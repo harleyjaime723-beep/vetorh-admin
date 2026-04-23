@@ -17,8 +17,7 @@ body{background:#0A0E14;color:#fff;font-family:Inter,system-ui,sans-serif;min-he
 .login-box input{width:100%;background:#0d1117;border:1px solid #374151;color:#fff;border-radius:10px;padding:10px 14px;font-size:14px;margin-bottom:16px;outline:none;transition:border .2s}
 .login-box input:focus{border-color:#E67E22}
 .login-err{background:#ef444415;border:1px solid #ef444440;border-radius:8px;color:#ef4444;font-size:13px;padding:10px 14px;margin-bottom:14px;display:none}
-.btn-login{width:100%;background:#E67E22;color:#fff;border:none;border-radius:10px;padding:12px;font-size:15px;font-weight:700;cursor:pointer;transition:background .2s}
-.btn-login:hover{background:#d35400}
+.btn-login{width:100%;background:#E67E22;color:#fff;border:none;border-radius:10px;padding:12px;font-size:15px;font-weight:700;cursor:pointer}
 .btn-login:disabled{background:#6b7280;cursor:not-allowed}
 
 /* APP */
@@ -28,9 +27,16 @@ body{background:#0A0E14;color:#fff;font-family:Inter,system-ui,sans-serif;min-he
 .bdg.ok{background:#10b98120;color:#10b981;border-color:#10b98140}
 .bdg.er{background:#ef444420;color:#ef4444;border-color:#ef444440}
 .btn{background:#1f2937;color:#9ca3af;border:1px solid #374151;border-radius:8px;padding:6px 14px;cursor:pointer;font-size:12px;font-weight:700}
-.btn:hover{background:#374151}
-.btn-danger{background:#ef444420;color:#ef4444;border:1px solid #ef444440;border-radius:8px;padding:6px 14px;cursor:pointer;font-size:12px;font-weight:700}
-.container{max-width:1280px;margin:0 auto;padding:24px 20px}
+.btn:hover{background:#374151;color:#fff}
+.btn-danger{background:#ef444415;color:#ef4444;border:1px solid #ef444440;border-radius:8px;padding:5px 12px;cursor:pointer;font-size:12px;font-weight:700}
+.btn-danger:hover{background:#ef444425}
+.btn-warn{background:#f59e0b15;color:#f59e0b;border:1px solid #f59e0b40;border-radius:8px;padding:5px 12px;cursor:pointer;font-size:12px;font-weight:700}
+.btn-warn:hover{background:#f59e0b25}
+.btn-ok{background:#10b98115;color:#10b981;border:1px solid #10b98140;border-radius:8px;padding:5px 12px;cursor:pointer;font-size:12px;font-weight:700}
+.btn-ok:hover{background:#10b98125}
+.btn-blue{background:#3498DB15;color:#3498DB;border:1px solid #3498DB40;border-radius:8px;padding:5px 12px;cursor:pointer;font-size:12px;font-weight:700}
+.btn-blue:hover{background:#3498DB25}
+.container{max-width:1300px;margin:0 auto;padding:24px 20px}
 .tabs{display:flex;border-bottom:1px solid #1f2937;margin-bottom:24px;overflow-x:auto;gap:0}
 .tab{padding:10px 16px;cursor:pointer;font-size:12px;font-weight:700;background:none;border:none;border-bottom:2px solid transparent;color:#6b7280;white-space:nowrap}
 .tab.on{color:#E67E22;border-bottom-color:#E67E22}
@@ -43,37 +49,62 @@ body{background:#0A0E14;color:#fff;font-family:Inter,system-ui,sans-serif;min-he
 .tw{overflow-x:auto;background:#111827;border-radius:14px;border:1px solid #1f2937}
 table{width:100%;border-collapse:collapse}
 th{color:#6b7280;font-size:11px;font-weight:700;text-transform:uppercase;padding:10px 12px;text-align:left;border-bottom:1px solid #1f2937}
-td{padding:10px 12px;border-bottom:1px solid #0f1520;font-size:13px;color:#d1d5db;vertical-align:middle}
+td{padding:9px 12px;border-bottom:1px solid #0f1520;font-size:13px;color:#d1d5db;vertical-align:middle}
 tr:hover td{background:#0d1117}
 .ldr-wrap{text-align:center;padding:80px 20px}
 .spinner{width:28px;height:28px;border:2px solid #1f2937;border-top-color:#E67E22;border-radius:50%;animation:spin .8s linear infinite;margin:16px auto 0}
 @keyframes spin{to{transform:rotate(360deg)}}
 .err-box{background:#ef444415;border:1px solid #ef444440;border-radius:10px;padding:16px;color:#ef4444;font-size:13px;margin-bottom:16px}
-.at-card{background:#111827;border:1px solid #1f2937;border-radius:14px;padding:20px;margin-bottom:12px}
+.at-card{background:#111827;border:1px solid #1f2937;border-radius:14px;padding:18px 20px;margin-bottom:12px}
 .at-card.pend{border-color:#f59e0b50}
+.at-card.er{border-color:#ef444440}
 .sec-title{font-size:18px;font-weight:800;margin-bottom:4px}
 .sec-sub{color:#6b7280;font-size:13px;margin-bottom:20px}
 .chip{display:inline-block;background:#1f2937;border-radius:6px;padding:2px 9px;font-size:11px;font-weight:700;color:#9ca3af}
 .empty{color:#6b7280;text-align:center;padding:40px;font-size:13px}
+.actions{display:flex;gap:6px;flex-wrap:wrap}
+.form-row{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.form-row label{font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:1px}
+.form-row input,.form-row textarea,.form-row select{background:#0d1117;border:1px solid #374151;color:#fff;border-radius:8px;padding:8px 12px;font-size:13px;outline:none;width:100%}
+.form-row input:focus,.form-row textarea:focus,.form-row select:focus{border-color:#E67E22}
+.form-row textarea{resize:vertical;min-height:80px}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:#000000cc;display:flex;align-items:center;justify-content:center;z-index:1000;padding:20px}
+.modal{background:#111827;border:1px solid #1f2937;border-radius:18px;padding:28px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto}
+.modal h3{font-size:16px;font-weight:800;margin-bottom:20px;color:#fff}
+.modal-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:20px}
+.toast{position:fixed;bottom:24px;right:24px;background:#111827;border:1px solid #1f2937;border-radius:12px;padding:12px 20px;font-size:13px;font-weight:600;z-index:2000;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+.toast.ok{border-color:#10b98160;color:#10b981}
+.toast.er{border-color:#ef444460;color:#ef4444}
 </style>
 </head>
 <body>
 
-<!-- ECRÃ DE LOGIN -->
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<!-- MODAL -->
+<div id="modal-bg" class="modal-bg" style="display:none" onclick="if(event.target===this)fecharModal()">
+  <div class="modal" id="modal-body"></div>
+</div>
+
+<!-- LOGIN -->
 <div id="pg-login" class="login-wrap">
   <div class="login-box">
     <div class="login-logo">VETORH</div>
     <div class="login-sub">Painel de Administração</div>
     <div id="login-err" class="login-err"></div>
     <label>Email</label>
-    <input type="email" id="inp-email" placeholder="admin@vetorh.ao" autocomplete="username"/>
+    <input type="email" id="inp-email" placeholder="admin@vetorh.ao"/>
     <label>Senha</label>
-    <input type="password" id="inp-pass" placeholder="••••••••" autocomplete="current-password"/>
+    <input type="password" id="inp-pass" placeholder="••••••••"/>
     <button class="btn-login" id="btn-login" onclick="fazerLogin()">Entrar →</button>
   </div>
 </div>
 
-<!-- PAINEL PRINCIPAL -->
+<!-- PAINEL -->
 <div id="pg-app" style="display:none">
   <div class="hdr">
     <div style="display:flex;align-items:center;gap:12px">
@@ -98,37 +129,47 @@ tr:hover td{background:#0d1117}
       <div class="tabs">
         <button class="tab on" onclick="mudarTab('ov',this)">📊 Geral</button>
         <button class="tab" onclick="mudarTab('al',this)">🎓 Alunos</button>
-        <button class="tab" onclick="mudarTab('de',this)">🎯 Submissões</button>
+        <button class="tab" onclick="mudarTab('de',this)">🎯 Desafios</button>
         <button class="tab" id="tab-in" onclick="mudarTab('in',this)">🚨 Integridade</button>
         <button class="tab" id="tab-at" onclick="mudarTab('at',this)">📋 Atenuantes</button>
         <button class="tab" onclick="mudarTab('re',this)">🔍 Recrutadores</button>
+        <button class="tab" onclick="mudarTab('en',this)">📅 Entrevistas</button>
+        <button class="tab" onclick="mudarTab('st',this)">📈 Stats</button>
       </div>
 
       <!-- GERAL -->
       <div id="v-ov">
         <div class="grid" id="cards-main"></div>
         <div class="grid" id="cards-scores"></div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+          <button class="btn" onclick="exportarCSV()">⬇️ Exportar Alunos CSV</button>
+          <button class="btn-blue" onclick="abrirModalNotificacao()">📢 Enviar Notificação Global</button>
+        </div>
       </div>
 
       <!-- ALUNOS -->
       <div id="v-al" style="display:none">
-        <div class="sec-title">🎓 Alunos</div>
-        <div class="sec-sub">Todos os perfis registados na plataforma</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+          <div><div class="sec-title">🎓 Alunos</div><div class="sec-sub" style="margin:0">Todos os perfis na plataforma</div></div>
+          <input id="search-alunos" placeholder="🔍 Pesquisar..." style="background:#111827;border:1px solid #374151;color:#fff;border-radius:8px;padding:8px 12px;font-size:13px;outline:none;width:220px" oninput="filtrarAlunos()"/>
+        </div>
         <div class="tw">
           <table>
-            <thead><tr><th>Nome</th><th>Universidade</th><th>Curso</th><th>Efic.</th><th>Resil.</th><th>Streak</th><th>IAPN</th><th>Selo</th></tr></thead>
+            <thead><tr><th>Nome</th><th>Universidade</th><th>Curso</th><th>Efic.</th><th>Resil.</th><th>IAPN</th><th>Selo</th><th>Acções</th></tr></thead>
             <tbody id="tb-alunos"></tbody>
           </table>
         </div>
       </div>
 
-      <!-- SUBMISSÕES -->
+      <!-- DESAFIOS -->
       <div id="v-de" style="display:none">
-        <div class="sec-title">🎯 Submissões</div>
-        <div class="sec-sub">Histórico de avaliações de desafios</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+          <div><div class="sec-title">🎯 Banco de Desafios</div><div class="sec-sub" style="margin:0">Gerir desafios na plataforma</div></div>
+          <button class="btn-ok" onclick="abrirModalCriarDesafio()">+ Novo Desafio</button>
+        </div>
         <div class="tw">
           <table>
-            <thead><tr><th>Aluno</th><th>Estado</th><th>Técnico</th><th>Linguístico</th><th>Idioma</th><th>Data</th></tr></thead>
+            <thead><tr><th>Título</th><th>Área</th><th>Tipo</th><th>Dif.</th><th>Idioma</th><th>Estado</th><th>Acções</th></tr></thead>
             <tbody id="tb-desafios"></tbody>
           </table>
         </div>
@@ -150,14 +191,29 @@ tr:hover td{background:#0d1117}
 
       <!-- RECRUTADORES -->
       <div id="v-re" style="display:none">
-        <div class="sec-title">🔍 Recrutadores</div>
-        <div class="sec-sub">Contas registadas na plataforma</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+          <div><div class="sec-title">🔍 Recrutadores</div><div class="sec-sub" style="margin:0">Contas e subscrições</div></div>
+        </div>
         <div class="tw">
           <table>
-            <thead><tr><th>Nome</th><th>Empresa</th><th>Setor</th><th>Plano</th><th>Pontos</th><th>Vagas</th></tr></thead>
+            <thead><tr><th>Nome</th><th>Empresa</th><th>Setor</th><th>Plano</th><th>Pontos</th><th>Vagas</th><th>Acções</th></tr></thead>
             <tbody id="tb-recrutadores"></tbody>
           </table>
         </div>
+      </div>
+
+      <!-- ENTREVISTAS -->
+      <div id="v-en" style="display:none">
+        <div class="sec-title">📅 Entrevistas</div>
+        <div class="sec-sub">Pedidos de entrevista entre recrutadores e alunos</div>
+        <div id="lista-entrevistas"></div>
+      </div>
+
+      <!-- STATS -->
+      <div id="v-st" style="display:none">
+        <div class="sec-title">📈 Estatísticas Avançadas</div>
+        <div class="sec-sub">Métricas detalhadas de desempenho da plataforma</div>
+        <div class="grid" id="stats-grid"></div>
       </div>
     </div>
   </div>
@@ -165,258 +221,580 @@ tr:hover td{background:#0d1117}
 
 <script>
 const API = "https://hargent26-a074b51a.base44.app/functions/adminDashboard";
-let TOKEN = "";
-let ADMIN_EMAIL = "";
-let DATA = null, FLAGS = [], ATENUANTES = [];
+let TOKEN = "", ADMIN_EMAIL = "";
+let DATA = null, FLAGS = [], ATENUANTES = [], ALUNOS_CACHE = [], DESAFIOS_CACHE = [];
 
-// ─── ENTER nas inputs faz login ───
-document.getElementById("inp-email").addEventListener("keydown", e => { if (e.key === "Enter") document.getElementById("inp-pass").focus(); });
-document.getElementById("inp-pass").addEventListener("keydown", e => { if (e.key === "Enter") fazerLogin(); });
+// ENTER no login
+document.getElementById("inp-email").addEventListener("keydown", e => { if (e.key==="Enter") document.getElementById("inp-pass").focus(); });
+document.getElementById("inp-pass").addEventListener("keydown", e => { if (e.key==="Enter") fazerLogin(); });
 
-// ─── LOGIN ───
+// ─── TOAST ───────────────────────────────────────────────────
+function toast(msg, tipo="ok") {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.className = "toast show " + tipo;
+  setTimeout(() => t.className = "toast", 3000);
+}
+
+// ─── MODAL ───────────────────────────────────────────────────
+function abrirModal(html) {
+  document.getElementById("modal-body").innerHTML = html;
+  document.getElementById("modal-bg").style.display = "flex";
+}
+function fecharModal() { document.getElementById("modal-bg").style.display = "none"; }
+
+// ─── LOGIN ───────────────────────────────────────────────────
 async function fazerLogin() {
   const email = (document.getElementById("inp-email").value || "").trim();
   const pass = document.getElementById("inp-pass").value || "";
   const errEl = document.getElementById("login-err");
   const btn = document.getElementById("btn-login");
-
   errEl.style.display = "none";
-
-  if (!email || !pass) {
-    errEl.textContent = "Preenche o email e a senha.";
-    errEl.style.display = "block";
-    return;
-  }
-
-  btn.textContent = "A entrar...";
-  btn.disabled = true;
-
+  if (!email || !pass) { errEl.textContent = "Preenche o email e a senha."; errEl.style.display = "block"; return; }
+  btn.textContent = "A entrar..."; btn.disabled = true;
   try {
-    const resp = await fetch(API, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ acao: "login", email: email, password: pass })
-    });
-
-    const r = await resp.json();
-
-    if (r.error || !r.token) {
-      errEl.textContent = "❌ " + (r.error || "Erro desconhecido.");
-      errEl.style.display = "block";
-      btn.textContent = "Entrar →";
-      btn.disabled = false;
-      return;
-    }
-
-    TOKEN = r.token;
-    ADMIN_EMAIL = r.email || email;
-
+    const r = await fetch(API, { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({acao:"login",email,password:pass}) }).then(r=>r.json());
+    if (r.error || !r.token) { errEl.textContent = "❌ " + (r.error || "Erro desconhecido."); errEl.style.display = "block"; btn.textContent = "Entrar →"; btn.disabled = false; return; }
+    TOKEN = r.token; ADMIN_EMAIL = r.email || email;
     document.getElementById("pg-login").style.display = "none";
     document.getElementById("pg-app").style.display = "";
     document.getElementById("chip-email").textContent = "👤 " + ADMIN_EMAIL;
-    btn.textContent = "Entrar →";
-    btn.disabled = false;
-
+    btn.textContent = "Entrar →"; btn.disabled = false;
     loadAll();
-
-  } catch (e) {
-    errEl.textContent = "❌ Erro de ligação: " + e.message;
-    errEl.style.display = "block";
-    btn.textContent = "Entrar →";
-    btn.disabled = false;
-  }
+  } catch(e) { errEl.textContent = "❌ Erro: " + e.message; errEl.style.display = "block"; btn.textContent = "Entrar →"; btn.disabled = false; }
 }
 
-// ─── LOGOUT ───
 function fazerLogout() {
-  TOKEN = ""; ADMIN_EMAIL = "";
-  DATA = null; FLAGS = []; ATENUANTES = [];
+  TOKEN = ""; ADMIN_EMAIL = ""; DATA = null; FLAGS = []; ATENUANTES = [];
   document.getElementById("pg-app").style.display = "none";
   document.getElementById("pg-login").style.display = "flex";
   document.getElementById("inp-pass").value = "";
   document.getElementById("login-err").style.display = "none";
   document.getElementById("app-content").style.display = "none";
   document.getElementById("app-loader").style.display = "";
-  document.getElementById("app-err").style.display = "none";
 }
 
-// ─── API ───
+// ─── API ─────────────────────────────────────────────────────
 function api(acao, extra) {
   return fetch(API, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "X-Admin-Token": TOKEN },
-    body: JSON.stringify(Object.assign({ acao }, extra || {}))
-  }).then(r => r.json());
+    method:"POST",
+    headers:{"Content-Type":"application/json","X-Admin-Token":TOKEN},
+    body:JSON.stringify(Object.assign({acao}, extra||{}))
+  }).then(r=>r.json());
 }
 
-// ─── TABS ───
+// ─── TABS ─────────────────────────────────────────────────────
 function mudarTab(id, btn) {
-  document.querySelectorAll(".tab").forEach(t => t.classList.remove("on"));
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("on"));
   btn.classList.add("on");
-  document.querySelectorAll("[id^='v-']").forEach(v => v.style.display = "none");
-  document.getElementById("v-" + id).style.display = "";
+  document.querySelectorAll("[id^='v-']").forEach(v=>v.style.display="none");
+  document.getElementById("v-"+id).style.display="";
+  if (id==="st") carregarStats();
+  if (id==="en") carregarEntrevistas();
 }
 
-// ─── HELPERS ───
+// ─── HELPERS ─────────────────────────────────────────────────
 function fmt(d) { return d ? new Date(d).toLocaleDateString("pt-PT") : "—"; }
 function safe(v) { return v != null ? v : "—"; }
-function badge(txt, cor) {
-  const cores = { ok: "#10b981", al: "#f59e0b", er: "#ef4444", in: "#3498DB", pu: "#8b5cf6" };
-  const c = cores[cor] || cor || "#6b7280";
-  return `<span style="background:${c}20;color:${c};border:1px solid ${c}40;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700">${txt}</span>`;
+function badge(txt, c) {
+  const cores = { ok:"#10b981", al:"#f59e0b", er:"#ef4444", in:"#3498DB", pu:"#8b5cf6" };
+  const cor = cores[c] || c || "#6b7280";
+  return `<span style="background:${cor}20;color:${cor};border:1px solid ${cor}40;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700">${txt}</span>`;
 }
-function card(ic, label, val, cor, sub) {
-  cor = cor || "#E67E22";
-  return `<div class="card" style="border-color:${cor}30"><div class="cl">${ic} ${label}</div><div class="cv" style="color:${cor}">${val != null ? val : "—"}</div>${sub ? `<div class="cs">${sub}</div>` : ""}</div>`;
+function card(ic, lbl, val, cor, sub) {
+  cor = cor||"#E67E22";
+  return `<div class="card" style="border-color:${cor}30"><div class="cl">${ic} ${lbl}</div><div class="cv" style="color:${cor}">${val!=null?val:"—"}</div>${sub?`<div class="cs">${sub}</div>`:""}</div>`;
 }
-function tr(cells) { return `<tr>${cells.map(c => `<td>${c}</td>`).join("")}</tr>`; }
+function tr(cells) { return `<tr>${cells.map(c=>`<td>${c}</td>`).join("")}</tr>`; }
 function emptyRow(cols, msg) { return `<tr><td colspan="${cols}" class="empty">${msg}</td></tr>`; }
 
-// ─── CARREGAR TUDO ───
+// ─── LOAD ALL ────────────────────────────────────────────────
 async function loadAll() {
-  document.getElementById("app-loader").style.display = "";
-  document.getElementById("app-content").style.display = "none";
-  document.getElementById("app-err").style.display = "none";
-  document.getElementById("chip-status").textContent = "A carregar...";
-  document.getElementById("chip-status").className = "bdg";
-
+  document.getElementById("app-loader").style.display="";
+  document.getElementById("app-content").style.display="none";
+  document.getElementById("app-err").style.display="none";
+  document.getElementById("chip-status").textContent="A carregar...";
+  document.getElementById("chip-status").className="bdg";
   try {
-    const [ov, fl, at] = await Promise.all([
-      api("overview"),
-      api("flags_integridade"),
-      api("atenuantes_pendentes")
-    ]);
-
-    if (ov.error) {
-      if (ov.error.includes("autenticado") || ov.error.includes("Token")) { fazerLogout(); return; }
-      throw new Error(ov.error);
-    }
-
-    DATA = ov;
-    FLAGS = fl.flags || [];
-    ATENUANTES = at.atenuantes || [];
-
+    const [ov, fl, at] = await Promise.all([api("overview"), api("flags_integridade"), api("atenuantes_pendentes")]);
+    if (ov.error) { if (ov.error.includes("autenticado")||ov.error.includes("Token")) { fazerLogout(); return; } throw new Error(ov.error); }
+    DATA = ov; FLAGS = fl.flags||[]; ATENUANTES = at.atenuantes||[];
+    ALUNOS_CACHE = ov.alunos || [];
     renderTudo();
-
-    document.getElementById("app-loader").style.display = "none";
-    document.getElementById("app-content").style.display = "";
-    document.getElementById("chip-status").textContent = "✅ Online";
-    document.getElementById("chip-status").className = "bdg ok";
-
-    const fa = FLAGS.filter(f => f.severidade === "alto" || f.severidade === "critico").length;
-    const ap = ATENUANTES.filter(a => a.estado === "pendente").length;
-    if (fa) document.getElementById("tab-in").textContent = `🚨 Integridade (${fa})`;
-    if (ap) document.getElementById("tab-at").textContent = `📋 Atenuantes (${ap})`;
-
-  } catch (e) {
-    document.getElementById("app-loader").style.display = "none";
-    document.getElementById("app-err").textContent = "❌ " + (e.message || "Erro ao ligar ao servidor.");
-    document.getElementById("app-err").style.display = "";
-    document.getElementById("chip-status").textContent = "Erro";
-    document.getElementById("chip-status").className = "bdg er";
+    document.getElementById("app-loader").style.display="none";
+    document.getElementById("app-content").style.display="";
+    document.getElementById("chip-status").textContent="✅ Online";
+    document.getElementById("chip-status").className="bdg ok";
+    const fa = FLAGS.filter(f=>f.severidade==="alto"||f.severidade==="critico").length;
+    const ap = ATENUANTES.filter(a=>a.estado==="pendente").length;
+    if (fa) document.getElementById("tab-in").textContent=`🚨 Integridade (${fa})`;
+    if (ap) document.getElementById("tab-at").textContent=`📋 Atenuantes (${ap})`;
+  } catch(e) {
+    document.getElementById("app-loader").style.display="none";
+    document.getElementById("app-err").textContent="❌ " + (e.message||"Erro ao ligar ao servidor.");
+    document.getElementById("app-err").style.display="";
+    document.getElementById("chip-status").textContent="Erro";
+    document.getElementById("chip-status").className="bdg er";
   }
 }
 
-// ─── RENDER ───
+// ─── RENDER TUDO ─────────────────────────────────────────────
 function renderTudo() {
-  const d = DATA || {};
+  const d = DATA||{};
 
-  // Cards principais
+  // Cards
   document.getElementById("cards-main").innerHTML = [
-    card("🎓", "Alunos", d.total_alunos, "#E67E22", "registados"),
-    card("🔍", "Recrutadores", d.total_recrutadores, "#3498DB"),
-    card("💎", "Premium", d.recrutadores_premium, "#8b5cf6"),
-    card("📤", "Submissões", d.total_submissoes, "#E67E22"),
-    card("🚨", "Flags", d.total_flags, d.total_flags > 0 ? "#ef4444" : "#6b7280"),
-    card("⏳", "Em Curso", d.desafios_em_curso, "#f59e0b"),
+    card("🎓","Alunos",d.total_alunos,"#E67E22","registados"),
+    card("🔍","Recrutadores",d.total_recrutadores,"#3498DB"),
+    card("💎","Premium",d.recrutadores_premium,"#8b5cf6"),
+    card("📤","Submissões",d.total_submissoes,"#E67E22"),
+    card("🚨","Flags",d.total_flags,d.total_flags>0?"#ef4444":"#6b7280"),
+    card("⏳","Em Curso",d.desafios_em_curso,"#f59e0b"),
   ].join("");
-
-  // Cards scores
   document.getElementById("cards-scores").innerHTML = [
-    card("⚡", "Eficiência Média", d.avg_eficiencia != null ? Math.round(d.avg_eficiencia) : "—", "#E67E22"),
-    card("💪", "Resiliência Média", d.avg_resiliencia != null ? Math.round(d.avg_resiliencia) : "—", "#10b981"),
-    card("📈", "Consistência Média", d.avg_consistencia != null ? Math.round(d.avg_consistencia) : "—", "#3498DB"),
-    card("🤝", "Colaboração Média", d.avg_colaboracao != null ? Math.round(d.avg_colaboracao) : "—", "#8b5cf6"),
+    card("⚡","Eficiência Média",d.avg_eficiencia!=null?Math.round(d.avg_eficiencia):"—","#E67E22"),
+    card("💪","Resiliência Média",d.avg_resiliencia!=null?Math.round(d.avg_resiliencia):"—","#10b981"),
+    card("📈","Consistência Média",d.avg_consistencia!=null?Math.round(d.avg_consistencia):"—","#3498DB"),
+    card("🤝","Colaboração Média",d.avg_colaboracao!=null?Math.round(d.avg_colaboracao):"—","#8b5cf6"),
   ].join("");
 
-  // Tabela alunos
-  const alunos = d.alunos || [];
-  document.getElementById("tb-alunos").innerHTML = alunos.length === 0
-    ? emptyRow(8, "Nenhum aluno registado ainda.")
-    : alunos.map(a => tr([
-        `<strong>${safe(a.nome)}</strong>`,
-        safe(a.universidade),
-        safe(a.curso),
-        `<span style="color:#E67E22;font-weight:700">${safe(a.score_eficiencia)}</span>`,
-        `<span style="color:#10b981;font-weight:700">${safe(a.score_resiliencia)}</span>`,
-        safe(a.streak_semanas) !== "—" ? `🔥 ${a.streak_semanas}` : "—",
-        safe(a.iapn),
-        a.selo ? badge(a.selo, "al") : "—"
-      ])).join("");
+  // Alunos
+  renderAlunos(ALUNOS_CACHE);
 
-  // Tabela desafios
-  const desafios = d.submissoes || [];
-  document.getElementById("tb-desafios").innerHTML = desafios.length === 0
-    ? emptyRow(6, "Nenhuma submissão ainda.")
-    : desafios.map(s => tr([
-        safe(s.aluno_nome || s.aluno_id),
-        badge(s.estado || "—", s.estado === "avaliado" ? "ok" : "al"),
-        s.score_tecnico != null ? `<span style="color:#E67E22;font-weight:700">${s.score_tecnico}</span>` : "—",
-        s.score_linguistico != null ? `<span style="color:#3498DB;font-weight:700">${s.score_linguistico}</span>` : "—",
-        safe(s.idioma_resposta || s.idioma),
-        fmt(s.submetido_em || s.created_date)
-      ])).join("");
+  // Desafios
+  api("listar_desafios").then(r => {
+    DESAFIOS_CACHE = r.desafios || [];
+    renderDesafios(DESAFIOS_CACHE);
+  });
 
-  // Flags de integridade
+  // Flags
   const liFlags = document.getElementById("lista-flags");
-  if (FLAGS.length === 0) {
-    liFlags.innerHTML = `<div class="empty">✅ Sem anomalias detectadas.</div>`;
-  } else {
-    liFlags.innerHTML = FLAGS.map(f => `
-      <div class="at-card ${f.severidade === "critico" ? "pend" : ""}">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
-          <div>
-            <div style="font-weight:700;margin-bottom:4px">${safe(f.tipo_anomalia)}</div>
-            <div style="color:#6b7280;font-size:12px">${safe(f.descricao)}</div>
-          </div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap">
-            ${badge(f.severidade || "—", f.severidade === "critico" ? "er" : f.severidade === "alto" ? "al" : "in")}
+  if (!FLAGS.length) { liFlags.innerHTML=`<div class="empty">✅ Sem anomalias detectadas.</div>`; }
+  else { liFlags.innerHTML = FLAGS.map(f=>`
+    <div class="at-card ${f.severidade==="critico"?"er":f.severidade==="alto"?"pend":""}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+        <div>
+          <div style="font-weight:700;margin-bottom:4px">${safe(f.tipo_anomalia)} — <span style="color:#9ca3af;font-size:12px">${safe(f.aluno_id)}</span></div>
+          <div style="color:#6b7280;font-size:12px;margin-bottom:8px">${safe(f.descricao)}</div>
+          <div class="actions">
+            ${badge(f.severidade||"—",f.severidade==="critico"?"er":f.severidade==="alto"?"al":"in")}
             <span class="chip">${fmt(f.timestamp)}</span>
           </div>
         </div>
-      </div>`).join("");
-  }
+        <div class="actions">
+          <button class="btn-ok" onclick="resolverFlag('${f.id}','aviso')">✅ Aviso</button>
+          <button class="btn-warn" onclick="resolverFlag('${f.id}','invalidar')">⚠️ Invalidar</button>
+          <button class="btn-danger" onclick="resolverFlag('${f.id}','suspensao')">🚫 Suspender</button>
+        </div>
+      </div>
+    </div>`).join(""); }
 
   // Atenuantes
   const liAt = document.getElementById("lista-atenuantes");
-  if (ATENUANTES.length === 0) {
-    liAt.innerHTML = `<div class="empty">✅ Nenhum pedido pendente.</div>`;
-  } else {
-    liAt.innerHTML = ATENUANTES.map(a => `
-      <div class="at-card ${a.estado === "pendente" ? "pend" : ""}">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+  if (!ATENUANTES.length) { liAt.innerHTML=`<div class="empty">✅ Nenhum pedido pendente.</div>`; }
+  else { liAt.innerHTML = ATENUANTES.map(a=>`
+    <div class="at-card ${a.estado==="pendente"?"pend":""}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
+        <div style="flex:1">
+          <div style="font-weight:700;margin-bottom:4px">Aluno: <span style="color:#E67E22">${safe(a.aluno_id)}</span></div>
+          <div style="color:#9ca3af;font-size:13px;margin-bottom:6px">${safe(a.descricao)}</div>
+          <div style="color:#6b7280;font-size:12px;margin-bottom:10px">📅 ${fmt(a.periodo_inicio)} → ${fmt(a.periodo_fim)}</div>
+          ${a.ficheiro_url?`<a href="${a.ficheiro_url}" target="_blank" style="color:#3498DB;font-size:12px">📎 Ver comprovativo</a>`:""}
+        </div>
+        <div>
+          ${badge(a.estado||"—",a.estado==="aprovado"?"ok":a.estado==="rejeitado"?"er":"al")}
+          ${a.estado==="pendente"?`
+          <div class="actions" style="margin-top:10px">
+            <button class="btn-ok" onclick="aprovarAtenuante('${a.id}')">✅ Aprovar</button>
+            <button class="btn-danger" onclick="rejeitarAtenuante('${a.id}')">❌ Rejeitar</button>
+          </div>`:""}
+        </div>
+      </div>
+    </div>`).join(""); }
+
+  // Recrutadores
+  renderRecrutadores(d.recrutadores||[]);
+}
+
+// ─── ALUNOS ──────────────────────────────────────────────────
+function renderAlunos(lista) {
+  document.getElementById("tb-alunos").innerHTML = !lista.length
+    ? emptyRow(8,"Nenhum aluno registado ainda.")
+    : lista.map(a=>`<tr>
+        <td><strong>${safe(a.nome)}</strong></td>
+        <td>${safe(a.universidade)}</td>
+        <td>${safe(a.curso)}</td>
+        <td><span style="color:#E67E22;font-weight:700">${safe(a.score_eficiencia)}</span></td>
+        <td><span style="color:#10b981;font-weight:700">${safe(a.score_resiliencia)}</span></td>
+        <td>${safe(a.iapn)}</td>
+        <td>${a.selo?badge(a.selo,"al"):"—"}</td>
+        <td><div class="actions">
+          <button class="btn-blue" onclick="editarScores('${a.id}','${(a.nome||"").replace(/'/g,"\\'")}',${a.score_eficiencia||0},${a.score_resiliencia||0},${a.score_consistencia||0},${a.score_colaboracao||0})">✏️ Scores</button>
+          <button class="btn-warn" onclick="confirmarSuspender('${a.id}','${(a.nome||"").replace(/'/g,"\\'")}')">⏸ Suspender</button>
+          <button class="btn-danger" onclick="confirmarBanir('${a.id}','${(a.nome||"").replace(/'/g,"\\'")}')">🚫 Banir</button>
+          <button class="btn-ok" onclick="atribuirDesafioManual('${a.id}','${(a.nome||"").replace(/'/g,"\\'")}')">🎯 Desafio</button>
+        </div></td>
+      </tr>`).join("");
+}
+
+function filtrarAlunos() {
+  const q = document.getElementById("search-alunos").value.toLowerCase();
+  const filtrado = ALUNOS_CACHE.filter(a =>
+    (a.nome||"").toLowerCase().includes(q) ||
+    (a.universidade||"").toLowerCase().includes(q) ||
+    (a.curso||"").toLowerCase().includes(q)
+  );
+  renderAlunos(filtrado);
+}
+
+// ─── DESAFIOS ────────────────────────────────────────────────
+function renderDesafios(lista) {
+  document.getElementById("tb-desafios").innerHTML = !lista.length
+    ? emptyRow(7,"Nenhum desafio encontrado.")
+    : lista.map(d=>`<tr>
+        <td><strong>${safe(d.titulo)}</strong></td>
+        <td>${safe(d.area)}</td>
+        <td><span class="chip">${safe(d.tipo)}</span></td>
+        <td>${safe(d.dificuldade)}</td>
+        <td>${safe(d.idioma)}</td>
+        <td>${d.ativo!==false?badge("Activo","ok"):badge("Inactivo","er")}</td>
+        <td><div class="actions">
+          <button class="${d.ativo!==false?"btn-danger":"btn-ok"}" onclick="toggleDesafio('${d.id}',${!d.ativo})">${d.ativo!==false?"⏸ Desactivar":"▶ Activar"}</button>
+        </div></td>
+      </tr>`).join("");
+}
+
+// ─── RECRUTADORES ─────────────────────────────────────────────
+function renderRecrutadores(lista) {
+  document.getElementById("tb-recrutadores").innerHTML = !lista.length
+    ? emptyRow(7,"Nenhum recrutador registado ainda.")
+    : lista.map(r=>`<tr>
+        <td><strong>${safe(r.nome)}</strong></td>
+        <td>${safe(r.empresa)}</td>
+        <td>${safe(r.setor)}</td>
+        <td>${r.plano==="premium"?badge("Premium","pu"):badge("Gratuito","in")}</td>
+        <td><span style="color:#f59e0b;font-weight:700">${safe(r.pontos)}</span></td>
+        <td>${safe(r.vagas_ativas)}</td>
+        <td><div class="actions">
+          ${r.plano==="premium"
+            ?`<button class="btn-warn" onclick="mudarPlano('${r.id}','downgrade')">⬇ Free</button>`
+            :`<button class="btn-ok" onclick="mudarPlano('${r.id}','upgrade')">⬆ Premium</button>`}
+          <button class="btn-blue" onclick="gestaoPontos('${r.id}','${(r.nome||"").replace(/'/g,"\\'")}',${r.pontos||0})">🪙 Pontos</button>
+        </div></td>
+      </tr>`).join("");
+}
+
+// ─── ENTREVISTAS ──────────────────────────────────────────────
+async function carregarEntrevistas() {
+  const el = document.getElementById("lista-entrevistas");
+  el.innerHTML = `<div class="ldr-wrap" style="padding:40px"><div class="spinner"></div></div>`;
+  try {
+    const r = await api("overview");
+    const lista = r.entrevistas || [];
+    if (!lista.length) { el.innerHTML=`<div class="empty">Nenhuma entrevista registada.</div>`; return; }
+    el.innerHTML = lista.map(e=>`
+      <div class="at-card ${e.estado==="pendente"?"pend":""}">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
           <div>
-            <div style="font-weight:700;margin-bottom:4px">Aluno: ${safe(a.aluno_id)}</div>
-            <div style="color:#9ca3af;font-size:13px;margin-bottom:6px">${safe(a.descricao)}</div>
-            <div style="color:#6b7280;font-size:12px">${fmt(a.periodo_inicio)} → ${fmt(a.periodo_fim)}</div>
+            <div style="font-weight:700;margin-bottom:4px">${safe(e.vaga_titulo)}</div>
+            <div style="color:#9ca3af;font-size:13px">Recrutador: ${safe(e.recrutador_nome)} · ${safe(e.recrutador_empresa)}</div>
+            <div style="color:#9ca3af;font-size:13px">Aluno: ${safe(e.aluno_nome)}</div>
+            <div style="color:#6b7280;font-size:12px;margin-top:6px">📅 ${fmt(e.data_proposta)} ${e.hora_proposta||""} · ${safe(e.formato)}</div>
           </div>
-          <div>${badge(a.estado || "—", a.estado === "aprovado" ? "ok" : a.estado === "rejeitado" ? "er" : "al")}</div>
+          <div>
+            ${badge(e.estado||"—",e.estado==="confirmada"?"ok":e.estado==="cancelada"?"er":"al")}
+            ${e.estado==="pendente"?`
+            <div class="actions" style="margin-top:10px">
+              <button class="btn-ok" onclick="confirmarEntrevista('${e.id}')">✅ Confirmar</button>
+              <button class="btn-danger" onclick="cancelarEntrevista('${e.id}')">❌ Cancelar</button>
+            </div>`:""}
+          </div>
         </div>
       </div>`).join("");
-  }
+  } catch(e) { el.innerHTML=`<div class="err-box">❌ ${e.message}</div>`; }
+}
 
-  // Tabela recrutadores
-  const recs = d.recrutadores || [];
-  document.getElementById("tb-recrutadores").innerHTML = recs.length === 0
-    ? emptyRow(6, "Nenhum recrutador registado ainda.")
-    : recs.map(r => tr([
-        `<strong>${safe(r.nome)}</strong>`,
-        safe(r.empresa),
-        safe(r.setor),
-        r.plano === "premium" ? badge("Premium", "pu") : badge("Gratuito", "in"),
-        `<span style="color:#f59e0b;font-weight:700">${safe(r.pontos)}</span>`,
-        safe(r.vagas_ativas)
-      ])).join("");
+// ─── STATS ────────────────────────────────────────────────────
+async function carregarStats() {
+  const el = document.getElementById("stats-grid");
+  el.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px"><div class="spinner"></div></div>`;
+  try {
+    const r = await api("stats_avancadas");
+    el.innerHTML = [
+      card("🎓","Universidades",r.total_universidades,"#E67E22"),
+      card("📚","Cursos Activos",r.total_cursos,"#3498DB"),
+      card("💪","Taxa Resiliência",r.taxa_resiliencia!=null?r.taxa_resiliencia+"%":"—","#10b981"),
+      card("🌍","Desafios em Inglês",r.desafios_ingles,"#8b5cf6"),
+      card("🔥","Alunos com Streak",r.alunos_streak_ativo,"#f59e0b"),
+      card("⚡","Score Médio Técnico",r.avg_score_tecnico!=null?Math.round(r.avg_score_tecnico):"—","#E67E22"),
+      card("🏆","Alunos Elite",r.alunos_elite,"#ef4444"),
+      card("📊","Submissões/Aluno",r.submissoes_por_aluno!=null?r.submissoes_por_aluno.toFixed(1):"—","#6b7280"),
+    ].join("");
+  } catch(e) { el.innerHTML=`<div style="grid-column:1/-1" class="err-box">❌ ${e.message}</div>`; }
+}
+
+// ═══════════════════════════════════════════════════════
+// ─── ACÇÕES ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════
+
+// — EDITAR SCORES —
+function editarScores(id, nome, ef, re, co, col) {
+  abrirModal(`
+    <h3>✏️ Editar Scores — ${nome}</h3>
+    <div class="form-row"><label>Eficiência (0–100)</label><input type="number" id="m-ef" value="${ef}" min="0" max="100"/></div>
+    <div class="form-row"><label>Resiliência (0–100)</label><input type="number" id="m-re" value="${re}" min="0" max="100"/></div>
+    <div class="form-row"><label>Consistência (0–100)</label><input type="number" id="m-co" value="${co}" min="0" max="100"/></div>
+    <div class="form-row"><label>Colaboração (0–100)</label><input type="number" id="m-col" value="${col}" min="0" max="100"/></div>
+    <div class="modal-footer">
+      <button class="btn" onclick="fecharModal()">Cancelar</button>
+      <button class="btn-ok" onclick="submeterEditarScores('${id}')">💾 Guardar</button>
+    </div>`);
+}
+async function submeterEditarScores(id) {
+  const scores = {
+    score_eficiencia: parseInt(document.getElementById("m-ef").value)||0,
+    score_resiliencia: parseInt(document.getElementById("m-re").value)||0,
+    score_consistencia: parseInt(document.getElementById("m-co").value)||0,
+    score_colaboracao: parseInt(document.getElementById("m-col").value)||0,
+  };
+  const r = await api("editar_scores", { aluno_id: id, scores });
+  if (r.error) { toast("❌ "+r.error,"er"); return; }
+  toast("✅ Scores actualizados!","ok"); fecharModal(); loadAll();
+}
+
+// — SUSPENDER ALUNO —
+function confirmarSuspender(id, nome) {
+  abrirModal(`
+    <h3>⏸ Suspender Aluno</h3>
+    <p style="color:#9ca3af;margin-bottom:16px">Suspender <strong style="color:#fff">${nome}</strong>? O aluno não poderá aceder à plataforma temporariamente.</p>
+    <div class="form-row"><label>Motivo</label><textarea id="m-motivo" placeholder="Descreve o motivo da suspensão..."></textarea></div>
+    <div class="modal-footer">
+      <button class="btn" onclick="fecharModal()">Cancelar</button>
+      <button class="btn-warn" onclick="submeterSuspender('${id}')">⏸ Confirmar Suspensão</button>
+    </div>`);
+}
+async function submeterSuspender(id) {
+  const motivo = document.getElementById("m-motivo").value;
+  if (!motivo.trim()) { toast("Indica o motivo.","er"); return; }
+  const r = await api("suspender_aluno", { aluno_id: id, motivo });
+  if (r.error) { toast("❌ "+r.error,"er"); return; }
+  toast("✅ Aluno suspenso.","ok"); fecharModal(); loadAll();
+}
+
+// — BANIR ALUNO —
+function confirmarBanir(id, nome) {
+  abrirModal(`
+    <h3 style="color:#ef4444">🚫 Banir Aluno</h3>
+    <p style="color:#9ca3af;margin-bottom:16px">Banir <strong style="color:#fff">${nome}</strong>? Esta acção é permanente e remove o acesso definitivo.</p>
+    <div class="form-row"><label>Motivo do Banimento</label><textarea id="m-motivo" placeholder="Descreve o motivo do banimento..."></textarea></div>
+    <div class="form-row"><label>Confirmar (escreve "CONFIRMAR")</label><input id="m-confirm" placeholder="CONFIRMAR"/></div>
+    <div class="modal-footer">
+      <button class="btn" onclick="fecharModal()">Cancelar</button>
+      <button class="btn-danger" onclick="submeterBanir('${id}')">🚫 Banir Definitivamente</button>
+    </div>`);
+}
+async function submeterBanir(id) {
+  if ((document.getElementById("m-confirm").value||"").trim() !== "CONFIRMAR") { toast("Escreve CONFIRMAR para prosseguir.","er"); return; }
+  const motivo = document.getElementById("m-motivo").value;
+  if (!motivo.trim()) { toast("Indica o motivo.","er"); return; }
+  const r = await api("banir_aluno", { aluno_id: id, motivo });
+  if (r.error) { toast("❌ "+r.error,"er"); return; }
+  toast("✅ Aluno banido.","ok"); fecharModal(); loadAll();
+}
+
+// — ATRIBUIR DESAFIO MANUAL —
+function atribuirDesafioManual(alunoId, nome) {
+  const opts = DESAFIOS_CACHE.filter(d=>d.ativo!==false).map(d=>`<option value="${d.id}">${d.titulo} (${d.area} · ${d.dificuldade})</option>`).join("");
+  abrirModal(`
+    <h3>🎯 Atribuir Desafio — ${nome}</h3>
+    <div class="form-row"><label>Desafio</label><select id="m-desafio">${opts||"<option>Nenhum desafio activo</option>"}</select></div>
+    <div class="form-row"><label>Contexto / Nota</label><input id="m-contexto" placeholder="Ex: Contexto urgente IAPN_T2"/></div>
+    <div class="modal-footer">
+      <button class="btn" onclick="fecharModal()">Cancelar</button>
+      <button class="btn-ok" onclick="submeterAtribuirDesafio('${alunoId}')">🎯 Atribuir</button>
+    </div>`);
+}
+async function submeterAtribuirDesafio(alunoId) {
+  const desafioId = document.getElementById("m-desafio").value;
+  const contexto = document.getElementById("m-contexto").value;
+  if (!desafioId) { toast("Selecciona um desafio.","er"); return; }
+  const r = await api("atribuir_desafio", { aluno_id: alunoId, desafio_id: desafioId, contexto });
+  if (r.error) { toast("❌ "+r.error,"er"); return; }
+  toast("✅ Desafio atribuído!","ok"); fecharModal();
+}
+
+// — TOGGLE DESAFIO —
+async function toggleDesafio(id, novoEstado) {
+  const r = await api("toggle_desafio", { desafio_id: id, ativo: novoEstado });
+  if (r.error) { toast("❌ "+r.error,"er"); return; }
+  toast(novoEstado?"✅ Desafio activado.":"⏸ Desafio desactivado.","ok");
+  api("listar_desafios").then(r => { DESAFIOS_CACHE = r.desafios||[]; renderDesafios(DESAFIOS_CACHE); });
+}
+
+// — CRIAR DESAFIO —
+function abrirModalCriarDesafio() {
+  abrirModal(`
+    <h3>+ Novo Desafio</h3>
+    <div class="form-row"><label>Título</label><input id="m-titulo" placeholder="Ex: Análise de Risco Sísmico"/></div>
+    <div class="form-row"><label>Área</label><input id="m-area" placeholder="Ex: Engenharia de Petróleo"/></div>
+    <div class="form-row"><label>Subárea</label><input id="m-subarea" placeholder="Ex: Geomecânica"/></div>
+    <div class="form-row"><label>Tipo</label>
+      <select id="m-tipo"><option value="tecnico">Técnico</option><option value="troubleshooting">Troubleshooting</option><option value="interdisciplinar">Interdisciplinar</option><option value="compostura">Compostura</option></select>
+    </div>
+    <div class="form-row"><label>Dificuldade</label>
+      <select id="m-dif"><option value="facil">Fácil</option><option value="medio" selected>Médio</option><option value="dificil">Difícil</option></select>
+    </div>
+    <div class="form-row"><label>Idioma</label>
+      <select id="m-idioma"><option value="portugues">Português</option><option value="ingles">Inglês</option><option value="frances">Francês</option></select>
+    </div>
+    <div class="form-row"><label>Tempo Esperado (min)</label><input type="number" id="m-tempo" value="45" min="5" max="180"/></div>
+    <div class="form-row"><label>Enunciado Técnico</label><textarea id="m-rubrica-tec" placeholder="Descreve o cenário técnico e o que se pede..."></textarea></div>
+    <div class="form-row"><label>Rubrica Linguística</label><textarea id="m-rubrica-ling" placeholder="Critérios de avaliação linguística..."></textarea></div>
+    <div class="modal-footer">
+      <button class="btn" onclick="fecharModal()">Cancelar</button>
+      <button class="btn-ok" onclick="submeterCriarDesafio()">✅ Criar Desafio</button>
+    </div>`);
+}
+async function submeterCriarDesafio() {
+  const titulo = document.getElementById("m-titulo").value.trim();
+  const area = document.getElementById("m-area").value.trim();
+  if (!titulo||!area) { toast("Título e Área são obrigatórios.","er"); return; }
+  const r = await api("criar_desafio", {
+    titulo, area,
+    subarea: document.getElementById("m-subarea").value.trim(),
+    tipo: document.getElementById("m-tipo").value,
+    dificuldade: document.getElementById("m-dif").value,
+    idioma: document.getElementById("m-idioma").value,
+    tempo_esperado_min: parseInt(document.getElementById("m-tempo").value)||45,
+    rubrica_tecnica: document.getElementById("m-rubrica-tec").value.trim(),
+    rubrica_linguistica: document.getElementById("m-rubrica-ling").value.trim(),
+    ativo: true,
+  });
+  if (r.error) { toast("❌ "+r.error,"er"); return; }
+  toast("✅ Desafio criado!","ok"); fecharModal();
+  api("listar_desafios").then(res => { DESAFIOS_CACHE=res.desafios||[]; renderDesafios(DESAFIOS_CACHE); });
+}
+
+// — RESOLVER FLAG —
+async function resolverFlag(id, acao) {
+  const labels = { aviso:"aviso registado", invalidar:"submissão invalidada", suspensao:"aluno suspenso" };
+  const r = await api("resolver_flag", { flag_id: id, acao_tomada: acao });
+  if (r.error) { toast("❌ "+r.error,"er"); return; }
+  toast("✅ Flag resolvida — " + (labels[acao]||acao),"ok"); loadAll();
+}
+
+// — APROVAR / REJEITAR ATENUANTE —
+function aprovarAtenuante(id) {
+  abrirModal(`
+    <h3>✅ Aprovar Atenuante</h3>
+    <div class="form-row"><label>Factor de Atenuação</label>
+      <select id="m-factor">
+        <option value="0.85">-15% (factor 0.85)</option>
+        <option value="0.80">-20% (factor 0.80)</option>
+        <option value="0.75">-25% (factor 0.75)</option>
+      </select>
+    </div>
+    <div class="form-row"><label>Notas de Revisão</label><textarea id="m-notas" placeholder="Notas internas sobre a aprovação..."></textarea></div>
+    <div class="modal-footer">
+      <button class="btn" onclick="fecharModal()">Cancelar</button>
+      <button class="btn-ok" onclick="submeterAprovar('${id}')">✅ Aprovar</button>
+    </div>`);
+}
+async function submeterAprovar(id) {
+  const factor = parseFloat(document.getElementById("m-factor").value);
+  const notas = document.getElementById("m-notas").value;
+  const r = await api("aprovar_atenuante", { atenuante_id: id, factor, notas });
+  if (r.error) { toast("❌ "+r.error,"er"); return; }
+  toast("✅ Atenuante aprovado!","ok"); fecharModal(); loadAll();
+}
+async function rejeitarAtenuante(id) {
+  const motivo = prompt("Motivo da rejeição (obrigatório):");
+  if (!motivo) return;
+  const r = await api("rejeitar_atenuante", { atenuante_id: id, notas: motivo });
+  if (r.error) { toast("❌ "+r.error,"er"); return; }
+  toast("✅ Atenuante rejeitado.","ok"); loadAll();
+}
+
+// — GERIR PLANO RECRUTADOR —
+async function mudarPlano(id, tipo) {
+  const acao = tipo==="upgrade" ? "upgrade_recrutador" : "downgrade_recrutador";
+  const r = await api(acao, { recrutador_id: id });
+  if (r.error) { toast("❌ "+r.error,"er"); return; }
+  toast(tipo==="upgrade"?"✅ Recrutador promovido a Premium!":"✅ Recrutador movido para Free.","ok"); loadAll();
+}
+
+// — GESTÃO DE PONTOS —
+function gestaoPontos(id, nome, atual) {
+  abrirModal(`
+    <h3>🪙 Pontos — ${nome}</h3>
+    <p style="color:#9ca3af;margin-bottom:16px">Saldo actual: <strong style="color:#f59e0b">${atual} pontos</strong></p>
+    <div class="form-row"><label>Quantidade de Pontos</label><input type="number" id="m-pts" value="50" min="1"/></div>
+    <div class="form-row"><label>Operação</label>
+      <select id="m-op"><option value="adicionar">➕ Adicionar pontos</option><option value="remover">➖ Remover pontos</option></select>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="fecharModal()">Cancelar</button>
+      <button class="btn-ok" onclick="submeterPontos('${id}')">💾 Aplicar</button>
+    </div>`);
+}
+async function submeterPontos(id) {
+  const pontos = parseInt(document.getElementById("m-pts").value)||0;
+  const op = document.getElementById("m-op").value;
+  if (!pontos) { toast("Indica a quantidade.","er"); return; }
+  const r = await api(op==="adicionar"?"adicionar_pontos":"remover_pontos", { recrutador_id: id, pontos });
+  if (r.error) { toast("❌ "+r.error,"er"); return; }
+  toast(op==="adicionar"?`✅ +${pontos} pontos adicionados.`:`✅ -${pontos} pontos removidos.`,"ok");
+  fecharModal(); loadAll();
+}
+
+// — CONFIRMAR / CANCELAR ENTREVISTA —
+async function confirmarEntrevista(id) {
+  const r = await api("confirmar_entrevista", { entrevista_id: id });
+  if (r.error) { toast("❌ "+r.error,"er"); return; }
+  toast("✅ Entrevista confirmada!","ok"); carregarEntrevistas();
+}
+async function cancelarEntrevista(id) {
+  const motivo = prompt("Motivo do cancelamento:");
+  if (motivo === null) return;
+  const r = await api("cancelar_entrevista", { entrevista_id: id, motivo });
+  if (r.error) { toast("❌ "+r.error,"er"); return; }
+  toast("✅ Entrevista cancelada.","ok"); carregarEntrevistas();
+}
+
+// — NOTIFICAÇÃO GLOBAL —
+function abrirModalNotificacao() {
+  abrirModal(`
+    <h3>📢 Enviar Notificação Global</h3>
+    <div class="form-row"><label>Destinatários</label>
+      <select id="m-dest"><option value="alunos">Todos os Alunos</option><option value="recrutadores">Todos os Recrutadores</option><option value="todos">Todos</option></select>
+    </div>
+    <div class="form-row"><label>Assunto</label><input id="m-assunto" placeholder="Ex: Novidades na plataforma VETORH"/></div>
+    <div class="form-row"><label>Mensagem</label><textarea id="m-msg" placeholder="Corpo da notificação..."></textarea></div>
+    <div class="modal-footer">
+      <button class="btn" onclick="fecharModal()">Cancelar</button>
+      <button class="btn-blue" onclick="submeterNotificacao()">📢 Enviar</button>
+    </div>`);
+}
+async function submeterNotificacao() {
+  const assunto = document.getElementById("m-assunto").value.trim();
+  const mensagem = document.getElementById("m-msg").value.trim();
+  const destinatarios = document.getElementById("m-dest").value;
+  if (!assunto||!mensagem) { toast("Preenche assunto e mensagem.","er"); return; }
+  const r = await api("enviar_notificacao", { assunto, mensagem, destinatarios });
+  if (r.error) { toast("❌ "+r.error,"er"); return; }
+  toast("✅ Notificação enviada!","ok"); fecharModal();
+}
+
+// — EXPORTAR CSV —
+async function exportarCSV() {
+  const r = await api("exportar_alunos_csv");
+  if (r.error) { toast("❌ "+r.error,"er"); return; }
+  const blob = new Blob([r.csv||""], {type:"text/csv"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "vetorh_alunos_" + new Date().toISOString().slice(0,10) + ".csv";
+  a.click(); URL.revokeObjectURL(url);
+  toast("✅ CSV exportado!","ok");
 }
 </script>
 </body>

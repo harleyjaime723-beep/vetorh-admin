@@ -98,6 +98,7 @@ label{color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:1px;d
     <input type="password" id="l-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')login()">
     <button class="btn full" onclick="login()">Entrar →</button>
     <div style="color:#6b7280;font-size:11px;margin-top:16px">Apenas administradores autorizados têm acesso.</div>
+    <button onclick="limparSessao()" style="background:none;border:none;color:#374151;font-size:11px;cursor:pointer;margin-top:8px;text-decoration:underline">Problemas a entrar? Clica aqui para limpar sessão</button>
   </div>
 </div>
 
@@ -389,13 +390,29 @@ function logout() {
   document.getElementById("main-app").style.display="none";
   document.getElementById("login-page").style.display="flex";
 }
-
-// Auto-login se token guardado
-if(TOKEN) {
-  document.getElementById("login-page").style.display="none";
-  document.getElementById("main-app").style.display="";
-  document.getElementById("admin-email-chip").textContent="👤 "+ADMIN_EMAIL;
+function limparSessao() {
+  localStorage.clear();
+  TOKEN=""; ADMIN_EMAIL="";
+  document.getElementById("login-er").textContent="✅ Sessão limpa. Faz login novamente.";
+  document.getElementById("login-er").style.background="#10b98115";
+  document.getElementById("login-er").style.color="#10b981";
+  document.getElementById("login-er").style.borderColor="#10b98140";
+  document.getElementById("login-er").style.display="";
 }
+
+// Auto-login se token guardado — verifica se é válido
+async function verificarToken() {
+  if(!TOKEN) return;
+  try {
+    const r = await fetch(API, {method:"POST", headers:{"Content-Type":"application/json","X-Admin-Token":TOKEN}, body:JSON.stringify({acao:"listar_admins"})}).then(r=>r.json());
+    if(r.error) { logout(); return; }
+    document.getElementById("login-page").style.display="none";
+    document.getElementById("main-app").style.display="";
+    document.getElementById("admin-email-chip").textContent="👤 "+ADMIN_EMAIL;
+    loadAll();
+  } catch(e) { logout(); }
+}
+if(TOKEN) verificarToken();
 
 function ok(msg){const e=document.getElementById("msg-ok");e.textContent="✅ "+msg;e.style.display="";setTimeout(()=>e.style.display="none",3000)}
 function er(msg){const e=document.getElementById("msg-er");e.textContent="❌ "+msg;e.style.display="";setTimeout(()=>e.style.display="none",4000)}
@@ -820,8 +837,7 @@ async function exportarCSV(){
 
 document.querySelectorAll(".mdl").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("open")}));
 
-// Auto-load se já autenticado
-if(TOKEN) loadAll();
+
 </script>
 </body>
 </html>

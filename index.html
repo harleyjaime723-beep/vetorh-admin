@@ -712,11 +712,62 @@ function renderFinanceiro(tx){document.getElementById("tb-fi").innerHTML=tx.leng
 
 async function carregarStats(){
   try{
-    const r=await post("stats_avancadas");STATS=r;
-    const barras=(obj,c,sub)=>Object.keys(obj||{}).length?Object.entries(obj).slice(0,8).map(([k,v])=>{const cnt=typeof v==="object"?v.count:v;const avgEf=typeof v==="object"&&v.avg_eficiencia!=null?` · Efic: <b style="color:#E67E22">${v.avg_eficiencia}</b>`:"";const avgIapn=typeof v==="object"&&v.avg_iapn!=null?` · IAPN: <b style="color:#f59e0b">${v.avg_iapn}</b>`:"";return`<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;flex-wrap:wrap;gap:4px"><span style="color:#d1d5db">${k}</span><span>${bdg(cnt+" alunos","gr")}${avgEf}${avgIapn}</span></div><div class="prog"><div class="pb" style="width:${Math.min(100,cnt/Math.max(...Object.values(obj).map(x=>typeof x==="object"?x.count:x))*100)}%;background:${c}"></div></div></div>`}).join(""):`<div class="empty">Sem dados</div>`;
+    const r=await post("stats_avancadas"); STATS=r;
+
     const top=(lista,c)=>lista&&lista.length?lista.map(a=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #1f2937"><span style="color:#fff;font-size:12px">${a.nome||"—"}</span><div class="row"><span style="font-size:11px;color:#6b7280">${a.universidade||""}</span><span style="color:${c};font-weight:700;min-width:28px;text-align:right">${a.score}</span></div></div>`).join(""):`<div class="empty">Sem dados</div>`;
+
+    const barrasSimples=(obj,c)=>{
+      const entries=Object.entries(obj||{}).sort((a,b)=>b[1]-a[1]).slice(0,8);
+      if(!entries.length)return`<div class="empty">Sem dados</div>`;
+      const mx=Math.max(...entries.map(e=>e[1]));
+      return entries.map(([k,v])=>`<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span style="color:#d1d5db">${k}</span><span style="color:${c};font-weight:700">${v}</span></div><div class="prog"><div class="pb" style="width:${mx?Math.min(100,v/mx*100):0}%;background:${c}"></div></div></div>`).join('');
+    };
+
+    const uniTree=r.universidades||{};
+    const uniHTML=Object.keys(uniTree).length===0
+      ?`<div class="empty">Sem dados de universidades.</div>`
+      :Object.entries(uniTree).sort((a,b)=>b[1].total-a[1].total).map(([uni,ud])=>{
+          const cursosHTML=Object.entries(ud.cursos||{}).sort((a,b)=>b[1].total-a[1].total).map(([curso,cd])=>{
+            const anoOrdem=['1','2','3','4','5','6','?'];
+            const anosHTML=Object.entries(cd.anos||{}).sort((a,b)=>anoOrdem.indexOf(a[0])-anoOrdem.indexOf(b[0])).map(([ano,ad])=>`
+              <div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #0f1520;flex-wrap:wrap">
+                <span style="color:#f59e0b;font-weight:700;min-width:55px;font-size:11px">${ano}º Ano</span>
+                <span class="bdg gr" style="font-size:10px">${ad.count} aluno${ad.count!==1?'s':''}</span>
+                ${ad.avg_eficiencia!=null?`<span style="font-size:11px;color:#6b7280">Efic: <b style="color:#E67E22">${ad.avg_eficiencia}</b></span>`:''}
+                ${ad.avg_iapn!=null?`<span style="font-size:11px;color:#6b7280">IAPN: <b style="color:#f59e0b">${ad.avg_iapn}</b></span>`:''}
+                ${ad.avg_resiliencia!=null?`<span style="font-size:11px;color:#6b7280">Resil: <b style="color:#10b981">${ad.avg_resiliencia}</b></span>`:''}
+              </div>`).join('');
+            return `<div style="margin-left:16px;margin-bottom:8px">
+              <div style="display:flex;align-items:center;gap:8px;padding:7px 0;cursor:pointer;flex-wrap:wrap" onclick="toggleBloco(this)">
+                <span style="color:#6b7280;font-size:11px;min-width:12px">▶</span>
+                <span style="color:#d1d5db;font-weight:600;font-size:13px">${curso}</span>
+                <span class="bdg in" style="font-size:10px">${cd.total}</span>
+                ${cd.avg_eficiencia!=null?`<span style="font-size:11px;color:#6b7280">Efic: <b style="color:#E67E22">${cd.avg_eficiencia}</b></span>`:''}
+                ${cd.avg_iapn!=null?`<span style="font-size:11px;color:#6b7280">IAPN: <b style="color:#f59e0b">${cd.avg_iapn}</b></span>`:''}
+              </div>
+              <div class="bloco-body" style="display:none;margin-left:20px;border-left:2px solid #1f2937;padding-left:12px">
+                ${anosHTML||'<div style="color:#6b7280;font-size:12px;padding:6px 0">Sem dados de ano.</div>'}
+              </div>
+            </div>`;
+          }).join('');
+          return `<div class="pnl" style="margin-bottom:12px;padding:14px">
+            <div style="display:flex;align-items:center;gap:10px;cursor:pointer;flex-wrap:wrap" onclick="toggleBloco(this)">
+              <span style="color:#9ca3af;font-size:12px;min-width:12px">▶</span>
+              <span style="color:#fff;font-weight:800;font-size:15px">${uni}</span>
+              <span class="bdg wa">${ud.total} aluno${ud.total!==1?'s':''}</span>
+              ${ud.avg_eficiencia!=null?`<span style="font-size:12px;color:#6b7280">Efic: <b style="color:#E67E22">${ud.avg_eficiencia}</b></span>`:''}
+              ${ud.avg_resiliencia!=null?`<span style="font-size:12px;color:#6b7280">Resil: <b style="color:#10b981">${ud.avg_resiliencia}</b></span>`:''}
+              ${ud.avg_iapn!=null?`<span style="font-size:12px;color:#6b7280">IAPN: <b style="color:#f59e0b">${ud.avg_iapn}</b></span>`:''}
+              ${ud.avg_iei!=null?`<span style="font-size:12px;color:#6b7280">IEI: <b style="color:#3498DB">${ud.avg_iei}</b></span>`:''}
+            </div>
+            <div class="bloco-body" style="display:none;margin-top:10px">
+              ${cursosHTML||'<div class="empty">Sem cursos.</div>'}
+            </div>
+          </div>`;
+        }).join('');
+
     document.getElementById("st-body").innerHTML=`
-      <div class="grid g5" style="margin-bottom:16px">
+      <div class="grid g5" style="margin-bottom:20px">
         ${crd("✅","Taxa Conclusão",(r.taxa_conclusao||0)+"%","#10b981")}
         ${crd("🚨","Taxa Flags",(r.taxa_flags||0)+"%",(r.taxa_flags||0)>20?"#ef4444":"#6b7280")}
         ${crd("💪","Taxa Resiliência",(r.taxa_resiliencia||0)+"%","#10b981")}
@@ -726,21 +777,38 @@ async function carregarStats(){
         ${crd("📊","Avg Técnico",r.avg_tecnico||0,"#E67E22")}
         ${crd("🗣","Avg Linguístico",r.avg_linguistico||0,"#3498DB")}
       </div>
-      <div class="grid g2" style="margin-bottom:16px">
+      <div class="grid g2" style="margin-bottom:20px">
         <div class="pnl"><div style="font-weight:700;margin-bottom:12px">🏆 Top Eficiência</div>${top(r.top_alunos_eficiencia,"#E67E22")}</div>
         <div class="pnl"><div style="font-weight:700;margin-bottom:12px">🧠 Top IAPN</div>${top(r.top_alunos_iapn,"#f59e0b")}</div>
       </div>
-      <div class="grid g2">
-        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">🏛 Por Universidade <span style="font-size:11px;color:#6b7280;font-weight:400">(com métricas)</span></div>${barras(r.por_universidade,"#E67E22",true)}</div>
-        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">📚 Por Curso</div>${barras(r.por_curso,"#3498DB",false)}</div>
-        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">🏅 Por Selo</div>${barras(r.por_selo||{},"#8b5cf6",false)}</div>
-        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">🔍 Recrutadores por Setor</div>${barras(r.por_setor_recrutador||{},"#3498DB",false)}</div>
-        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">📋 Por Estado de Desafio</div>${barras(r.por_estado||{},"#10b981",false)}</div>
-        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">📅 Por Ano na Plataforma</div>${barras(r.por_ano||{},"#f59e0b",false)}</div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+        <span style="font-weight:800;font-size:15px">🏛 Universidades → Cursos → Anos</span>
+        <span style="font-size:11px;color:#6b7280">Clica em cada linha para expandir</span>
+        <button class="btn sm ok" onclick="expandirTudo()">Expandir Tudo</button>
+        <button class="btn sm" onclick="recolherTudo()">Recolher</button>
+      </div>
+      <div id="uni-tree">${uniHTML}</div>
+      <div class="grid g2" style="margin-top:20px">
+        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">🏅 Por Selo</div>${barrasSimples(r.por_selo,"#8b5cf6")}</div>
+        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">🔍 Recrutadores por Setor</div>${barrasSimples(r.por_setor_recrutador,"#3498DB")}</div>
+        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">📋 Por Estado de Desafio</div>${barrasSimples(r.por_estado,"#10b981")}</div>
+        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">📅 Por Ano Global</div>${barrasSimples(r.por_ano_global,"#f59e0b")}</div>
       </div>
     `;
   }catch(e){document.getElementById("st-body").innerHTML=`<div class="msg-er">Erro: ${e.message}</div>`}
 }
+
+function toggleBloco(el){
+  const body=el.nextElementSibling;
+  const arrow=el.querySelector('span:first-child');
+  if(!body)return;
+  if(body.style.display==='none'||body.style.display===''){
+    body.style.display='block';if(arrow)arrow.textContent='▼';
+  }else{body.style.display='none';if(arrow)arrow.textContent='▶';}
+}
+function expandirTudo(){document.querySelectorAll('.bloco-body').forEach(b=>{b.style.display='block'});document.querySelectorAll('[onclick="toggleBloco(this)"] span:first-child').forEach(s=>s.textContent='▼');}
+function recolherTudo(){document.querySelectorAll('.bloco-body').forEach(b=>{b.style.display='none'});document.querySelectorAll('[onclick="toggleBloco(this)"] span:first-child').forEach(s=>s.textContent='▶');}
+
 
 async function carregarAdmins(){
   try{const r=await post("listar_admins");const lista=r.admins||[];document.getElementById("admins-lista").innerHTML=lista.map(e=>`<div class="admin-chip" style="margin-bottom:8px">✅ ${e}</div>`).join("<br>")||"<div style='color:#6b7280;font-size:13px'>Sem admins configurados.</div>";}catch(e){document.getElementById("admins-lista").innerHTML=`<div class="msg-er">Erro: ${e.message}</div>`;}

@@ -1,392 +1,193 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>VETORH — Admin</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VETORH — Painel Admin</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#0A0E14;color:#fff;font-family:Inter,system-ui,sans-serif;min-height:100vh}
+
 /* LOGIN */
 .login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
-.login-box{background:#111827;border:1px solid #1f2937;border-radius:20px;padding:40px 36px;width:100%;max-width:400px;text-align:center}
-.login-logo{font-size:28px;font-weight:900;color:#E67E22;letter-spacing:8px;font-family:monospace;margin-bottom:6px}
-.login-sub{color:#6b7280;font-size:13px;margin-bottom:28px}
-/* HEADER */
-.hdr{background:#0d1117;border-bottom:1px solid #1f2937;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:200}
+.login-box{background:#111827;border:1px solid #1f2937;border-radius:20px;padding:40px 36px;width:100%;max-width:380px}
+.login-logo{font-size:28px;font-weight:900;color:#E67E22;letter-spacing:6px;font-family:monospace;text-align:center;margin-bottom:4px}
+.login-sub{color:#6b7280;font-size:13px;text-align:center;margin-bottom:28px}
+.login-box label{display:block;font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.login-box input{width:100%;background:#0d1117;border:1px solid #374151;color:#fff;border-radius:10px;padding:10px 14px;font-size:14px;margin-bottom:16px;outline:none;transition:border .2s}
+.login-box input:focus{border-color:#E67E22}
+.login-err{background:#ef444415;border:1px solid #ef444440;border-radius:8px;color:#ef4444;font-size:13px;padding:10px 14px;margin-bottom:14px;display:none}
+.btn-login{width:100%;background:#E67E22;color:#fff;border:none;border-radius:10px;padding:12px;font-size:15px;font-weight:700;cursor:pointer;transition:background .2s}
+.btn-login:hover{background:#d35400}
+.btn-login:disabled{background:#6b7280;cursor:not-allowed}
+
+/* APP */
+.hdr{background:#0d1117;border-bottom:1px solid #1f2937;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .logo{font-size:18px;font-weight:900;color:#E67E22;letter-spacing:6px;font-family:monospace}
-/* BADGES */
-.bdg{display:inline-block;border-radius:6px;padding:2px 9px;font-size:11px;font-weight:700;border:1px solid}
-.bdg.ok{background:#10b98118;color:#10b981;border-color:#10b98140}
-.bdg.er{background:#ef444418;color:#ef4444;border-color:#ef444440}
-.bdg.wa{background:#f59e0b18;color:#f59e0b;border-color:#f59e0b40}
-.bdg.in{background:#3498DB18;color:#3498DB;border-color:#3498DB40}
-.bdg.pu{background:#8b5cf618;color:#8b5cf6;border-color:#8b5cf640}
-.bdg.gr{background:#6b728018;color:#6b7280;border-color:#6b728040}
-/* BUTTONS */
-.btn{background:#1f2937;color:#9ca3af;border:1px solid #374151;border-radius:8px;padding:6px 14px;cursor:pointer;font-size:12px;font-weight:700;transition:all .15s;white-space:nowrap}
-.btn:hover{background:#374151;color:#fff}
-.btn.ok{background:#10b98118;color:#10b981;border-color:#10b98140}.btn.ok:hover{background:#10b981;color:#fff}
-.btn.er{background:#ef444418;color:#ef4444;border-color:#ef444440}.btn.er:hover{background:#ef4444;color:#fff}
-.btn.wa{background:#f59e0b18;color:#f59e0b;border-color:#f59e0b40}.btn.wa:hover{background:#f59e0b;color:#000}
-.btn.in{background:#3498DB18;color:#3498DB;border-color:#3498DB40}.btn.in:hover{background:#3498DB;color:#fff}
-.btn.pu{background:#8b5cf618;color:#8b5cf6;border-color:#8b5cf640}.btn.pu:hover{background:#8b5cf6;color:#fff}
-.btn.primary{background:#E67E2218;color:#E67E22;border-color:#E67E2240}.btn.primary:hover{background:#E67E22;color:#fff}
-.btn.sm{padding:3px 9px;font-size:11px}
-.btn.full{width:100%;padding:10px;font-size:14px;font-weight:800;background:#E67E22;color:#fff;border-color:#E67E22}
-.btn.full:hover{background:#d35400}
-/* LAYOUT */
-.con{max-width:1440px;margin:0 auto;padding:20px}
-.tabs{display:flex;border-bottom:1px solid #1f2937;margin-bottom:20px;overflow-x:auto}
-.tab{padding:10px 16px;cursor:pointer;font-size:12px;font-weight:700;background:none;border:none;border-bottom:2px solid transparent;color:#6b7280;white-space:nowrap;transition:all .15s}
+.bdg{background:#f59e0b20;color:#f59e0b;border:1px solid #f59e0b40;border-radius:6px;padding:2px 10px;font-size:11px;font-weight:700}
+.bdg.ok{background:#10b98120;color:#10b981;border-color:#10b98140}
+.bdg.er{background:#ef444420;color:#ef4444;border-color:#ef444440}
+.btn{background:#1f2937;color:#9ca3af;border:1px solid #374151;border-radius:8px;padding:6px 14px;cursor:pointer;font-size:12px;font-weight:700}
+.btn:hover{background:#374151}
+.btn-danger{background:#ef444420;color:#ef4444;border:1px solid #ef444440;border-radius:8px;padding:6px 14px;cursor:pointer;font-size:12px;font-weight:700}
+.container{max-width:1280px;margin:0 auto;padding:24px 20px}
+.tabs{display:flex;border-bottom:1px solid #1f2937;margin-bottom:24px;overflow-x:auto;gap:0}
+.tab{padding:10px 16px;cursor:pointer;font-size:12px;font-weight:700;background:none;border:none;border-bottom:2px solid transparent;color:#6b7280;white-space:nowrap}
 .tab.on{color:#E67E22;border-bottom-color:#E67E22}
 .tab:hover{color:#d1d5db}
-.grid{display:grid;gap:12px;margin-bottom:16px}
-.g5{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
-.g2{grid-template-columns:1fr 1fr}
-.g3{grid-template-columns:1fr 1fr 1fr}
-@media(max-width:700px){.g2,.g3{grid-template-columns:1fr}}
-.card{background:#111827;border-radius:14px;padding:16px 18px;border:1px solid #1f2937;transition:transform .15s}
-.card:hover{transform:translateY(-2px)}
-.cv{font-size:26px;font-weight:900}
-.cl{color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
-.cs{color:#6b7280;font-size:11px;margin-top:3px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:16px}
+.card{background:#111827;border-radius:14px;padding:18px 20px;border:1px solid #1f2937}
+.cl{color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.cv{font-size:28px;font-weight:900}
+.cs{color:#6b7280;font-size:11px;margin-top:4px}
 .tw{overflow-x:auto;background:#111827;border-radius:14px;border:1px solid #1f2937}
 table{width:100%;border-collapse:collapse}
-th{color:#6b7280;font-size:11px;font-weight:700;text-transform:uppercase;padding:9px 12px;text-align:left;border-bottom:1px solid #1f2937;white-space:nowrap}
-td{padding:8px 12px;border-bottom:1px solid #0f1520;font-size:12px;color:#d1d5db;vertical-align:middle}
-tr:last-child td{border-bottom:none}
+th{color:#6b7280;font-size:11px;font-weight:700;text-transform:uppercase;padding:10px 12px;text-align:left;border-bottom:1px solid #1f2937}
+td{padding:10px 12px;border-bottom:1px solid #0f1520;font-size:13px;color:#d1d5db;vertical-align:middle}
 tr:hover td{background:#0d1117}
-.pnl{background:#111827;border:1px solid #1f2937;border-radius:14px;padding:18px;margin-bottom:12px}
-.pnl.wa{border-color:#f59e0b30}.pnl.er{border-color:#ef444430}
+.ldr-wrap{text-align:center;padding:80px 20px}
+.spinner{width:28px;height:28px;border:2px solid #1f2937;border-top-color:#E67E22;border-radius:50%;animation:spin .8s linear infinite;margin:16px auto 0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.err-box{background:#ef444415;border:1px solid #ef444440;border-radius:10px;padding:16px;color:#ef4444;font-size:13px;margin-bottom:16px}
+.at-card{background:#111827;border:1px solid #1f2937;border-radius:14px;padding:20px;margin-bottom:12px}
+.at-card.pend{border-color:#f59e0b50}
+.sec-title{font-size:18px;font-weight:800;margin-bottom:4px}
+.sec-sub{color:#6b7280;font-size:13px;margin-bottom:20px}
+.chip{display:inline-block;background:#1f2937;border-radius:6px;padding:2px 9px;font-size:11px;font-weight:700;color:#9ca3af}
 .empty{color:#6b7280;text-align:center;padding:40px;font-size:13px}
-.spin{width:26px;height:26px;border:2px solid #1f2937;border-top-color:#E67E22;border-radius:50%;animation:sp .8s linear infinite;margin:16px auto}
-@keyframes sp{to{transform:rotate(360deg)}}
-.ldr{text-align:center;padding:60px}
-.msg-ok{background:#10b98115;border:1px solid #10b98140;border-radius:10px;padding:11px 16px;color:#10b981;font-size:13px;margin-bottom:14px}
-.msg-er{background:#ef444415;border:1px solid #ef444440;border-radius:10px;padding:11px 16px;color:#ef4444;font-size:13px;margin-bottom:14px}
-.ttl{font-size:17px;font-weight:800;margin-bottom:3px}
-.sub{color:#6b7280;font-size:12px;margin-bottom:18px}
-.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.prog{background:#1f2937;border-radius:99px;height:5px;flex:1;min-width:40px;overflow:hidden}
-.pb{height:100%;border-radius:99px;transition:width .3s}
-input,textarea,select{background:#0d1117;border:1px solid #374151;border-radius:8px;color:#fff;padding:7px 11px;font-size:13px;width:100%;margin-bottom:10px;font-family:inherit}
-input:focus,textarea:focus,select:focus{outline:none;border-color:#E67E22}
-label{color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:3px}
-.mdl{display:none;position:fixed;inset:0;background:#000c;z-index:999;align-items:center;justify-content:center;padding:16px}
-.mdl.open{display:flex}
-.mbox{background:#111827;border:1px solid #1f2937;border-radius:16px;padding:24px;width:100%;max-width:560px;max-height:88vh;overflow-y:auto}
-.mtitle{font-size:15px;font-weight:800;margin-bottom:14px}
-.kpi-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px;margin-bottom:14px}
-.kpi{background:#0d1117;border-radius:10px;padding:12px}
-.kpi-l{font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
-.kpi-v{font-size:15px;font-weight:800}
-.sep{border:none;border-top:1px solid #1f2937;margin:14px 0}
-.admin-chip{background:#E67E2218;border:1px solid #E67E2240;border-radius:8px;padding:4px 10px;font-size:12px;color:#E67E22;font-weight:700;display:inline-flex;align-items:center;gap:6px}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div id="login-page" class="login-wrap">
+<!-- ECRÃ DE LOGIN -->
+<div id="pg-login" class="login-wrap">
   <div class="login-box">
     <div class="login-logo">VETORH</div>
     <div class="login-sub">Painel de Administração</div>
-    <div id="login-er" class="msg-er" style="display:none;text-align:left"></div>
+    <div id="login-err" class="login-err"></div>
     <label>Email</label>
-    <input type="email" id="l-email" placeholder="admin@vetorh.ao" onkeydown="if(event.key==='Enter')login()">
+    <input type="email" id="inp-email" placeholder="admin@vetorh.ao" autocomplete="username"/>
     <label>Senha</label>
-    <input type="password" id="l-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')login()">
-    <button class="btn full" onclick="login()">Entrar →</button>
-    <div style="color:#6b7280;font-size:11px;margin-top:16px">Apenas administradores autorizados têm acesso.</div>
-    <button onclick="limparSessao()" style="background:none;border:none;color:#374151;font-size:11px;cursor:pointer;margin-top:8px;text-decoration:underline">Problemas a entrar? Clica aqui para limpar sessão</button>
+    <input type="password" id="inp-pass" placeholder="••••••••" autocomplete="current-password"/>
+    <button class="btn-login" id="btn-login" onclick="fazerLogin()">Entrar →</button>
   </div>
 </div>
 
-<!-- APP -->
-<div id="main-app" style="display:none">
-<div class="hdr">
-  <div class="row"><span class="logo">VETORH</span><span class="bdg wa">ADMIN</span></div>
-  <div class="row">
-    <span id="admin-email-chip" class="admin-chip">👤 —</span>
-    <span id="sb" class="bdg gr">A carregar...</span>
-    <button class="btn" onclick="loadAll()">🔄</button>
-    <button class="btn ok" onclick="exportarCSV()">⬇ CSV</button>
-    <button class="btn er" onclick="logout()">Sair</button>
+<!-- PAINEL PRINCIPAL -->
+<div id="pg-app" style="display:none">
+  <div class="hdr">
+    <div style="display:flex;align-items:center;gap:12px">
+      <span class="logo">VETORH</span>
+      <span class="bdg">ADMIN</span>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <span id="chip-email" style="color:#6b7280;font-size:12px"></span>
+      <span id="chip-status" class="bdg">A carregar...</span>
+      <button class="btn" onclick="loadAll()">🔄 Actualizar</button>
+      <button class="btn-danger" onclick="fazerLogout()">Sair</button>
+    </div>
   </div>
-</div>
-
-<div class="con">
-  <div id="ldr" class="ldr"><div class="logo" style="font-size:28px">VETORH</div><div style="color:#6b7280;font-size:12px;margin-top:10px">A carregar dados...</div><div class="spin"></div></div>
-  <div id="msg-ok" class="msg-ok" style="display:none"></div>
-  <div id="msg-er" class="msg-er" style="display:none"></div>
-
-  <div id="app" style="display:none">
-    <div class="tabs">
-      <button class="tab on" onclick="tab('ov',this)">📊 Geral</button>
-      <button class="tab" onclick="tab('al',this)">🎓 Alunos</button>
-      <button class="tab" onclick="tab('de',this)">🎯 Desafios</button>
-      <button class="tab" id="ti" onclick="tab('in',this)">🚨 Integridade</button>
-      <button class="tab" id="ta" onclick="tab('at',this)">📋 Atenuantes</button>
-      <button class="tab" id="te" onclick="tab('en',this)">📅 Entrevistas</button>
-      <button class="tab" onclick="tab('re',this)">🔍 Recrutadores</button>
-      <button class="tab" onclick="tab('fi',this)">💰 Financeiro</button>
-      <button class="tab" onclick="tab('st',this)">📈 Estatísticas</button>
-      <button class="tab" onclick="tab('adm',this)">⚙️ Acessos</button>
+  <div class="container">
+    <div id="app-loader" class="ldr-wrap">
+      <div style="font-size:24px;font-weight:900;color:#E67E22;letter-spacing:6px;font-family:monospace">VETORH</div>
+      <div style="color:#6b7280;font-size:13px;margin-top:8px">A carregar dados...</div>
+      <div class="spinner"></div>
     </div>
-
-    <!-- GERAL -->
-    <div id="v-ov">
-      <div class="grid g5" id="cm"></div>
-      <div class="grid g5" id="cs"></div>
-      <div class="grid g2">
-        <div><div class="ttl" style="margin-bottom:10px">🕐 Últimas Submissões</div>
-        <div class="tw"><table><thead><tr><th>Aluno ID</th><th>Estado</th><th>Téc.</th><th>Ling.</th><th>Data</th></tr></thead><tbody id="tb-ov-s"></tbody></table></div></div>
-        <div><div class="ttl" style="margin-bottom:10px">💰 Últimas Transações</div>
-        <div class="tw"><table><thead><tr><th>Recrutador</th><th>Tipo</th><th>Pts</th><th>Motivo</th></tr></thead><tbody id="tb-ov-t"></tbody></table></div></div>
+    <div id="app-err" class="err-box" style="display:none"></div>
+    <div id="app-content" style="display:none">
+      <div class="tabs">
+        <button class="tab on" onclick="mudarTab('ov',this)">📊 Geral</button>
+        <button class="tab" onclick="mudarTab('al',this)">🎓 Alunos</button>
+        <button class="tab" onclick="mudarTab('de',this)">🎯 Submissões</button>
+        <button class="tab" id="tab-in" onclick="mudarTab('in',this)">🚨 Integridade</button>
+        <button class="tab" id="tab-at" onclick="mudarTab('at',this)">📋 Atenuantes</button>
+        <button class="tab" onclick="mudarTab('re',this)">🔍 Recrutadores</button>
       </div>
-    </div>
 
-    <!-- ALUNOS -->
-    <div id="v-al" style="display:none">
-      <div class="row" style="margin-bottom:14px;justify-content:space-between;flex-wrap:wrap;gap:8px">
-        <div><div class="ttl">🎓 Alunos</div><div class="sub">Todos os perfis registados</div></div>
-        <input style="width:280px;margin:0" placeholder="🔍 Nome, universidade, curso..." id="q-al" oninput="filtrarAlunos()">
+      <!-- GERAL -->
+      <div id="v-ov">
+        <div class="grid" id="cards-main"></div>
+        <div class="grid" id="cards-scores"></div>
       </div>
-      <div class="tw"><table><thead><tr>
-        <th>Nome</th><th>Universidade</th><th>Curso</th><th>Ano</th>
-        <th>⚡Efic.</th><th>💪Resil.</th><th>📈Consist.</th><th>🤝Colab.</th>
-        <th>🧠IAPN</th><th>🌐IEI</th><th>🔥Streak</th>
-        <th>🏅Selo</th><th>🃏Wild.</th><th>🇬🇧Inglês</th>
-        <th>📝Testes</th><th>✅Completos</th><th>⏱ Dias</th><th>📅Entrev.</th>
-        <th>Acções</th>
-      </tr></thead><tbody id="tb-a"></tbody></table></div>
-    </div>
 
-    <!-- DESAFIOS -->
-    <div id="v-de" style="display:none">
-      <div class="row" style="margin-bottom:14px;justify-content:space-between;flex-wrap:wrap;gap:8px">
-        <div><div class="ttl">🎯 Banco de Desafios</div><div class="sub">Gestão e atribuição</div></div>
-        <div class="row">
-          <button class="btn ok" onclick="abrirCriarDesafio()">➕ Novo Desafio</button>
-          <button class="btn in" onclick="abrirAtribuir()">📤 Atribuir</button>
+      <!-- ALUNOS -->
+      <div id="v-al" style="display:none">
+        <div class="sec-title">🎓 Alunos</div>
+        <div class="sec-sub">Todos os perfis registados na plataforma</div>
+        <div class="tw">
+          <table>
+            <thead><tr><th>Nome</th><th>Universidade</th><th>Curso</th><th>Efic.</th><th>Resil.</th><th>Streak</th><th>IAPN</th><th>Selo</th></tr></thead>
+            <tbody id="tb-alunos"></tbody>
+          </table>
         </div>
       </div>
-      <div class="tw" style="margin-bottom:20px"><table><thead><tr><th>Título</th><th>Área</th><th>Subárea</th><th>Dif.</th><th>Tipo</th><th>Idioma</th><th>Tempo</th><th>Estado</th><th>Acções</th></tr></thead><tbody id="tb-d"></tbody></table></div>
-      <div class="ttl" style="margin-bottom:10px">📋 Submissões Recentes</div>
-      <div class="tw"><table><thead><tr><th>Aluno</th><th>Estado</th><th>Téc.</th><th>Ling.</th><th>Efic.</th><th>Idioma</th><th>Data</th><th>Acções</th></tr></thead><tbody id="tb-sub"></tbody></table></div>
-    </div>
 
-    <!-- INTEGRIDADE -->
-    <div id="v-in" style="display:none">
-      <div class="ttl">🚨 Integridade</div><div class="sub">Ordenadas por severidade</div>
-      <div id="li"></div>
-    </div>
-
-    <!-- ATENUANTES -->
-    <div id="v-at" style="display:none">
-      <div class="ttl">📋 Atenuantes</div><div class="sub">Aguardam revisão</div>
-      <div id="la"></div>
-    </div>
-
-    <!-- ENTREVISTAS -->
-    <div id="v-en" style="display:none">
-      <div class="ttl">📅 Entrevistas</div><div class="sub">Pedidos de entrevista</div>
-      <div class="tw"><table><thead><tr><th>Recrutador</th><th>Empresa</th><th>Aluno</th><th>Vaga</th><th>Data</th><th>Formato</th><th>Estado</th><th>Acções</th></tr></thead><tbody id="tb-en"></tbody></table></div>
-    </div>
-
-    <!-- RECRUTADORES -->
-    <div id="v-re" style="display:none">
-      <div class="ttl">🔍 Recrutadores</div><div class="sub">Contas e planos</div>
-      <div class="tw"><table><thead><tr><th>Nome</th><th>Empresa</th><th>Setor</th><th>Plano</th><th>Pontos</th><th>Vagas</th><th>Perfis Vis.</th><th>📅Entrev. Total</th><th>✅Confirmadas</th><th>⏱ Dias</th><th>Acções</th></tr></thead><tbody id="tb-r"></tbody></table></div>
-    </div>
-
-    <!-- FINANCEIRO -->
-    <div id="v-fi" style="display:none">
-      <div class="ttl">💰 Transações</div><div class="sub">Histórico completo</div>
-      <div class="tw"><table><thead><tr><th>Recrutador</th><th>Tipo</th><th>Pontos</th><th>Motivo</th><th>Descrição</th><th>Data</th></tr></thead><tbody id="tb-fi"></tbody></table></div>
-    </div>
-
-    <!-- ESTATÍSTICAS -->
-    <div id="v-st" style="display:none">
-      <div class="ttl">📈 Estatísticas</div><div class="sub">Análise em tempo real</div>
-      <div id="st-body"><div class="spin"></div></div>
-    </div>
-
-    <!-- ACESSOS ADMIN -->
-    <div id="v-adm" style="display:none">
-      <div class="ttl">⚙️ Gestão de Acessos</div>
-      <div class="sub">Administradores autorizados a aceder ao painel</div>
-      <div class="pnl" style="max-width:600px">
-        <div style="font-weight:700;margin-bottom:12px;font-size:13px">Como funciona</div>
-        <div style="color:#9ca3af;font-size:13px;line-height:1.7;margin-bottom:16px">
-          Os acessos são controlados directamente no código backend (<code style="background:#0d1117;padding:2px 6px;border-radius:4px;color:#E67E22">adminDashboard.ts</code>). Para adicionar ou remover um administrador, edita a lista <code style="background:#0d1117;padding:2px 6px;border-radius:4px;color:#E67E22">ADMIN_EMAILS</code> e reimplementa a função.<br><br>
-          A senha é definida pela variável de ambiente <code style="background:#0d1117;padding:2px 6px;border-radius:4px;color:#E67E22">ADMIN_PASSWORD</code> no Base44. Se não estiver definida, usa a senha padrão temporária.
+      <!-- SUBMISSÕES -->
+      <div id="v-de" style="display:none">
+        <div class="sec-title">🎯 Submissões</div>
+        <div class="sec-sub">Histórico de avaliações de desafios</div>
+        <div class="tw">
+          <table>
+            <thead><tr><th>Aluno</th><th>Estado</th><th>Técnico</th><th>Linguístico</th><th>Idioma</th><th>Data</th></tr></thead>
+            <tbody id="tb-desafios"></tbody>
+          </table>
         </div>
-        <div style="font-weight:700;margin-bottom:10px;font-size:13px">Admins actuais</div>
-        <div id="admins-lista"><div class="spin"></div></div>
-        <hr class="sep">
-        <div style="font-weight:700;margin-bottom:10px;font-size:13px">🔐 Alterar Senha</div>
-        <div style="color:#9ca3af;font-size:12px;margin-bottom:12px">Para alterar a senha, define a variável <code style="background:#0d1117;padding:2px 6px;border-radius:4px;color:#E67E22">ADMIN_PASSWORD</code> nas definições do Base44 → Backend Functions → Environment Variables.</div>
-        <hr class="sep">
-        <div style="font-weight:700;margin-bottom:10px;font-size:13px">➕ Adicionar Admin</div>
-        <div style="color:#9ca3af;font-size:12px;margin-bottom:10px">Edita o ficheiro <code style="background:#0d1117;padding:2px 6px;border-radius:4px;color:#E67E22">functions/adminDashboard.ts</code> no Base44 App Builder e adiciona o email à lista <code style="background:#0d1117;padding:2px 6px;border-radius:4px;color:#E67E22">ADMIN_EMAILS</code>. Depois reimplementa.</div>
-        <div style="background:#0d1117;border-radius:8px;padding:14px;font-family:monospace;font-size:12px;color:#10b981">
-          const ADMIN_EMAILS: string[] = [<br>
-          &nbsp;&nbsp;"admin@vetorh.ao",<br>
-          &nbsp;&nbsp;"harley@vetorh.ao",<br>
-          &nbsp;&nbsp;<span style="color:#f59e0b">// adiciona aqui os novos admins</span><br>
-          ];
+      </div>
+
+      <!-- INTEGRIDADE -->
+      <div id="v-in" style="display:none">
+        <div class="sec-title">🚨 Integridade Académica</div>
+        <div class="sec-sub">Anomalias detectadas pelo sistema</div>
+        <div id="lista-flags"></div>
+      </div>
+
+      <!-- ATENUANTES -->
+      <div id="v-at" style="display:none">
+        <div class="sec-title">📋 Pedidos de Atenuante</div>
+        <div class="sec-sub">A aguardar revisão humana</div>
+        <div id="lista-atenuantes"></div>
+      </div>
+
+      <!-- RECRUTADORES -->
+      <div id="v-re" style="display:none">
+        <div class="sec-title">🔍 Recrutadores</div>
+        <div class="sec-sub">Contas registadas na plataforma</div>
+        <div class="tw">
+          <table>
+            <thead><tr><th>Nome</th><th>Empresa</th><th>Setor</th><th>Plano</th><th>Pontos</th><th>Vagas</th></tr></thead>
+            <tbody id="tb-recrutadores"></tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
 </div>
-</div>
-
-<!-- MODAIS -->
-<div class="mdl" id="m-aluno"><div class="mbox">
-  <div class="row" style="justify-content:space-between;margin-bottom:14px">
-    <div class="mtitle" id="m-aluno-nome">Perfil</div>
-    <button class="btn sm" onclick="fechar('m-aluno')">✕</button>
-  </div>
-  <div id="m-aluno-body"></div>
-</div></div>
-
-<div class="mdl" id="m-sub"><div class="mbox">
-  <div class="row" style="justify-content:space-between;margin-bottom:14px">
-    <div class="mtitle">📄 Detalhe da Submissão</div>
-    <button class="btn sm" onclick="fechar('m-sub')">✕</button>
-  </div>
-  <div id="m-sub-body"></div>
-</div></div>
-
-<div class="mdl" id="m-suspender"><div class="mbox">
-  <div class="mtitle">🔴 Suspender Aluno</div>
-  <input type="hidden" id="sus-id">
-  <label>Motivo</label><textarea id="sus-mot" rows="3" placeholder="Motivo da suspensão..."></textarea>
-  <div class="row"><button class="btn er" onclick="confirmarSuspender()">Suspender</button><button class="btn" onclick="fechar('m-suspender')">Cancelar</button></div>
-</div></div>
-
-<div class="mdl" id="m-banir"><div class="mbox">
-  <div class="mtitle">⛔ Banir Aluno</div>
-  <input type="hidden" id="ban-id">
-  <label>Motivo</label><textarea id="ban-mot" rows="3" placeholder="Motivo do banimento..."></textarea>
-  <div class="row"><button class="btn er" onclick="confirmarBanir()">Banir Permanentemente</button><button class="btn" onclick="fechar('m-banir')">Cancelar</button></div>
-</div></div>
-
-<div class="mdl" id="m-scores"><div class="mbox">
-  <div class="mtitle">✏️ Editar Indicadores</div>
-  <input type="hidden" id="sc-id">
-  <div class="grid g2" style="gap:8px">
-    <div><label>⚡ Eficiência</label><input type="number" id="sc-ef" min="0" max="100"></div>
-    <div><label>💪 Resiliência</label><input type="number" id="sc-re" min="0" max="100"></div>
-    <div><label>📈 Consistência</label><input type="number" id="sc-co" min="0" max="100"></div>
-    <div><label>🤝 Colaboração</label><input type="number" id="sc-cl" min="0" max="100"></div>
-    <div><label>🧠 IAPN</label><input type="number" id="sc-ia" min="0" max="100"></div>
-    <div><label>🌐 IEI</label><input type="number" id="sc-ie" min="0" max="100"></div>
-    <div><label>🔥 Streak (semanas)</label><input type="number" id="sc-st" min="0"></div>
-    <div><label>🃏 Wildcards</label><input type="number" id="sc-wc" min="0"></div>
-    <div><label>🇬🇧 Nível Inglês</label><input type="text" id="sc-ni" placeholder="ex: B2"></div>
-    <div><label>🏅 Selo</label><input type="text" id="sc-sl" placeholder="ex: 🟢 Verificado"></div>
-  </div>
-  <div class="row"><button class="btn ok" onclick="confirmarScores()">Guardar</button><button class="btn" onclick="fechar('m-scores')">Cancelar</button></div>
-</div></div>
-
-<div class="mdl" id="m-notif"><div class="mbox">
-  <div class="mtitle">📢 Notificação</div>
-  <input type="hidden" id="nf-id">
-  <label>Mensagem</label><textarea id="nf-msg" rows="4" placeholder="Escreve a mensagem..."></textarea>
-  <div class="row"><button class="btn in" onclick="confirmarNotif()">Enviar</button><button class="btn" onclick="fechar('m-notif')">Cancelar</button></div>
-</div></div>
-
-<div class="mdl" id="m-atrib"><div class="mbox">
-  <div class="mtitle">📤 Atribuir Desafio</div>
-  <label>Aluno</label><select id="at-al"></select>
-  <label>Desafio</label><select id="at-de"></select>
-  <label>Idioma</label><select id="at-id"><option value="portugues">Português</option><option value="ingles">Inglês</option><option value="frances">Francês</option></select>
-  <label>Prazo (dias)</label><input type="number" id="at-pr" value="7" min="1" max="30">
-  <div class="row"><button class="btn in" onclick="confirmarAtribuir()">Atribuir</button><button class="btn" onclick="fechar('m-atrib')">Cancelar</button></div>
-</div></div>
-
-<div class="mdl" id="m-criar-d"><div class="mbox">
-  <div class="mtitle">➕ Novo Desafio</div>
-  <label>Título</label><input type="text" id="cd-ti" placeholder="Título do desafio">
-  <div class="grid g2" style="gap:8px">
-    <div><label>Área</label><input type="text" id="cd-ar" placeholder="ex: Engenharia Informática"></div>
-    <div><label>Subárea</label><input type="text" id="cd-sa" placeholder="ex: Redes"></div>
-    <div><label>Dificuldade</label><select id="cd-di"><option value="facil">Fácil</option><option value="medio">Médio</option><option value="dificil">Difícil</option></select></div>
-    <div><label>Tipo</label><select id="cd-tp"><option value="tecnico">Técnico</option><option value="troubleshooting">Troubleshooting</option><option value="interdisciplinar">Interdisciplinar</option><option value="compostura">Compostura</option></select></div>
-    <div><label>Idioma</label><select id="cd-id"><option value="portugues">Português</option><option value="ingles">Inglês</option><option value="frances">Francês</option></select></div>
-    <div><label>Tempo (min)</label><input type="number" id="cd-tm" value="45" min="5"></div>
-  </div>
-  <label>Rubrica Técnica</label><textarea id="cd-rt" rows="3" placeholder="Critérios técnicos..."></textarea>
-  <label>Rubrica Linguística</label><textarea id="cd-rl" rows="2" placeholder="Critérios linguísticos..."></textarea>
-  <div class="row"><button class="btn ok" onclick="confirmarCriarDesafio()">Criar</button><button class="btn" onclick="fechar('m-criar-d')">Cancelar</button></div>
-</div></div>
-
-<div class="mdl" id="m-flag"><div class="mbox">
-  <div class="mtitle">🚨 Resolver Flag</div>
-  <input type="hidden" id="fl-id">
-  <label>Resolução</label><textarea id="fl-res" rows="3" placeholder="Descreve a resolução..."></textarea>
-  <label style="display:flex;align-items:center;gap:8px;text-transform:none;letter-spacing:0;cursor:pointer">
-    <input type="checkbox" id="fl-ban" style="width:auto;margin:0"> Banir aluno permanentemente
-  </label>
-  <div class="row" style="margin-top:12px"><button class="btn er" onclick="confirmarFlag()">Resolver</button><button class="btn" onclick="fechar('m-flag')">Cancelar</button></div>
-</div></div>
-
-<div class="mdl" id="m-pontos"><div class="mbox">
-  <div class="mtitle" id="m-pontos-t">💰 Gerir Pontos</div>
-  <input type="hidden" id="pt-id"><input type="hidden" id="pt-op">
-  <label>Quantidade</label><input type="number" id="pt-qt" value="50" min="1">
-  <label>Motivo</label><input type="text" id="pt-mot" placeholder="ex: Compensação...">
-  <div class="row"><button class="btn ok" onclick="confirmarPontos()">Confirmar</button><button class="btn" onclick="fechar('m-pontos')">Cancelar</button></div>
-</div></div>
-
-<div class="mdl" id="m-rec"><div class="mbox">
-  <div class="row" style="justify-content:space-between;margin-bottom:14px">
-    <div class="mtitle" id="m-rec-nome">Recrutador</div>
-    <button class="btn sm" onclick="fechar('m-rec')">✕</button>
-  </div>
-  <div id="m-rec-body"></div>
-</div></div>
 
 <script>
 const API = "https://hargent26-a074b51a.base44.app/functions/adminDashboard";
 let TOKEN = "";
 let ADMIN_EMAIL = "";
-let D = null, FL = [], AT = [], DESAFIOS = [], STATS = null;
+let DATA = null, FLAGS = [], ATENUANTES = [];
 
-// Tentar recuperar sessão guardada
-try {
-  const saved = sessionStorage.getItem("vt_token");
-  if (saved) { TOKEN = saved; ADMIN_EMAIL = sessionStorage.getItem("vt_email") || ""; }
-} catch(e) {}
+// ─── ENTER nas inputs faz login ───
+document.getElementById("inp-email").addEventListener("keydown", e => { if (e.key === "Enter") document.getElementById("inp-pass").focus(); });
+document.getElementById("inp-pass").addEventListener("keydown", e => { if (e.key === "Enter") fazerLogin(); });
 
-function apiCall(acao, extra, raw) {
-  const opts = {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "X-Admin-Token": TOKEN },
-    body: JSON.stringify({ acao, ...extra })
-  };
-  if (raw) return fetch(API, opts);
-  return fetch(API, opts).then(r => r.json());
-}
-const post = (acao, extra={}) => apiCall(acao, extra, false);
+// ─── LOGIN ───
+async function fazerLogin() {
+  const email = (document.getElementById("inp-email").value || "").trim();
+  const pass = document.getElementById("inp-pass").value || "";
+  const errEl = document.getElementById("login-err");
+  const btn = document.getElementById("btn-login");
 
-async function login() {
-  const email = (document.getElementById("l-email").value || "").trim();
-  const password = document.getElementById("l-pass").value || "";
-  const errEl = document.getElementById("login-er");
   errEl.style.display = "none";
 
-  if (!email || !password) {
+  if (!email || !pass) {
     errEl.textContent = "Preenche o email e a senha.";
-    errEl.style.color = "#ef4444";
-    errEl.style.display = "";
+    errEl.style.display = "block";
     return;
   }
 
-  const btn = document.querySelector(".btn.full");
   btn.textContent = "A entrar...";
   btn.disabled = true;
 
@@ -394,490 +195,229 @@ async function login() {
     const resp = await fetch(API, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ acao: "login", email: email, password: password })
+      body: JSON.stringify({ acao: "login", email: email, password: pass })
     });
+
     const r = await resp.json();
 
-    if (r.error) {
-      errEl.textContent = "❌ " + r.error;
-      errEl.style.color = "#ef4444";
-      errEl.style.display = "";
+    if (r.error || !r.token) {
+      errEl.textContent = "❌ " + (r.error || "Erro desconhecido.");
+      errEl.style.display = "block";
       btn.textContent = "Entrar →";
       btn.disabled = false;
       return;
     }
 
     TOKEN = r.token;
-    ADMIN_EMAIL = r.email;
-    try { sessionStorage.setItem("vt_token", TOKEN); sessionStorage.setItem("vt_email", ADMIN_EMAIL); } catch(e) {}
+    ADMIN_EMAIL = r.email || email;
 
-    // Mostrar painel
-    document.getElementById("login-page").style.display = "none";
-    document.getElementById("main-app").style.display = "";
-    document.getElementById("admin-email-chip").textContent = "👤 " + ADMIN_EMAIL;
-    document.getElementById("ldr").style.display = "";
-    document.getElementById("app").style.display = "none";
+    document.getElementById("pg-login").style.display = "none";
+    document.getElementById("pg-app").style.display = "";
+    document.getElementById("chip-email").textContent = "👤 " + ADMIN_EMAIL;
     btn.textContent = "Entrar →";
     btn.disabled = false;
 
-    // Carregar dados
     loadAll();
 
-  } catch(e) {
-    errEl.textContent = "❌ Erro: " + e.message;
-    errEl.style.color = "#ef4444";
-    errEl.style.display = "";
+  } catch (e) {
+    errEl.textContent = "❌ Erro de ligação: " + e.message;
+    errEl.style.display = "block";
     btn.textContent = "Entrar →";
     btn.disabled = false;
   }
 }
 
-function logout() {
+// ─── LOGOUT ───
+function fazerLogout() {
   TOKEN = ""; ADMIN_EMAIL = "";
-  try { sessionStorage.clear(); } catch(e) {}
-  document.getElementById("main-app").style.display = "none";
-  document.getElementById("login-page").style.display = "flex";
+  DATA = null; FLAGS = []; ATENUANTES = [];
+  document.getElementById("pg-app").style.display = "none";
+  document.getElementById("pg-login").style.display = "flex";
+  document.getElementById("inp-pass").value = "";
+  document.getElementById("login-err").style.display = "none";
+  document.getElementById("app-content").style.display = "none";
+  document.getElementById("app-loader").style.display = "";
+  document.getElementById("app-err").style.display = "none";
 }
 
-function limparSessao() {
-  try { sessionStorage.clear(); localStorage.clear(); } catch(e) {}
-  TOKEN = ""; ADMIN_EMAIL = "";
-  const errEl = document.getElementById("login-er");
-  errEl.textContent = "✅ Sessão limpa. Podes fazer login agora.";
-  errEl.style.background = "#10b98115";
-  errEl.style.color = "#10b981";
-  errEl.style.borderColor = "#10b98140";
-  errEl.style.display = "";
+// ─── API ───
+function api(acao, extra) {
+  return fetch(API, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "X-Admin-Token": TOKEN },
+    body: JSON.stringify(Object.assign({ acao }, extra || {}))
+  }).then(r => r.json());
 }
 
-// auto-login desactivado
-
-function ok(msg){const e=document.getElementById("msg-ok");e.textContent="✅ "+msg;e.style.display="";setTimeout(()=>e.style.display="none",3000)}
-function er(msg){const e=document.getElementById("msg-er");e.textContent="❌ "+msg;e.style.display="";setTimeout(()=>e.style.display="none",4000)}
-function abrir(id){document.getElementById(id).classList.add("open")}
-function fechar(id){document.getElementById(id).classList.remove("open")}
-function fmt(d){return d?new Date(d).toLocaleDateString("pt-PT"):"—"}
-function fmtDt(d){return d?new Date(d).toLocaleString("pt-PT"):"—"}
-function bdg(t,c){return`<span class="bdg ${c||'gr'}">${t}</span>`}
-function crd(ic,lb,vl,c,sb){return`<div class="card" style="border-color:${c||"#E67E22"}25"><div class="cl">${ic} ${lb}</div><div class="cv" style="color:${c||"#E67E22"}">${vl!=null?vl:"—"}</div>${sb?`<div class="cs">${sb}</div>`:""}</div>`}
-function pr(v,c){return`<div class="row"><span style="color:${c};font-weight:700;min-width:24px;font-size:12px">${v!=null?v:"—"}</span><div class="prog"><div class="pb" style="width:${Math.min(100,v||0)}%;background:${c}"></div></div></div>`}
-
-function tab(id,btn){
-  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("on"));btn.classList.add("on");
-  document.querySelectorAll("[id^='v-']").forEach(v=>v.style.display="none");
-  document.getElementById("v-"+id).style.display="";
-  if(id==="de")carregarDesafios();
-  if(id==="st"&&!STATS)carregarStats();
-  if(id==="adm")carregarAdmins();
+// ─── TABS ───
+function mudarTab(id, btn) {
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("on"));
+  btn.classList.add("on");
+  document.querySelectorAll("[id^='v-']").forEach(v => v.style.display = "none");
+  document.getElementById("v-" + id).style.display = "";
 }
 
-async function loadAll(){
-  document.getElementById("ldr").style.display="";
-  document.getElementById("app").style.display="none";
-  document.getElementById("sb").textContent="A carregar...";
-  document.getElementById("sb").className="bdg gr";
-  try{
-    const [ov,fl,at]=await Promise.all([post("overview"),post("flags_integridade"),post("atenuantes_pendentes")]);
-    if(ov.error){if(ov.error.includes("autenticado")||ov.error.includes("Token")){logout();return;}
-    document.getElementById("ldr").innerHTML='<div style="color:#ef4444;padding:20px;font-size:16px">❌ Erro ao carregar dados: '+ov.error+'<br><br><button onclick="loadAll()" style="background:#E67E22;color:#fff;border:none;padding:10px 20px;cursor:pointer;border-radius:8px">Tentar novamente</button></div>';
-    return;}
-    D=ov;FL=fl.flags||[];AT=at.atenuantes||[];
-    render();
-    document.getElementById("ldr").style.display="none";
-    document.getElementById("app").style.display="";
-    document.getElementById("sb").textContent="✅ Online";
-    document.getElementById("sb").className="bdg ok";
-    const fa=FL.filter(f=>f.severidade==="alto"||f.severidade==="critico").length;
-    const ap=AT.filter(a=>a.estado==="pendente").length;
-    const ep=D.entrevistas_pendentes||0;
-    document.getElementById("ti").textContent=fa?`🚨 Integridade (${fa})`:"🚨 Integridade";
-    document.getElementById("ta").textContent=ap?`📋 Atenuantes (${ap})`:"📋 Atenuantes";
-    document.getElementById("te").textContent=ep?`📅 Entrevistas (${ep})`:"📅 Entrevistas";
-  }catch(e){
-    document.getElementById("ldr").style.display="none";
-    er(e.message||"Erro.");
-    document.getElementById("sb").textContent="Offline";
-    document.getElementById("sb").className="bdg er";
+// ─── HELPERS ───
+function fmt(d) { return d ? new Date(d).toLocaleDateString("pt-PT") : "—"; }
+function safe(v) { return v != null ? v : "—"; }
+function badge(txt, cor) {
+  const cores = { ok: "#10b981", al: "#f59e0b", er: "#ef4444", in: "#3498DB", pu: "#8b5cf6" };
+  const c = cores[cor] || cor || "#6b7280";
+  return `<span style="background:${c}20;color:${c};border:1px solid ${c}40;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700">${txt}</span>`;
+}
+function card(ic, label, val, cor, sub) {
+  cor = cor || "#E67E22";
+  return `<div class="card" style="border-color:${cor}30"><div class="cl">${ic} ${label}</div><div class="cv" style="color:${cor}">${val != null ? val : "—"}</div>${sub ? `<div class="cs">${sub}</div>` : ""}</div>`;
+}
+function tr(cells) { return `<tr>${cells.map(c => `<td>${c}</td>`).join("")}</tr>`; }
+function emptyRow(cols, msg) { return `<tr><td colspan="${cols}" class="empty">${msg}</td></tr>`; }
+
+// ─── CARREGAR TUDO ───
+async function loadAll() {
+  document.getElementById("app-loader").style.display = "";
+  document.getElementById("app-content").style.display = "none";
+  document.getElementById("app-err").style.display = "none";
+  document.getElementById("chip-status").textContent = "A carregar...";
+  document.getElementById("chip-status").className = "bdg";
+
+  try {
+    const [ov, fl, at] = await Promise.all([
+      api("overview"),
+      api("flags_integridade"),
+      api("atenuantes_pendentes")
+    ]);
+
+    if (ov.error) {
+      if (ov.error.includes("autenticado") || ov.error.includes("Token")) { fazerLogout(); return; }
+      throw new Error(ov.error);
+    }
+
+    DATA = ov;
+    FLAGS = fl.flags || [];
+    ATENUANTES = at.atenuantes || [];
+
+    renderTudo();
+
+    document.getElementById("app-loader").style.display = "none";
+    document.getElementById("app-content").style.display = "";
+    document.getElementById("chip-status").textContent = "✅ Online";
+    document.getElementById("chip-status").className = "bdg ok";
+
+    const fa = FLAGS.filter(f => f.severidade === "alto" || f.severidade === "critico").length;
+    const ap = ATENUANTES.filter(a => a.estado === "pendente").length;
+    if (fa) document.getElementById("tab-in").textContent = `🚨 Integridade (${fa})`;
+    if (ap) document.getElementById("tab-at").textContent = `📋 Atenuantes (${ap})`;
+
+  } catch (e) {
+    document.getElementById("app-loader").style.display = "none";
+    document.getElementById("app-err").textContent = "❌ " + (e.message || "Erro ao ligar ao servidor.");
+    document.getElementById("app-err").style.display = "";
+    document.getElementById("chip-status").textContent = "Erro";
+    document.getElementById("chip-status").className = "bdg er";
   }
 }
 
-function render(){
-  const d=D||{};
-  document.getElementById("cm").innerHTML=[
-    crd("🎓","Alunos",d.total_alunos,"#E67E22","registados"),
-    crd("🔍","Recrutadores",d.total_recrutadores,"#3498DB"),
-    crd("💎","Premium",d.recrutadores_premium,"#8b5cf6"),
-    crd("📤","Submissões",d.total_submissoes,"#E67E22"),
-    crd("⏳","Em Curso",d.desafios_em_curso,"#f59e0b"),
-    crd("🎯","Desafios",`${d.desafios_ativos||0}/${d.total_desafios_banco||0}`,"#10b981","activos/total"),
-    crd("🚨","Flags Críticos",d.flags_criticos||0,(d.flags_criticos||0)>0?"#ef4444":"#6b7280"),
-    crd("📅","Entrevistas",d.total_entrevistas,"#f59e0b",`${d.entrevistas_pendentes||0} pendentes`),
-    crd("📋","Atenuantes",d.atenuantes_pendentes||0,"#f59e0b","pendentes"),
-    crd("💬","Posts Estaleiro",d.total_posts,"#8b5cf6"),
-  ].join("");
-  document.getElementById("cs").innerHTML=[
-    crd("⚡","Efic. Média",d.avg_eficiencia!=null?d.avg_eficiencia:"—","#E67E22"),
-    crd("💪","Resil. Média",d.avg_resiliencia!=null?d.avg_resiliencia:"—","#10b981"),
-    crd("📈","Consist. Média",d.avg_consistencia!=null?d.avg_consistencia:"—","#3498DB"),
-    crd("🤝","Colab. Média",d.avg_colaboracao!=null?d.avg_colaboracao:"—","#8b5cf6"),
-    crd("🧠","IAPN Médio",d.avg_iapn!=null?d.avg_iapn:"—","#f59e0b"),
-    crd("🌐","IEI Médio",d.avg_iei!=null?d.avg_iei:"—","#10b981"),
-    crd("✅","Avaliados",d.desafios_avaliados||0,"#10b981"),
-    crd("📅","Confirmadas",d.entrevistas_confirmadas||0,"#10b981","entrevistas"),
+// ─── RENDER ───
+function renderTudo() {
+  const d = DATA || {};
+
+  // Cards principais
+  document.getElementById("cards-main").innerHTML = [
+    card("🎓", "Alunos", d.total_alunos, "#E67E22", "registados"),
+    card("🔍", "Recrutadores", d.total_recrutadores, "#3498DB"),
+    card("💎", "Premium", d.recrutadores_premium, "#8b5cf6"),
+    card("📤", "Submissões", d.total_submissoes, "#E67E22"),
+    card("🚨", "Flags", d.total_flags, d.total_flags > 0 ? "#ef4444" : "#6b7280"),
+    card("⏳", "Em Curso", d.desafios_em_curso, "#f59e0b"),
   ].join("");
 
-  const sb=d.ultimas_submissoes||[];
-  document.getElementById("tb-ov-s").innerHTML=sb.length?sb.slice(0,12).map(s=>`<tr><td style="font-family:monospace;font-size:11px">${(s.aluno_id||"").slice(0,10)}…</td><td>${bdg(s.estado,s.estado==="avaliado"?"ok":s.estado==="em_curso"?"wa":s.estado==="invalidado"?"er":"in")}</td><td style="color:#E67E22;font-weight:700">${s.score_tecnico!=null?s.score_tecnico:"—"}</td><td style="color:#3498DB;font-weight:700">${s.score_linguistico!=null?s.score_linguistico:"—"}</td><td>${fmt(s.submetido_em)}</td></tr>`).join(""):`<tr><td colspan="5" class="empty">Sem submissões.</td></tr>`;
-  const tx=d.transacoes_recentes||[];
-  document.getElementById("tb-ov-t").innerHTML=tx.length?tx.slice(0,12).map(t=>`<tr><td style="font-family:monospace;font-size:11px">${(t.recrutador_id||"").slice(0,10)}…</td><td>${bdg(t.tipo,t.tipo==="credito"?"ok":"er")}</td><td style="color:${t.tipo==="credito"?"#10b981":"#ef4444"};font-weight:700">${t.tipo==="credito"?"+":"−"}${t.pontos}</td><td>${t.motivo||"—"}</td></tr>`).join(""):`<tr><td colspan="4" class="empty">Sem transações.</td></tr>`;
+  // Cards scores
+  document.getElementById("cards-scores").innerHTML = [
+    card("⚡", "Eficiência Média", d.avg_eficiencia != null ? Math.round(d.avg_eficiencia) : "—", "#E67E22"),
+    card("💪", "Resiliência Média", d.avg_resiliencia != null ? Math.round(d.avg_resiliencia) : "—", "#10b981"),
+    card("📈", "Consistência Média", d.avg_consistencia != null ? Math.round(d.avg_consistencia) : "—", "#3498DB"),
+    card("🤝", "Colaboração Média", d.avg_colaboracao != null ? Math.round(d.avg_colaboracao) : "—", "#8b5cf6"),
+  ].join("");
 
-  renderAlunos(d.alunos||[]);
-  renderRecrutadores(d.recrutadores||[]);
-  renderFlags();
-  renderAtenuantes();
-  renderEntrevistas(d.entrevistas_lista||[]);
-  renderFinanceiro(d.transacoes_recentes||[]);
+  // Tabela alunos
+  const alunos = d.alunos || [];
+  document.getElementById("tb-alunos").innerHTML = alunos.length === 0
+    ? emptyRow(8, "Nenhum aluno registado ainda.")
+    : alunos.map(a => tr([
+        `<strong>${safe(a.nome)}</strong>`,
+        safe(a.universidade),
+        safe(a.curso),
+        `<span style="color:#E67E22;font-weight:700">${safe(a.score_eficiencia)}</span>`,
+        `<span style="color:#10b981;font-weight:700">${safe(a.score_resiliencia)}</span>`,
+        safe(a.streak_semanas) !== "—" ? `🔥 ${a.streak_semanas}` : "—",
+        safe(a.iapn),
+        a.selo ? badge(a.selo, "al") : "—"
+      ])).join("");
+
+  // Tabela desafios
+  const desafios = d.submissoes || [];
+  document.getElementById("tb-desafios").innerHTML = desafios.length === 0
+    ? emptyRow(6, "Nenhuma submissão ainda.")
+    : desafios.map(s => tr([
+        safe(s.aluno_nome || s.aluno_id),
+        badge(s.estado || "—", s.estado === "avaliado" ? "ok" : "al"),
+        s.score_tecnico != null ? `<span style="color:#E67E22;font-weight:700">${s.score_tecnico}</span>` : "—",
+        s.score_linguistico != null ? `<span style="color:#3498DB;font-weight:700">${s.score_linguistico}</span>` : "—",
+        safe(s.idioma_resposta || s.idioma),
+        fmt(s.submetido_em || s.created_date)
+      ])).join("");
+
+  // Flags de integridade
+  const liFlags = document.getElementById("lista-flags");
+  if (FLAGS.length === 0) {
+    liFlags.innerHTML = `<div class="empty">✅ Sem anomalias detectadas.</div>`;
+  } else {
+    liFlags.innerHTML = FLAGS.map(f => `
+      <div class="at-card ${f.severidade === "critico" ? "pend" : ""}">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div>
+            <div style="font-weight:700;margin-bottom:4px">${safe(f.tipo_anomalia)}</div>
+            <div style="color:#6b7280;font-size:12px">${safe(f.descricao)}</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            ${badge(f.severidade || "—", f.severidade === "critico" ? "er" : f.severidade === "alto" ? "al" : "in")}
+            <span class="chip">${fmt(f.timestamp)}</span>
+          </div>
+        </div>
+      </div>`).join("");
+  }
+
+  // Atenuantes
+  const liAt = document.getElementById("lista-atenuantes");
+  if (ATENUANTES.length === 0) {
+    liAt.innerHTML = `<div class="empty">✅ Nenhum pedido pendente.</div>`;
+  } else {
+    liAt.innerHTML = ATENUANTES.map(a => `
+      <div class="at-card ${a.estado === "pendente" ? "pend" : ""}">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div>
+            <div style="font-weight:700;margin-bottom:4px">Aluno: ${safe(a.aluno_id)}</div>
+            <div style="color:#9ca3af;font-size:13px;margin-bottom:6px">${safe(a.descricao)}</div>
+            <div style="color:#6b7280;font-size:12px">${fmt(a.periodo_inicio)} → ${fmt(a.periodo_fim)}</div>
+          </div>
+          <div>${badge(a.estado || "—", a.estado === "aprovado" ? "ok" : a.estado === "rejeitado" ? "er" : "al")}</div>
+        </div>
+      </div>`).join("");
+  }
+
+  // Tabela recrutadores
+  const recs = d.recrutadores || [];
+  document.getElementById("tb-recrutadores").innerHTML = recs.length === 0
+    ? emptyRow(6, "Nenhum recrutador registado ainda.")
+    : recs.map(r => tr([
+        `<strong>${safe(r.nome)}</strong>`,
+        safe(r.empresa),
+        safe(r.setor),
+        r.plano === "premium" ? badge("Premium", "pu") : badge("Gratuito", "in"),
+        `<span style="color:#f59e0b;font-weight:700">${safe(r.pontos)}</span>`,
+        safe(r.vagas_ativas)
+      ])).join("");
 }
-
-function renderAlunos(al){
-  document.getElementById("tb-a").innerHTML=al.length?al.map(a=>`<tr>
-    <td style="color:#fff;font-weight:600;white-space:nowrap">${a.nome||"—"}</td>
-    <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${a.universidade||"—"}</td>
-    <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${a.curso||"—"}</td>
-    <td style="text-align:center;color:#E67E22;font-weight:700">${a.ano_plataforma||"—"}</td>
-    <td>${pr(a.score_eficiencia,"#E67E22")}</td>
-    <td>${pr(a.score_resiliencia,"#10b981")}</td>
-    <td>${pr(a.score_consistencia,"#3498DB")}</td>
-    <td>${pr(a.score_colaboracao,"#8b5cf6")}</td>
-    <td>${pr(a.iapn,"#f59e0b")}</td>
-    <td>${pr(a.iei,"#10b981")}</td>
-    <td style="color:#f59e0b;font-weight:700;text-align:center">${a.streak_semanas!=null?a.streak_semanas+"s":"—"}</td>
-    <td>${a.selo||"—"}</td>
-    <td style="text-align:center;color:#8b5cf6;font-weight:700">${a.wildcards_disponiveis||0}</td>
-    <td style="text-align:center">${a.nivel_ingles||"—"}</td>
-    <td style="text-align:center;color:#fff;font-weight:700">${a._total_testes!=null?a._total_testes:"—"}</td>
-    <td style="text-align:center;color:#10b981;font-weight:700">${a._testes_completos!=null?a._testes_completos:"—"}</td>
-    <td style="text-align:center;color:#6b7280">${a._tempo_plataforma_dias!=null?a._tempo_plataforma_dias+"d":"—"}</td>
-    <td style="text-align:center;color:#3498DB;font-weight:700">${a._total_entrevistas!=null?a._total_entrevistas:"—"}</td>
-    <td>
-      <div class="row">
-        <button class="btn sm in" onclick="verAluno('${a.id}','${(a.nome||"").replace(/'/g,"\\'")}')">👤</button>
-        <button class="btn sm pu" onclick="abrirNotif('${a.id}')">📢</button>
-        <button class="btn sm wa" onclick="abrirScores('${a.id}',${JSON.stringify(a).replace(/</g,"\\u003c")})">✏️</button>
-        ${a.selo&&(a.selo.includes("Suspenso")||a.selo.includes("Banido"))?`<button class="btn sm ok" onclick="reativar('${a.id}')">✅</button>`:`<button class="btn sm er" onclick="abrirSuspender('${a.id}')">⏸</button>`}
-        <button class="btn sm er" onclick="abrirBanir('${a.id}')">⛔</button>
-      </div>
-    </td>
-  </tr>`).join(""):`<tr><td colspan="19" class="empty">Sem alunos.</td></tr>`;
-}
-function filtrarAlunos(){const q=document.getElementById("q-al").value.toLowerCase();renderAlunos((D?.alunos||[]).filter(a=>(a.nome||"").toLowerCase().includes(q)||(a.universidade||"").toLowerCase().includes(q)||(a.curso||"").toLowerCase().includes(q)));}
-
-async function verAluno(id,nome){
-  document.getElementById("m-aluno-nome").textContent="👤 "+nome;
-  document.getElementById("m-aluno-body").innerHTML='<div class="spin"></div>';
-  abrir("m-aluno");
-  try{
-    const r=await post("aluno_detalhe",{aluno_id:id});
-    const p=r.perfil||{};const s=r._stats||{};const assigns=r.assignments||[];const flags=r.flags||[];const lang=r.lang||[];
-    document.getElementById("m-aluno-body").innerHTML=`
-      <div class="kpi-g">
-        <div class="kpi"><div class="kpi-l">⚡ Eficiência</div><div class="kpi-v" style="color:#E67E22">${p.score_eficiencia||0}</div></div>
-        <div class="kpi"><div class="kpi-l">💪 Resiliência</div><div class="kpi-v" style="color:#10b981">${p.score_resiliencia||0}</div></div>
-        <div class="kpi"><div class="kpi-l">📈 Consist.</div><div class="kpi-v" style="color:#3498DB">${p.score_consistencia||0}</div></div>
-        <div class="kpi"><div class="kpi-l">🤝 Colab.</div><div class="kpi-v" style="color:#8b5cf6">${p.score_colaboracao||0}</div></div>
-        <div class="kpi"><div class="kpi-l">🧠 IAPN</div><div class="kpi-v" style="color:#f59e0b">${p.iapn||0}</div></div>
-        <div class="kpi"><div class="kpi-l">🌐 IEI</div><div class="kpi-v" style="color:#10b981">${p.iei||0}</div></div>
-        <div class="kpi"><div class="kpi-l">📝 Total Testes</div><div class="kpi-v" style="color:#fff">${s.total_testes||0}</div></div>
-        <div class="kpi"><div class="kpi-l">✅ Completos</div><div class="kpi-v" style="color:#10b981">${s.testes_completos||0}</div></div>
-        <div class="kpi"><div class="kpi-l">⏳ Em Curso</div><div class="kpi-v" style="color:#f59e0b">${s.testes_em_curso||0}</div></div>
-        <div class="kpi"><div class="kpi-l">❌ Invalidados</div><div class="kpi-v" style="color:#ef4444">${s.testes_invalidados||0}</div></div>
-        <div class="kpi"><div class="kpi-l">⏱ Dias na Plat.</div><div class="kpi-v" style="color:#6b7280">${s.tempo_plataforma_dias!=null?s.tempo_plataforma_dias+"d":"—"}</div></div>
-        <div class="kpi"><div class="kpi-l">🔥 Streak</div><div class="kpi-v" style="color:#f59e0b">${p.streak_semanas||0}s</div></div>
-        <div class="kpi"><div class="kpi-l">Avg Técnico</div><div class="kpi-v" style="color:#E67E22">${s.avg_score_tecnico!=null?s.avg_score_tecnico:"—"}</div></div>
-        <div class="kpi"><div class="kpi-l">Avg Linguíst.</div><div class="kpi-v" style="color:#3498DB">${s.avg_score_linguistico!=null?s.avg_score_linguistico:"—"}</div></div>
-        <div class="kpi"><div class="kpi-l">💬 Posts</div><div class="kpi-v" style="color:#8b5cf6">${s.posts_estaleiro||0}</div></div>
-        <div class="kpi"><div class="kpi-l">🏅 Selo</div><div class="kpi-v" style="font-size:11px">${p.selo||"—"}</div></div>
-      </div>
-      <div style="font-size:11px;color:#6b7280;margin-bottom:12px">${p.universidade||"—"} · ${p.curso||"—"} · Ano ${p.ano_plataforma||"—"} · ${p.email_institucional||"—"}</div>
-      <hr class="sep">
-      <div style="font-weight:700;margin-bottom:8px">Últimos Desafios (${assigns.length})</div>
-      <div class="tw" style="margin-bottom:12px"><table><thead><tr><th>Estado</th><th>Téc.</th><th>Ling.</th><th>Efic.</th><th>Idioma</th><th>Data</th><th></th></tr></thead><tbody>
-        ${assigns.length?assigns.slice(0,15).map(a=>`<tr><td>${bdg(a.estado,a.estado==="avaliado"?"ok":a.estado==="em_curso"?"wa":a.estado==="invalidado"?"er":"in")}</td><td style="color:#E67E22;font-weight:700">${a.score_tecnico!=null?a.score_tecnico:"—"}</td><td style="color:#3498DB;font-weight:700">${a.score_linguistico!=null?a.score_linguistico:"—"}</td><td style="color:#f59e0b;font-weight:700">${a.score_eficiencia!=null?a.score_eficiencia:"—"}</td><td>${a.idioma||"—"}</td><td>${fmt(a.submetido_em)}</td><td>${a.estado==="avaliado"?`<button class="btn sm in" onclick="verSubmissao('${a.id}')">👁</button>`:"—"}</td></tr>`).join(""):`<tr><td colspan="7" class="empty">Sem desafios.</td></tr>`}
-      </tbody></table></div>
-      ${flags.length?`<div style="font-weight:700;margin-bottom:8px">Flags (${flags.length})</div>${flags.map(f=>`<div class="pnl ${f.severidade==="critico"||f.severidade==="alto"?"er":"wa"}" style="padding:10px;margin-bottom:6px"><div class="row">${bdg(f.severidade||"—",f.severidade==="critico"||f.severidade==="alto"?"er":"wa")}<span style="font-size:12px">${f.tipo_anomalia||"—"}</span><span style="font-size:11px;color:#6b7280;margin-left:auto">${fmt(f.timestamp)}</span></div></div>`).join(""):`<div style="color:#10b981;font-size:12px;padding:8px">✅ Sem flags</div>`}`:""}
-      ${lang.length?`<hr class="sep"><div style="font-weight:700;margin-bottom:8px">Línguas</div>${lang.map(l=>`<div style="display:flex;gap:12px;font-size:12px;padding:4px 0;border-bottom:1px solid #1f2937"><span style="color:#3498DB;font-weight:700;min-width:80px">${l.idioma||"—"}</span><span>Nível: <b>${l.nivel_atual||"—"}</b></span><span>Técnico: <b>${l.nivel_tecnico||"—"}</b></span></div>`).join("")}`:""}
-    `;
-  }catch(e){document.getElementById("m-aluno-body").innerHTML=`<div class="msg-er">Erro: ${e.message}</div>`}
-}
-
-async function verSubmissao(id){
-  document.getElementById("m-sub-body").innerHTML='<div class="spin"></div>';
-  abrir("m-sub");
-  try{
-    const r=await post("submissao_detalhe",{assignment_id:id});
-    const a=r.assignment||{};const d=r.desafio||{};const al=r.aluno||{};
-    document.getElementById("m-sub-body").innerHTML=`
-      <div class="kpi-g">
-        <div class="kpi"><div class="kpi-l">Aluno</div><div class="kpi-v" style="font-size:12px">${al.nome||"—"}</div></div>
-        <div class="kpi"><div class="kpi-l">Desafio</div><div class="kpi-v" style="font-size:11px">${d.titulo||"—"}</div></div>
-        <div class="kpi"><div class="kpi-l">Score Técnico</div><div class="kpi-v" style="color:#E67E22">${a.score_tecnico!=null?a.score_tecnico:"—"}</div></div>
-        <div class="kpi"><div class="kpi-l">Score Ling.</div><div class="kpi-v" style="color:#3498DB">${a.score_linguistico!=null?a.score_linguistico:"—"}</div></div>
-        <div class="kpi"><div class="kpi-l">Eficiência</div><div class="kpi-v" style="color:#f59e0b">${a.score_eficiencia!=null?a.score_eficiencia:"—"}</div></div>
-        <div class="kpi"><div class="kpi-l">Tempo</div><div class="kpi-v">${a.tempo_gasto_seg?Math.round(a.tempo_gasto_seg/60)+"min":"—"}</div></div>
-      </div>
-      <hr class="sep">
-      <div style="font-weight:700;margin-bottom:6px;font-size:12px">Resposta</div>
-      <div style="background:#0d1117;border-radius:8px;padding:12px;font-size:12px;color:#d1d5db;white-space:pre-wrap;max-height:160px;overflow-y:auto;margin-bottom:12px">${a.resposta_texto||"(sem resposta)"}</div>
-      <div style="font-weight:700;margin-bottom:6px;font-size:12px">Feedback IA</div>
-      <div style="background:#0d1117;border-radius:8px;padding:12px;font-size:12px;color:#9ca3af;white-space:pre-wrap;max-height:160px;overflow-y:auto;margin-bottom:12px">${a.feedback_ia||"(sem feedback)"}</div>
-      <div style="font-size:11px;color:#6b7280">Idioma: ${a.idioma||"—"} · Estado: ${a.estado||"—"} · ${fmtDt(a.submetido_em)}</div>
-      <hr class="sep">
-      ${a.estado==="avaliado"?`<button class="btn er" onclick="invalidarSub('${a.id}')">Invalidar esta Submissão</button>`:""}
-    `;
-  }catch(e){document.getElementById("m-sub-body").innerHTML=`<div class="msg-er">Erro: ${e.message}</div>`}
-}
-async function invalidarSub(id){const mot=prompt("Motivo:");if(mot===null)return;try{await post("invalidar_submissao",{assignment_id:id,motivo:mot});fechar("m-sub");ok("Invalidada.");await loadAll();}catch(e){er(e.message)}}
-
-function abrirSuspender(id){document.getElementById("sus-id").value=id;document.getElementById("sus-mot").value="";abrir("m-suspender")}
-async function confirmarSuspender(){const id=document.getElementById("sus-id").value;const mot=document.getElementById("sus-mot").value;try{await post("suspender_aluno",{aluno_id:id,motivo:mot});fechar("m-suspender");ok("Suspenso.");await loadAll();}catch(e){er(e.message)}}
-function abrirBanir(id){document.getElementById("ban-id").value=id;document.getElementById("ban-mot").value="";abrir("m-banir")}
-async function confirmarBanir(){const id=document.getElementById("ban-id").value;const mot=document.getElementById("ban-mot").value;try{await post("banir_aluno",{aluno_id:id,motivo:mot});fechar("m-banir");ok("Banido.");await loadAll();}catch(e){er(e.message)}}
-async function reativar(id){if(!confirm("Reativar?"))return;try{await post("reativar_aluno",{aluno_id:id});ok("Reativado.");await loadAll();}catch(e){er(e.message)}}
-
-function abrirScores(id,a){
-  document.getElementById("sc-id").value=id;
-  document.getElementById("sc-ef").value=a.score_eficiencia||0;document.getElementById("sc-re").value=a.score_resiliencia||0;
-  document.getElementById("sc-co").value=a.score_consistencia||0;document.getElementById("sc-cl").value=a.score_colaboracao||0;
-  document.getElementById("sc-ia").value=a.iapn||0;document.getElementById("sc-ie").value=a.iei||0;
-  document.getElementById("sc-st").value=a.streak_semanas||0;document.getElementById("sc-wc").value=a.wildcards_disponiveis||0;
-  document.getElementById("sc-ni").value=a.nivel_ingles||"";document.getElementById("sc-sl").value=a.selo||"";
-  abrir("m-scores");
-}
-async function confirmarScores(){
-  const id=document.getElementById("sc-id").value;
-  const scores={score_eficiencia:+document.getElementById("sc-ef").value,score_resiliencia:+document.getElementById("sc-re").value,score_consistencia:+document.getElementById("sc-co").value,score_colaboracao:+document.getElementById("sc-cl").value,iapn:+document.getElementById("sc-ia").value,iei:+document.getElementById("sc-ie").value,streak_semanas:+document.getElementById("sc-st").value,wildcards_disponiveis:+document.getElementById("sc-wc").value,nivel_ingles:document.getElementById("sc-ni").value,selo:document.getElementById("sc-sl").value};
-  try{await post("editar_scores",{aluno_id:id,scores});fechar("m-scores");ok("Actualizado.");await loadAll();}catch(e){er(e.message)}
-}
-function abrirNotif(id){document.getElementById("nf-id").value=id;document.getElementById("nf-msg").value="";abrir("m-notif")}
-async function confirmarNotif(){const id=document.getElementById("nf-id").value;const msg=document.getElementById("nf-msg").value;if(!msg)return;try{await post("enviar_notificacao",{aluno_id:id,mensagem_texto:msg});fechar("m-notif");ok("Enviada.");}catch(e){er(e.message)}}
-
-async function carregarDesafios(){if(DESAFIOS.length){renderDesafios();return;}const r=await post("listar_desafios");DESAFIOS=r.desafios||[];renderDesafios();}
-function renderDesafios(){
-  document.getElementById("tb-d").innerHTML=DESAFIOS.length?DESAFIOS.map(d=>`<tr>
-    <td style="color:#fff;font-weight:600;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${d.titulo||""}">${d.titulo||"—"}</td>
-    <td>${d.area||"—"}</td><td>${d.subarea||"—"}</td>
-    <td>${bdg(d.dificuldade,d.dificuldade==="dificil"?"er":d.dificuldade==="medio"?"wa":"ok")}</td>
-    <td>${d.tipo||"—"}</td><td>${d.idioma||"—"}</td>
-    <td>${d.tempo_esperado_min?d.tempo_esperado_min+"min":"—"}</td>
-    <td>${d.ativo?bdg("Activo","ok"):bdg("Inactivo","er")}</td>
-    <td><button class="btn sm ${d.ativo?"er":"ok"}" onclick="toggleDesafio('${d.id}',${!d.ativo})">${d.ativo?"Desact.":"Activar"}</button></td>
-  </tr>`).join(""):`<tr><td colspan="9" class="empty">Sem desafios.</td></tr>`;
-  const sb=D?.ultimas_submissoes||[];
-  document.getElementById("tb-sub").innerHTML=sb.length?sb.map(s=>`<tr>
-    <td style="font-family:monospace;font-size:11px">${(s.aluno_id||"").slice(0,10)}…</td>
-    <td>${bdg(s.estado,s.estado==="avaliado"?"ok":s.estado==="em_curso"?"wa":s.estado==="invalidado"?"er":"in")}</td>
-    <td style="color:#E67E22;font-weight:700">${s.score_tecnico!=null?s.score_tecnico:"—"}</td>
-    <td style="color:#3498DB;font-weight:700">${s.score_linguistico!=null?s.score_linguistico:"—"}</td>
-    <td style="color:#f59e0b;font-weight:700">${s.score_eficiencia!=null?s.score_eficiencia:"—"}</td>
-    <td>${s.idioma||"—"}</td><td>${fmt(s.submetido_em)}</td>
-    <td><div class="row">
-      ${s.score_tecnico!=null?`<button class="btn sm in" onclick="verSubmissao('${s.id}')">👁 Ver</button>`:""}
-      ${s.estado==="avaliado"?`<button class="btn sm er" onclick="invalidarSub('${s.id}')">Invalidar</button>`:""}
-    </div></td>
-  </tr>`).join(""):`<tr><td colspan="8" class="empty">Sem submissões.</td></tr>`;
-}
-async function toggleDesafio(id,ativo){try{await post("toggle_desafio",{desafio_id:id,ativo});DESAFIOS=[];ok(ativo?"Activado.":"Desactivado.");carregarDesafios();}catch(e){er(e.message)}}
-function abrirAtribuir(){const al=D?.alunos||[];const de=DESAFIOS.filter(d=>d.ativo);document.getElementById("at-al").innerHTML=al.map(a=>`<option value="${a.id}">${a.nome||a.id}</option>`).join("");document.getElementById("at-de").innerHTML=de.map(d=>`<option value="${d.id}">${d.titulo||d.id}</option>`).join("");abrir("m-atrib");}
-async function confirmarAtribuir(){try{await post("atribuir_desafio",{aluno_id:document.getElementById("at-al").value,desafio_id:document.getElementById("at-de").value,idioma:document.getElementById("at-id").value,prazo_dias:+document.getElementById("at-pr").value});fechar("m-atrib");ok("Atribuído.");await loadAll();}catch(e){er(e.message)}}
-function abrirCriarDesafio(){abrir("m-criar-d")}
-async function confirmarCriarDesafio(){const dados={titulo:document.getElementById("cd-ti").value,area:document.getElementById("cd-ar").value,subarea:document.getElementById("cd-sa").value,dificuldade:document.getElementById("cd-di").value,tipo:document.getElementById("cd-tp").value,idioma:document.getElementById("cd-id").value,tempo_esperado_min:+document.getElementById("cd-tm").value,rubrica_tecnica:document.getElementById("cd-rt").value,rubrica_linguistica:document.getElementById("cd-rl").value};if(!dados.titulo){er("Título obrigatório.");return;}try{await post("criar_desafio",dados);fechar("m-criar-d");DESAFIOS=[];ok("Criado.");carregarDesafios();}catch(e){er(e.message)}}
-
-function renderFlags(){document.getElementById("li").innerHTML=FL.length?FL.map(f=>`<div class="pnl ${f.severidade==="critico"||f.severidade==="alto"?"er":"wa"}"><div class="row" style="justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:6px"><div class="row">${bdg(f.severidade||"—",f.severidade==="critico"||f.severidade==="alto"?"er":f.severidade==="medio"?"wa":"in")}<span style="color:#fff;font-weight:700">${f.tipo_anomalia||"—"}</span><span style="color:#6b7280;font-size:11px">#${f.ocorrencia_numero||1}</span></div><span style="color:#6b7280;font-size:11px">${fmtDt(f.timestamp)}</span></div><div style="color:#9ca3af;font-size:12px;margin-bottom:8px">${f.descricao||"—"}</div><div style="font-size:11px;color:#6b7280;margin-bottom:10px">Aluno: <span style="font-family:monospace">${(f.aluno_id||"").slice(0,14)}…</span> · Acção: <span style="color:#f59e0b">${f.acao_tomada||"pendente"}</span></div><div class="row"><button class="btn sm ok" onclick="abrirFlag('${f.id}')">✅ Resolver</button><button class="btn sm er" onclick="abrirFlagBanir('${f.id}')">⛔ Banir</button></div></div>`).join(""):`<div style="background:#111827;border-radius:14px;padding:48px;text-align:center"><div style="font-size:36px">✅</div><div style="color:#10b981;margin-top:10px;font-weight:600">Sem flags activos</div></div>`;}
-function abrirFlag(id,banir=false){document.getElementById("fl-id").value=id;document.getElementById("fl-res").value="";document.getElementById("fl-ban").checked=banir;abrir("m-flag")}
-function abrirFlagBanir(id){abrirFlag(id,true)}
-async function confirmarFlag(){const id=document.getElementById("fl-id").value;const res=document.getElementById("fl-res").value;const banir=document.getElementById("fl-ban").checked;try{await post("resolver_flag",{flag_id:id,resolucao:res,banir});fechar("m-flag");ok("Resolvido.");await loadAll();}catch(e){er(e.message)}}
-
-function renderAtenuantes(){document.getElementById("la").innerHTML=AT.length?AT.map(a=>`<div class="pnl ${a.estado==="pendente"?"wa":""}"><div class="row" style="justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:6px"><span style="color:#fff;font-weight:700">${(a.aluno_id||"").slice(0,10)}… · ${fmt(a.periodo_inicio)} → ${fmt(a.periodo_fim)}</span>${bdg(a.estado||"—",a.estado==="pendente"?"wa":a.estado==="aprovado"?"ok":"er")}</div><div style="color:#9ca3af;font-size:13px;margin-bottom:6px">${a.descricao||"—"}</div>${a.tipo_prova?`<div style="font-size:11px;color:#6b7280;margin-bottom:6px">Tipo: <span style="color:#d1d5db">${a.tipo_prova}</span></div>`:""} ${a.ficheiro_url?`<a href="${a.ficheiro_url}" target="_blank" style="color:#3498DB;font-size:12px;display:block;margin-bottom:8px">📎 Ver Comprovativo</a>`:""} ${a.estado==="pendente"?`<div class="row"><button class="btn sm ok" onclick="acaoAt('${a.id}','aprovar_atenuante')">✅ Aprovar</button><button class="btn sm er" onclick="acaoAt('${a.id}','rejeitar_atenuante')">❌ Rejeitar</button></div>`:`<div style="font-size:11px;color:#6b7280">Revisto por ${a.revisto_por||"—"} em ${fmt(a.revisto_em)}</div>`}</div>`).join(""):`<div class="empty">Sem pedidos.</div>`;}
-async function acaoAt(id,acao){try{await post(acao,{atenuante_id:id});ok(acao==="aprovar_atenuante"?"Aprovado.":"Rejeitado.");await loadAll();}catch(e){er(e.message)}}
-
-function renderEntrevistas(en){document.getElementById("tb-en").innerHTML=en.length?en.map(e=>`<tr><td style="color:#fff;font-weight:600">${e.recrutador_nome||"—"}</td><td>${e.recrutador_empresa||"—"}</td><td>${e.aluno_nome||"—"}</td><td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.vaga_titulo||"—"}</td><td>${e.data_proposta?fmt(e.data_proposta)+" "+(e.hora_proposta||""):"—"}</td><td>${e.formato||"—"}</td><td>${bdg(e.estado,e.estado==="confirmada"?"ok":e.estado==="pendente"?"wa":e.estado==="cancelada"?"er":"in")}</td><td><div class="row">${e.estado==="pendente"?`<button class="btn sm ok" onclick="confirmarEnt('${e.id}')">✅</button><button class="btn sm er" onclick="cancelarEnt('${e.id}')">❌</button>`:""} ${e.link_meet?`<a href="${e.link_meet}" target="_blank" class="btn sm in">🎥</a>`:""}</div></td></tr>`).join(""):`<tr><td colspan="8" class="empty">Sem entrevistas.</td></tr>`;}
-async function confirmarEnt(id){try{await post("confirmar_entrevista",{entrevista_id:id});ok("Confirmada.");await loadAll();}catch(e){er(e.message)}}
-async function cancelarEnt(id){const nota=prompt("Motivo:");if(nota===null)return;try{await post("cancelar_entrevista",{entrevista_id:id,nota});ok("Cancelada.");await loadAll();}catch(e){er(e.message)}}
-
-function renderRecrutadores(rc){
-  document.getElementById("tb-r").innerHTML=rc.length?rc.map(r=>`<tr>
-    <td style="color:#fff;font-weight:600">${r.nome||"—"}</td>
-    <td>${r.empresa||"—"}</td><td>${r.setor||"—"}</td>
-    <td>${bdg(r.plano||"free",r.plano==="premium"?"wa":"in")}</td>
-    <td style="color:#f59e0b;font-weight:700">${r.pontos||0}</td>
-    <td>${r.vagas_ativas||0}</td>
-    <td>${r.perfis_visitados||0}</td>
-    <td style="color:#3498DB;font-weight:700;text-align:center">${r._total_entrevistas!=null?r._total_entrevistas:"—"}</td>
-    <td style="color:#10b981;font-weight:700;text-align:center">${r._entrevistas_confirmadas!=null?r._entrevistas_confirmadas:"—"}</td>
-    <td style="color:#6b7280;text-align:center">${r._tempo_plataforma_dias!=null?r._tempo_plataforma_dias+"d":"—"}</td>
-    <td><div class="row">
-      <button class="btn sm in" onclick="verRecrutador('${r.id}','${(r.nome||"").replace(/'/g,"\\'")}')">👁</button>
-      ${r.plano==="premium"?`<button class="btn sm er" onclick="downgrade('${r.id}')">⬇</button>`:`<button class="btn sm ok" onclick="upgrade('${r.id}')">⬆ Prem.</button>`}
-      <button class="btn sm ok" onclick="abrirPontos('${r.id}','+')">+Pts</button>
-      <button class="btn sm er" onclick="abrirPontos('${r.id}','-')">−Pts</button>
-    </div></td>
-  </tr>`).join(""):`<tr><td colspan="11" class="empty">Sem recrutadores.</td></tr>`;
-}
-
-async function verRecrutador(id,nome){
-  document.getElementById("m-rec-nome").textContent="🔍 "+nome;
-  document.getElementById("m-rec-body").innerHTML='<div class="spin"></div>';
-  abrir("m-rec");
-  try{
-    const r=await post("recrutador_detalhe",{recrutador_id:id});
-    const p=r.perfil||{};const ents=r.entrevistas||[];const txs=r.transacoes||[];
-    const confirmadas=ents.filter((e)=>e.estado==="confirmada").length;
-    const pendentes=ents.filter((e)=>e.estado==="pendente").length;
-    const canceladas=ents.filter((e)=>e.estado==="cancelada").length;
-    const gastos=txs.filter((t)=>t.tipo==="debito").reduce((s,t)=>s+(t.pontos||0),0);
-    document.getElementById("m-rec-body").innerHTML=`
-      <div class="kpi-g">
-        <div class="kpi"><div class="kpi-l">Empresa</div><div class="kpi-v" style="font-size:12px">${p.empresa||"—"}</div></div>
-        <div class="kpi"><div class="kpi-l">Plano</div><div class="kpi-v">${bdg(p.plano||"free",p.plano==="premium"?"wa":"in")}</div></div>
-        <div class="kpi"><div class="kpi-l">Pontos</div><div class="kpi-v" style="color:#f59e0b">${p.pontos||0}</div></div>
-        <div class="kpi"><div class="kpi-l">Pts Gastos</div><div class="kpi-v" style="color:#ef4444">${gastos}</div></div>
-        <div class="kpi"><div class="kpi-l">📅 Entrev. Total</div><div class="kpi-v" style="color:#3498DB">${ents.length}</div></div>
-        <div class="kpi"><div class="kpi-l">✅ Confirmadas</div><div class="kpi-v" style="color:#10b981">${confirmadas}</div></div>
-        <div class="kpi"><div class="kpi-l">⏳ Pendentes</div><div class="kpi-v" style="color:#f59e0b">${pendentes}</div></div>
-        <div class="kpi"><div class="kpi-l">❌ Canceladas</div><div class="kpi-v" style="color:#ef4444">${canceladas}</div></div>
-        <div class="kpi"><div class="kpi-l">Perfis Vis.</div><div class="kpi-v">${p.perfis_visitados||0}</div></div>
-        <div class="kpi"><div class="kpi-l">⏱ Dias Plat.</div><div class="kpi-v" style="color:#6b7280">${p.created_date?Math.floor((Date.now()-new Date(p.created_date).getTime())/86400000)+"d":"—"}</div></div>
-      </div>
-      <hr class="sep">
-      <div style="font-weight:700;margin-bottom:8px">Entrevistas</div>
-      <div class="tw" style="margin-bottom:12px"><table><thead><tr><th>Aluno</th><th>Vaga</th><th>Estado</th><th>Data</th></tr></thead><tbody>
-        ${ents.length?ents.slice(0,10).map(e=>`<tr><td>${e.aluno_nome||"—"}</td><td>${e.vaga_titulo||"—"}</td><td>${bdg(e.estado,e.estado==="confirmada"?"ok":e.estado==="pendente"?"wa":"er")}</td><td>${fmt(e.data_proposta)}</td></tr>`).join(""):`<tr><td colspan="4" class="empty">Sem entrevistas.</td></tr>`}
-      </tbody></table></div>
-      <div style="font-weight:700;margin-bottom:8px">Transações</div>
-      <div class="tw"><table><thead><tr><th>Tipo</th><th>Pts</th><th>Motivo</th><th>Data</th></tr></thead><tbody>
-        ${txs.length?txs.slice(0,10).map(t=>`<tr><td>${bdg(t.tipo,t.tipo==="credito"?"ok":"er")}</td><td style="color:${t.tipo==="credito"?"#10b981":"#ef4444"};font-weight:700">${t.tipo==="credito"?"+":"−"}${t.pontos}</td><td>${t.motivo||"—"}</td><td>${fmt(t.created_date)}</td></tr>`).join(""):`<tr><td colspan="4" class="empty">Sem transações.</td></tr>`}
-      </tbody></table></div>
-    `;
-  }catch(e){document.getElementById("m-rec-body").innerHTML=`<div class="msg-er">Erro: ${e.message}</div>`}
-}
-async function upgrade(id){if(!confirm("Fazer upgrade para Premium?"))return;try{await post("upgrade_recrutador",{recrutador_id:id,pontos:100});ok("Premium activado.");await loadAll();}catch(e){er(e.message)}}
-async function downgrade(id){if(!confirm("Reverter para Free?"))return;try{await post("downgrade_recrutador",{recrutador_id:id});ok("Revertido.");await loadAll();}catch(e){er(e.message)}}
-function abrirPontos(id,op){document.getElementById("pt-id").value=id;document.getElementById("pt-op").value=op;document.getElementById("m-pontos-t").textContent=op==="+"?"💰 Adicionar Pontos":"💰 Remover Pontos";document.getElementById("pt-qt").value=50;document.getElementById("pt-mot").value="";abrir("m-pontos");}
-async function confirmarPontos(){const id=document.getElementById("pt-id").value;const op=document.getElementById("pt-op").value;const pontos=+document.getElementById("pt-qt").value;const motivo=document.getElementById("pt-mot").value;try{await post(op==="+"?"adicionar_pontos":"remover_pontos",{recrutador_id:id,pontos,motivo});fechar("m-pontos");ok(pontos+" pontos "+(op==="+"?"adicionados.":"removidos."));await loadAll();}catch(e){er(e.message)}}
-
-function renderFinanceiro(tx){document.getElementById("tb-fi").innerHTML=tx.length?tx.map(t=>`<tr><td style="font-family:monospace;font-size:11px">${(t.recrutador_id||"").slice(0,12)}…</td><td>${bdg(t.tipo,t.tipo==="credito"?"ok":"er")}</td><td style="color:${t.tipo==="credito"?"#10b981":"#ef4444"};font-weight:700">${t.tipo==="credito"?"+":"−"}${t.pontos}</td><td>${t.motivo||"—"}</td><td style="color:#6b7280;font-size:11px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.descricao||"—"}</td><td>${fmt(t.created_date)}</td></tr>`).join(""):`<tr><td colspan="6" class="empty">Sem transações.</td></tr>`;}
-
-async function carregarStats(){
-  try{
-    const r=await post("stats_avancadas"); STATS=r;
-
-    const top=(lista,c)=>lista&&lista.length?lista.map(a=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #1f2937"><span style="color:#fff;font-size:12px">${a.nome||"—"}</span><div class="row"><span style="font-size:11px;color:#6b7280">${a.universidade||""}</span><span style="color:${c};font-weight:700;min-width:28px;text-align:right">${a.score}</span></div></div>`).join(""):`<div class="empty">Sem dados</div>`;
-
-    const barrasSimples=(obj,c)=>{
-      const entries=Object.entries(obj||{}).sort((a,b)=>b[1]-a[1]).slice(0,8);
-      if(!entries.length)return`<div class="empty">Sem dados</div>`;
-      const mx=Math.max(...entries.map(e=>e[1]));
-      return entries.map(([k,v])=>`<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span style="color:#d1d5db">${k}</span><span style="color:${c};font-weight:700">${v}</span></div><div class="prog"><div class="pb" style="width:${mx?Math.min(100,v/mx*100):0}%;background:${c}"></div></div></div>`).join('');
-    };
-
-    const uniTree=r.universidades||{};
-    const uniHTML=Object.keys(uniTree).length===0
-      ?`<div class="empty">Sem dados de universidades.</div>`
-      :Object.entries(uniTree).sort((a,b)=>b[1].total-a[1].total).map(([uni,ud])=>{
-          const cursosHTML=Object.entries(ud.cursos||{}).sort((a,b)=>b[1].total-a[1].total).map(([curso,cd])=>{
-            const anoOrdem=['1','2','3','4','5','6','?'];
-            const anosHTML=Object.entries(cd.anos||{}).sort((a,b)=>anoOrdem.indexOf(a[0])-anoOrdem.indexOf(b[0])).map(([ano,ad])=>`
-              <div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #0f1520;flex-wrap:wrap">
-                <span style="color:#f59e0b;font-weight:700;min-width:55px;font-size:11px">${ano}º Ano</span>
-                <span class="bdg gr" style="font-size:10px">${ad.count} aluno${ad.count!==1?'s':''}</span>
-                ${ad.avg_eficiencia!=null?`<span style="font-size:11px;color:#6b7280">Efic: <b style="color:#E67E22">${ad.avg_eficiencia}</b></span>`:''}
-                ${ad.avg_iapn!=null?`<span style="font-size:11px;color:#6b7280">IAPN: <b style="color:#f59e0b">${ad.avg_iapn}</b></span>`:''}
-                ${ad.avg_resiliencia!=null?`<span style="font-size:11px;color:#6b7280">Resil: <b style="color:#10b981">${ad.avg_resiliencia}</b></span>`:''}
-              </div>`).join('');
-            return `<div style="margin-left:16px;margin-bottom:8px">
-              <div style="display:flex;align-items:center;gap:8px;padding:7px 0;cursor:pointer;flex-wrap:wrap" onclick="toggleBloco(this)">
-                <span style="color:#6b7280;font-size:11px;min-width:12px">▶</span>
-                <span style="color:#d1d5db;font-weight:600;font-size:13px">${curso}</span>
-                <span class="bdg in" style="font-size:10px">${cd.total}</span>
-                ${cd.avg_eficiencia!=null?`<span style="font-size:11px;color:#6b7280">Efic: <b style="color:#E67E22">${cd.avg_eficiencia}</b></span>`:''}
-                ${cd.avg_iapn!=null?`<span style="font-size:11px;color:#6b7280">IAPN: <b style="color:#f59e0b">${cd.avg_iapn}</b></span>`:''}
-              </div>
-              <div class="bloco-body" style="display:none;margin-left:20px;border-left:2px solid #1f2937;padding-left:12px">
-                ${anosHTML||'<div style="color:#6b7280;font-size:12px;padding:6px 0">Sem dados de ano.</div>'}
-              </div>
-            </div>`;
-          }).join('');
-          return `<div class="pnl" style="margin-bottom:12px;padding:14px">
-            <div style="display:flex;align-items:center;gap:10px;cursor:pointer;flex-wrap:wrap" onclick="toggleBloco(this)">
-              <span style="color:#9ca3af;font-size:12px;min-width:12px">▶</span>
-              <span style="color:#fff;font-weight:800;font-size:15px">${uni}</span>
-              <span class="bdg wa">${ud.total} aluno${ud.total!==1?'s':''}</span>
-              ${ud.avg_eficiencia!=null?`<span style="font-size:12px;color:#6b7280">Efic: <b style="color:#E67E22">${ud.avg_eficiencia}</b></span>`:''}
-              ${ud.avg_resiliencia!=null?`<span style="font-size:12px;color:#6b7280">Resil: <b style="color:#10b981">${ud.avg_resiliencia}</b></span>`:''}
-              ${ud.avg_iapn!=null?`<span style="font-size:12px;color:#6b7280">IAPN: <b style="color:#f59e0b">${ud.avg_iapn}</b></span>`:''}
-              ${ud.avg_iei!=null?`<span style="font-size:12px;color:#6b7280">IEI: <b style="color:#3498DB">${ud.avg_iei}</b></span>`:''}
-            </div>
-            <div class="bloco-body" style="display:none;margin-top:10px">
-              ${cursosHTML||'<div class="empty">Sem cursos.</div>'}
-            </div>
-          </div>`;
-        }).join('');
-
-    document.getElementById("st-body").innerHTML=`
-      <div class="grid g5" style="margin-bottom:20px">
-        ${crd("✅","Taxa Conclusão",(r.taxa_conclusao||0)+"%","#10b981")}
-        ${crd("🚨","Taxa Flags",(r.taxa_flags||0)+"%",(r.taxa_flags||0)>20?"#ef4444":"#6b7280")}
-        ${crd("💪","Taxa Resiliência",(r.taxa_resiliencia||0)+"%","#10b981")}
-        ${crd("📅","Entrev. Pendentes",r.entrevistas_pendentes||0,"#f59e0b")}
-        ${crd("✅","Entrev. Confirmadas",r.entrevistas_confirmadas||0,"#10b981")}
-        ${crd("❌","Entrev. Canceladas",r.entrevistas_canceladas||0,"#ef4444")}
-        ${crd("📊","Avg Técnico",r.avg_tecnico||0,"#E67E22")}
-        ${crd("🗣","Avg Linguístico",r.avg_linguistico||0,"#3498DB")}
-      </div>
-      <div class="grid g2" style="margin-bottom:20px">
-        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">🏆 Top Eficiência</div>${top(r.top_alunos_eficiencia,"#E67E22")}</div>
-        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">🧠 Top IAPN</div>${top(r.top_alunos_iapn,"#f59e0b")}</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
-        <span style="font-weight:800;font-size:15px">🏛 Universidades → Cursos → Anos</span>
-        <span style="font-size:11px;color:#6b7280">Clica em cada linha para expandir</span>
-        <button class="btn sm ok" onclick="expandirTudo()">Expandir Tudo</button>
-        <button class="btn sm" onclick="recolherTudo()">Recolher</button>
-      </div>
-      <div id="uni-tree">${uniHTML}</div>
-      <div class="grid g2" style="margin-top:20px">
-        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">🏅 Por Selo</div>${barrasSimples(r.por_selo,"#8b5cf6")}</div>
-        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">🔍 Recrutadores por Setor</div>${barrasSimples(r.por_setor_recrutador,"#3498DB")}</div>
-        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">📋 Por Estado de Desafio</div>${barrasSimples(r.por_estado,"#10b981")}</div>
-        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">📅 Por Ano Global</div>${barrasSimples(r.por_ano_global,"#f59e0b")}</div>
-      </div>
-    `;
-  }catch(e){document.getElementById("st-body").innerHTML=`<div class="msg-er">Erro: ${e.message}</div>`}
-}
-
-function toggleBloco(el){
-  const body=el.nextElementSibling;
-  const arrow=el.querySelector('span:first-child');
-  if(!body)return;
-  if(body.style.display==='none'||body.style.display===''){
-    body.style.display='block';if(arrow)arrow.textContent='▼';
-  }else{body.style.display='none';if(arrow)arrow.textContent='▶';}
-}
-function expandirTudo(){document.querySelectorAll('.bloco-body').forEach(b=>{b.style.display='block'});document.querySelectorAll('[onclick="toggleBloco(this)"] span:first-child').forEach(s=>s.textContent='▼');}
-function recolherTudo(){document.querySelectorAll('.bloco-body').forEach(b=>{b.style.display='none'});document.querySelectorAll('[onclick="toggleBloco(this)"] span:first-child').forEach(s=>s.textContent='▶');}
-
-
-async function carregarAdmins(){
-  try{const r=await post("listar_admins");const lista=r.admins||[];document.getElementById("admins-lista").innerHTML=lista.map(e=>`<div class="admin-chip" style="margin-bottom:8px">✅ ${e}</div>`).join("<br>")||"<div style='color:#6b7280;font-size:13px'>Sem admins configurados.</div>";}catch(e){document.getElementById("admins-lista").innerHTML=`<div class="msg-er">Erro: ${e.message}</div>`;}
-}
-
-async function exportarCSV(){
-  try{const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json","X-Admin-Token":TOKEN},body:JSON.stringify({acao:"exportar_alunos_csv"})});const blob=await r.blob();const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="vetorh_alunos.csv";a.click();URL.revokeObjectURL(url);ok("CSV exportado.");}catch(e){er(e.message)}
-}
-
-document.querySelectorAll(".mdl").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("open")}));
-
-
 </script>
 </body>
 </html>

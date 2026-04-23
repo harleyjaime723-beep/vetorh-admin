@@ -1,99 +1,102 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>VETORH — Painel Admin</title>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>VETORH — Admin</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#0A0E14;color:#fff;font-family:Inter,system-ui,sans-serif;min-height:100vh}
-.header{background:#0d1117;border-bottom:1px solid #1f2937;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:100}
+.hdr{background:#0d1117;border-bottom:1px solid #1f2937;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:200}
 .logo{font-size:20px;font-weight:900;color:#E67E22;letter-spacing:6px;font-family:monospace}
-.badge{background:#f59e0b20;color:#f59e0b;border:1px solid #f59e0b40;border-radius:6px;padding:2px 10px;font-size:11px;font-weight:700}
-.badge.ok{background:#10b98120;color:#10b981;border-color:#10b98140}
-.badge.er{background:#ef444420;color:#ef4444;border-color:#ef444440}
-.badge.in{background:#3498DB20;color:#3498DB;border-color:#3498DB40}
-.badge.wa{background:#f59e0b20;color:#f59e0b;border-color:#f59e0b40}
-.btn{background:#1f2937;color:#9ca3af;border:1px solid #374151;border-radius:8px;padding:6px 14px;cursor:pointer;font-size:12px;font-weight:700;transition:all .2s}
+.bdg{display:inline-block;border-radius:6px;padding:2px 9px;font-size:11px;font-weight:700;border:1px solid}
+.bdg.ok{background:#10b98118;color:#10b981;border-color:#10b98140}
+.bdg.er{background:#ef444418;color:#ef4444;border-color:#ef444440}
+.bdg.wa{background:#f59e0b18;color:#f59e0b;border-color:#f59e0b40}
+.bdg.in{background:#3498DB18;color:#3498DB;border-color:#3498DB40}
+.bdg.pu{background:#8b5cf618;color:#8b5cf6;border-color:#8b5cf640}
+.bdg.gr{background:#6b728018;color:#6b7280;border-color:#6b728040}
+.btn{background:#1f2937;color:#9ca3af;border:1px solid #374151;border-radius:8px;padding:6px 14px;cursor:pointer;font-size:12px;font-weight:700;transition:all .15s;white-space:nowrap}
 .btn:hover{background:#374151;color:#fff}
-.btn.danger{background:#ef444420;color:#ef4444;border-color:#ef444440}
-.btn.danger:hover{background:#ef4444;color:#fff}
-.btn.success{background:#10b98120;color:#10b981;border-color:#10b98140}
-.btn.success:hover{background:#10b981;color:#fff}
-.btn.primary{background:#E67E2220;color:#E67E22;border-color:#E67E2240}
-.btn.primary:hover{background:#E67E22;color:#fff}
-.btn.sm{padding:4px 10px;font-size:11px}
-.container{max-width:1400px;margin:0 auto;padding:24px 20px}
-.tabs{display:flex;border-bottom:1px solid #1f2937;margin-bottom:24px;overflow-x:auto;gap:0}
-.tab{padding:10px 18px;cursor:pointer;font-size:12px;font-weight:700;background:none;border:none;border-bottom:2px solid transparent;color:#6b7280;white-space:nowrap;transition:all .2s}
-.tab.active{color:#E67E22;border-bottom-color:#E67E22}
+.btn.ok{background:#10b98118;color:#10b981;border-color:#10b98140}.btn.ok:hover{background:#10b981;color:#fff}
+.btn.er{background:#ef444418;color:#ef4444;border-color:#ef444440}.btn.er:hover{background:#ef4444;color:#fff}
+.btn.wa{background:#f59e0b18;color:#f59e0b;border-color:#f59e0b40}.btn.wa:hover{background:#f59e0b;color:#000}
+.btn.in{background:#3498DB18;color:#3498DB;border-color:#3498DB40}.btn.in:hover{background:#3498DB;color:#fff}
+.btn.pu{background:#8b5cf618;color:#8b5cf6;border-color:#8b5cf640}.btn.pu:hover{background:#8b5cf6;color:#fff}
+.btn.sm{padding:3px 9px;font-size:11px}
+.con{max-width:1440px;margin:0 auto;padding:20px}
+.tabs{display:flex;border-bottom:1px solid #1f2937;margin-bottom:20px;overflow-x:auto}
+.tab{padding:10px 16px;cursor:pointer;font-size:12px;font-weight:700;background:none;border:none;border-bottom:2px solid transparent;color:#6b7280;white-space:nowrap;transition:all .15s}
+.tab.on{color:#E67E22;border-bottom-color:#E67E22}
 .tab:hover{color:#d1d5db}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-.card{background:#111827;border-radius:14px;padding:18px 20px;border:1px solid #1f2937;transition:transform .15s}
+.grid{display:grid;gap:12px;margin-bottom:16px}
+.g6{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:700px){.g2,.g3{grid-template-columns:1fr}}
+.card{background:#111827;border-radius:14px;padding:16px 18px;border:1px solid #1f2937;transition:transform .15s}
 .card:hover{transform:translateY(-2px)}
-.card-label{color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
-.card-value{font-size:28px;font-weight:900}
-.card-sub{color:#6b7280;font-size:11px;margin-top:4px}
-table{width:100%;border-collapse:collapse}
-th{color:#6b7280;font-size:11px;font-weight:700;text-transform:uppercase;padding:10px 12px;text-align:left;border-bottom:1px solid #1f2937;white-space:nowrap}
-td{padding:9px 12px;border-bottom:1px solid #0f1520;font-size:12px;color:#d1d5db;vertical-align:middle}
-tr:hover td{background:#0d1117}
+.cv{font-size:26px;font-weight:900}
+.cl{color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
+.cs{color:#6b7280;font-size:11px;margin-top:3px}
 .tw{overflow-x:auto;background:#111827;border-radius:14px;border:1px solid #1f2937}
-.panel{background:#111827;border:1px solid #1f2937;border-radius:14px;padding:20px;margin-bottom:12px}
-.panel.warn{border-color:#f59e0b40}
-.panel.danger{border-color:#ef444440}
-.empty{color:#6b7280;text-align:center;padding:48px;font-size:13px}
-.loading{text-align:center;padding:80px}
-.spinner{width:28px;height:28px;border:2px solid #1f2937;border-top-color:#E67E22;border-radius:50%;animation:spin .8s linear infinite;margin:20px auto 0}
-@keyframes spin{to{transform:rotate(360deg)}}
-.eb{background:#ef444415;border:1px solid #ef444440;border-radius:10px;padding:16px;color:#ef4444;font-size:13px;margin-bottom:16px}
-.sb2{background:#10b98115;border:1px solid #10b98140;border-radius:10px;padding:12px 16px;color:#10b981;font-size:13px;margin-bottom:16px}
-.st{font-size:18px;font-weight:800;margin-bottom:4px}
-.ss{color:#6b7280;font-size:13px;margin-bottom:20px}
-.modal{display:none;position:fixed;inset:0;background:#000000cc;z-index:1000;align-items:center;justify-content:center}
-.modal.open{display:flex}
-.modal-box{background:#111827;border:1px solid #1f2937;border-radius:16px;padding:28px;width:90%;max-width:520px;max-height:90vh;overflow-y:auto}
-.modal-title{font-size:16px;font-weight:800;margin-bottom:16px;color:#fff}
-input,textarea,select{background:#0d1117;border:1px solid #374151;border-radius:8px;color:#fff;padding:8px 12px;font-size:13px;width:100%;margin-bottom:12px;font-family:inherit}
-input:focus,textarea:focus,select:focus{outline:none;border-color:#E67E22}
-label{color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:4px}
+table{width:100%;border-collapse:collapse}
+th{color:#6b7280;font-size:11px;font-weight:700;text-transform:uppercase;padding:9px 12px;text-align:left;border-bottom:1px solid #1f2937;white-space:nowrap}
+td{padding:8px 12px;border-bottom:1px solid #0f1520;font-size:12px;color:#d1d5db;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#0d1117}
+.pnl{background:#111827;border:1px solid #1f2937;border-radius:14px;padding:18px;margin-bottom:12px}
+.pnl.wa{border-color:#f59e0b30}
+.pnl.er{border-color:#ef444430}
+.empty{color:#6b7280;text-align:center;padding:40px;font-size:13px}
+.spin{width:26px;height:26px;border:2px solid #1f2937;border-top-color:#E67E22;border-radius:50%;animation:sp .8s linear infinite;margin:16px auto}
+@keyframes sp{to{transform:rotate(360deg)}}
+.ldr{text-align:center;padding:60px}
+.msg-ok{background:#10b98115;border:1px solid #10b98140;border-radius:10px;padding:11px 16px;color:#10b981;font-size:13px;margin-bottom:14px}
+.msg-er{background:#ef444415;border:1px solid #ef444440;border-radius:10px;padding:11px 16px;color:#ef4444;font-size:13px;margin-bottom:14px}
+.ttl{font-size:17px;font-weight:800;margin-bottom:3px}
+.sub{color:#6b7280;font-size:12px;margin-bottom:18px}
 .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.prog{background:#1f2937;border-radius:99px;height:6px;overflow:hidden;flex:1;min-width:60px}
-.prog-bar{height:100%;border-radius:99px;transition:width .3s}
-.kpi{display:flex;flex-direction:column;gap:2px}
-.kpi-label{font-size:11px;color:#6b7280}
-.kpi-val{font-size:15px;font-weight:800}
+.prog{background:#1f2937;border-radius:99px;height:5px;flex:1;min-width:40px;overflow:hidden}
+.pb{height:100%;border-radius:99px;transition:width .3s}
+input,textarea,select{background:#0d1117;border:1px solid #374151;border-radius:8px;color:#fff;padding:7px 11px;font-size:13px;width:100%;margin-bottom:10px;font-family:inherit}
+input:focus,textarea:focus,select:focus{outline:none;border-color:#E67E22}
+label{color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:3px}
+.mdl{display:none;position:fixed;inset:0;background:#000c;z-index:999;align-items:center;justify-content:center;padding:16px}
+.mdl.open{display:flex}
+.mbox{background:#111827;border:1px solid #1f2937;border-radius:16px;padding:24px;width:100%;max-width:560px;max-height:88vh;overflow-y:auto}
+.mtitle{font-size:15px;font-weight:800;margin-bottom:14px}
+.kpi-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:14px}
+.kpi{background:#0d1117;border-radius:10px;padding:12px}
+.kpi-l{font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.kpi-v{font-size:16px;font-weight:800}
+.search-bar{background:#0d1117;border:1px solid #374151;border-radius:8px;color:#fff;padding:7px 12px;font-size:13px;width:100%;max-width:300px;margin-bottom:14px}
+.search-bar:focus{outline:none;border-color:#E67E22}
+.sep{border:none;border-top:1px solid #1f2937;margin:16px 0}
 </style>
 </head>
 <body>
-<div class="header">
-  <div style="display:flex;align-items:center;gap:12px">
-    <span class="logo">VETORH</span>
-    <span class="badge">ADMIN</span>
-  </div>
-  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-    <span id="sb" class="badge">A carregar...</span>
-    <button class="btn" onclick="loadAll()">🔄 Atualizar</button>
+<div class="hdr">
+  <div class="row"><span class="logo">VETORH</span><span class="bdg wa">ADMIN</span></div>
+  <div class="row">
+    <span id="sb" class="bdg gr">A carregar...</span>
+    <button class="btn" onclick="loadAll()">🔄 Actualizar</button>
+    <button class="btn ok" onclick="exportarCSV()">⬇ CSV Alunos</button>
   </div>
 </div>
 
-<div class="container">
-  <div id="loading" class="loading">
-    <div style="font-size:32px;font-weight:900;color:#E67E22;letter-spacing:6px;font-family:monospace">VETORH</div>
-    <div style="color:#6b7280;font-size:13px;margin-top:12px">A ligar ao servidor...</div>
-    <div class="spinner"></div>
-  </div>
-  <div id="eb" class="eb" style="display:none"></div>
-  <div id="success-msg" class="sb2" style="display:none"></div>
+<div class="con">
+  <div id="ldr" class="ldr"><div class="logo" style="font-size:28px">VETORH</div><div style="color:#6b7280;font-size:12px;margin-top:10px">A ligar...</div><div class="spin"></div></div>
+  <div id="msg-ok" class="msg-ok" style="display:none"></div>
+  <div id="msg-er" class="msg-er" style="display:none"></div>
 
   <div id="app" style="display:none">
     <div class="tabs">
-      <button class="tab active" onclick="tab('ov',this)">📊 Geral</button>
+      <button class="tab on" onclick="tab('ov',this)">📊 Geral</button>
       <button class="tab" onclick="tab('al',this)">🎓 Alunos</button>
       <button class="tab" onclick="tab('de',this)">🎯 Desafios</button>
       <button class="tab" id="ti" onclick="tab('in',this)">🚨 Integridade</button>
       <button class="tab" id="ta" onclick="tab('at',this)">📋 Atenuantes</button>
+      <button class="tab" id="te" onclick="tab('en',this)">📅 Entrevistas</button>
       <button class="tab" onclick="tab('re',this)">🔍 Recrutadores</button>
       <button class="tab" onclick="tab('fi',this)">💰 Financeiro</button>
       <button class="tab" onclick="tab('st',this)">📈 Estatísticas</button>
@@ -101,554 +104,632 @@ label{color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:1px;d
 
     <!-- GERAL -->
     <div id="v-ov">
-      <div class="grid" id="cm"></div>
-      <div class="grid" id="cs"></div>
-      <div class="grid2">
-        <div>
-          <div class="st" style="margin-bottom:12px">🕐 Últimas Submissões</div>
-          <div class="tw"><table><thead><tr><th>Aluno</th><th>Estado</th><th>Téc.</th><th>Data</th></tr></thead><tbody id="tb-ov-s"></tbody></table></div>
-        </div>
-        <div>
-          <div class="st" style="margin-bottom:12px">💰 Últimas Transações</div>
-          <div class="tw"><table><thead><tr><th>Recrutador</th><th>Tipo</th><th>Pts</th><th>Motivo</th></tr></thead><tbody id="tb-ov-t"></tbody></table></div>
-        </div>
+      <div class="grid g6" id="cm"></div>
+      <div class="grid g6" id="cs"></div>
+      <div class="grid g2">
+        <div><div class="ttl" style="margin-bottom:10px">🕐 Últimas Submissões</div>
+        <div class="tw"><table><thead><tr><th>Aluno ID</th><th>Estado</th><th>Téc.</th><th>Ling.</th><th>Data</th></tr></thead><tbody id="tb-ov-s"></tbody></table></div></div>
+        <div><div class="ttl" style="margin-bottom:10px">💰 Últimas Transações</div>
+        <div class="tw"><table><thead><tr><th>Recrutador</th><th>Tipo</th><th>Pts</th><th>Motivo</th></tr></thead><tbody id="tb-ov-t"></tbody></table></div></div>
       </div>
     </div>
 
     <!-- ALUNOS -->
     <div id="v-al" style="display:none">
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px">
-        <div><div class="st">🎓 Alunos</div><div class="ss">Gestão completa de perfis</div></div>
-        <input type="text" id="search-al" placeholder="🔍 Pesquisar nome ou universidade..." oninput="filtrarAlunos()" style="width:280px;margin:0">
+      <div class="row" style="margin-bottom:14px;justify-content:space-between">
+        <div><div class="ttl">🎓 Alunos</div><div class="sub">Todos os perfis registados</div></div>
+        <input class="search-bar" id="q-al" placeholder="🔍 Nome, universidade, curso..." oninput="filtrarAlunos()" style="margin:0">
       </div>
-      <div class="tw"><table><thead><tr><th>Nome</th><th>Universidade</th><th>Curso</th><th>Efic.</th><th>Resil.</th><th>IAPN</th><th>Streak</th><th>Selo</th><th>Acções</th></tr></thead><tbody id="tb-a"></tbody></table></div>
+      <div class="tw"><table><thead><tr><th>Nome</th><th>Universidade</th><th>Curso</th><th>Ano</th><th>⚡Efic.</th><th>💪Resil.</th><th>📈Consist.</th><th>🤝Colab.</th><th>🧠IAPN</th><th>🌐IEI</th><th>🔥Streak</th><th>🏅Selo</th><th>🃏Wild.</th><th>🇬🇧Inglês</th><th>Acções</th></tr></thead><tbody id="tb-a"></tbody></table></div>
     </div>
 
     <!-- DESAFIOS -->
     <div id="v-de" style="display:none">
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px">
-        <div><div class="st">🎯 Banco de Desafios</div><div class="ss">Gestão e atribuição de desafios</div></div>
-        <button class="btn primary" onclick="abrirModalAtribuir()">➕ Atribuir Desafio</button>
+      <div class="row" style="margin-bottom:14px;justify-content:space-between;flex-wrap:wrap;gap:8px">
+        <div><div class="ttl">🎯 Banco de Desafios</div><div class="sub">Gestão e atribuição</div></div>
+        <div class="row">
+          <button class="btn ok" onclick="abrirModalCriarDesafio()">➕ Novo Desafio</button>
+          <button class="btn in" onclick="abrirModalAtribuir()">📤 Atribuir</button>
+        </div>
       </div>
-      <div class="tw"><table><thead><tr><th>Título</th><th>Área</th><th>Dificuldade</th><th>Tipo</th><th>Idioma</th><th>Estado</th><th>Acções</th></tr></thead><tbody id="tb-d"></tbody></table></div>
-      <div style="margin-top:24px"><div class="st" style="margin-bottom:12px">📋 Submissões Recentes</div>
-      <div class="tw"><table><thead><tr><th>Aluno</th><th>Estado</th><th>Téc.</th><th>Ling.</th><th>Idioma</th><th>Data</th><th>Acções</th></tr></thead><tbody id="tb-sub"></tbody></table></div></div>
+      <div class="tw" style="margin-bottom:20px"><table><thead><tr><th>Título</th><th>Área</th><th>Subárea</th><th>Dif.</th><th>Tipo</th><th>Idioma</th><th>Tempo</th><th>Estado</th><th>Acções</th></tr></thead><tbody id="tb-d"></tbody></table></div>
+      <div class="ttl" style="margin-bottom:10px">📋 Submissões Recentes</div>
+      <div class="tw"><table><thead><tr><th>Aluno</th><th>Estado</th><th>Téc.</th><th>Ling.</th><th>Efic.</th><th>Idioma</th><th>Data</th><th>Acções</th></tr></thead><tbody id="tb-sub"></tbody></table></div>
     </div>
 
     <!-- INTEGRIDADE -->
     <div id="v-in" style="display:none">
-      <div class="st">🚨 Integridade Académica</div>
-      <div class="ss">Anomalias detectadas e acções tomadas</div>
+      <div class="ttl">🚨 Integridade Académica</div><div class="sub">Anomalias detectadas — ordenadas por severidade</div>
       <div id="li"></div>
     </div>
 
     <!-- ATENUANTES -->
     <div id="v-at" style="display:none">
-      <div class="st">📋 Pedidos de Atenuante</div>
-      <div class="ss">Comprovantes académicos a aguardar revisão</div>
+      <div class="ttl">📋 Pedidos de Atenuante</div><div class="sub">Comprovativos académicos a aguardar revisão</div>
       <div id="la"></div>
+    </div>
+
+    <!-- ENTREVISTAS -->
+    <div id="v-en" style="display:none">
+      <div class="ttl">📅 Entrevistas</div><div class="sub">Pedidos de entrevista entre recrutadores e alunos</div>
+      <div class="tw"><table><thead><tr><th>Recrutador</th><th>Empresa</th><th>Aluno</th><th>Vaga</th><th>Data</th><th>Formato</th><th>Estado</th><th>Acções</th></tr></thead><tbody id="tb-en"></tbody></table></div>
     </div>
 
     <!-- RECRUTADORES -->
     <div id="v-re" style="display:none">
-      <div class="st">🔍 Recrutadores</div>
-      <div class="ss">Gestão de contas e planos</div>
-      <div class="tw"><table><thead><tr><th>Nome</th><th>Empresa</th><th>Setor</th><th>Plano</th><th>Pontos</th><th>Vagas</th><th>Acções</th></tr></thead><tbody id="tb-r"></tbody></table></div>
+      <div class="ttl">🔍 Recrutadores</div><div class="sub">Gestão de contas e planos</div>
+      <div class="tw"><table><thead><tr><th>Nome</th><th>Empresa</th><th>Setor</th><th>Plano</th><th>Pontos</th><th>Vagas</th><th>Perfis Vis.</th><th>Entrevistas</th><th>Acções</th></tr></thead><tbody id="tb-r"></tbody></table></div>
     </div>
 
     <!-- FINANCEIRO -->
     <div id="v-fi" style="display:none">
-      <div class="st">💰 Transações de Pontos</div>
-      <div class="ss">Histórico completo de créditos e débitos</div>
+      <div class="ttl">💰 Transações de Pontos</div><div class="sub">Histórico completo</div>
       <div class="tw"><table><thead><tr><th>Recrutador</th><th>Tipo</th><th>Pontos</th><th>Motivo</th><th>Descrição</th><th>Data</th></tr></thead><tbody id="tb-fi"></tbody></table></div>
     </div>
 
     <!-- ESTATÍSTICAS -->
     <div id="v-st" style="display:none">
-      <div class="st">📈 Estatísticas Avançadas</div>
-      <div class="ss">Análise da plataforma em tempo real</div>
-      <div id="stats-content"><div class="loading"><div class="spinner"></div></div></div>
+      <div class="ttl">📈 Estatísticas Avançadas</div><div class="sub">Análise em tempo real</div>
+      <div id="st-body"><div class="spin"></div></div>
     </div>
   </div>
 </div>
 
-<!-- MODAL DETALHE ALUNO -->
-<div class="modal" id="modal-aluno">
-  <div class="modal-box">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-      <div class="modal-title" id="modal-aluno-nome">Perfil do Aluno</div>
-      <button class="btn" onclick="fecharModal('modal-aluno')">✕</button>
-    </div>
-    <div id="modal-aluno-body"></div>
+<!-- MODAIS -->
+<div class="mdl" id="m-aluno"><div class="mbox">
+  <div class="row" style="justify-content:space-between;margin-bottom:14px">
+    <div class="mtitle" id="m-aluno-nome">Perfil</div>
+    <button class="btn sm" onclick="fechar('m-aluno')">✕</button>
   </div>
-</div>
+  <div id="m-aluno-body"></div>
+</div></div>
 
-<!-- MODAL SUSPENDER -->
-<div class="modal" id="modal-suspender">
-  <div class="modal-box">
-    <div class="modal-title">🔴 Suspender Aluno</div>
-    <input type="hidden" id="suspender-id">
-    <label>Motivo da suspensão</label>
-    <textarea id="suspender-motivo" rows="3" placeholder="Descreve o motivo..."></textarea>
-    <div class="row">
-      <button class="btn danger" onclick="confirmarSuspender()">Suspender</button>
-      <button class="btn" onclick="fecharModal('modal-suspender')">Cancelar</button>
-    </div>
+<div class="mdl" id="m-sub"><div class="mbox">
+  <div class="row" style="justify-content:space-between;margin-bottom:14px">
+    <div class="mtitle">📄 Detalhe Submissão</div>
+    <button class="btn sm" onclick="fechar('m-sub')">✕</button>
   </div>
-</div>
+  <div id="m-sub-body"></div>
+</div></div>
 
-<!-- MODAL EDITAR SCORES -->
-<div class="modal" id="modal-scores">
-  <div class="modal-box">
-    <div class="modal-title">✏️ Editar Scores</div>
-    <input type="hidden" id="scores-id">
-    <label>Eficiência (0-100)</label>
-    <input type="number" id="sc-ef" min="0" max="100">
-    <label>Resiliência (0-100)</label>
-    <input type="number" id="sc-re" min="0" max="100">
-    <label>Consistência (0-100)</label>
-    <input type="number" id="sc-co" min="0" max="100">
-    <label>Colaboração (0-100)</label>
-    <input type="number" id="sc-cl" min="0" max="100">
-    <label>IAPN (0-100)</label>
-    <input type="number" id="sc-ia" min="0" max="100">
-    <div class="row">
-      <button class="btn success" onclick="confirmarScores()">Guardar</button>
-      <button class="btn" onclick="fecharModal('modal-scores')">Cancelar</button>
-    </div>
-  </div>
-</div>
+<div class="mdl" id="m-suspender"><div class="mbox">
+  <div class="mtitle">🔴 Suspender Aluno</div>
+  <input type="hidden" id="sus-id">
+  <label>Motivo</label><textarea id="sus-mot" rows="3" placeholder="Descreve o motivo..."></textarea>
+  <div class="row"><button class="btn er" onclick="confirmarSuspender()">Suspender</button><button class="btn" onclick="fechar('m-suspender')">Cancelar</button></div>
+</div></div>
 
-<!-- MODAL ATRIBUIR DESAFIO -->
-<div class="modal" id="modal-atribuir">
-  <div class="modal-box">
-    <div class="modal-title">➕ Atribuir Desafio</div>
-    <label>Aluno</label>
-    <select id="at-aluno"></select>
-    <label>Desafio</label>
-    <select id="at-desafio"></select>
-    <label>Prazo (dias)</label>
-    <input type="number" id="at-prazo" value="7" min="1" max="30">
-    <div class="row">
-      <button class="btn primary" onclick="confirmarAtribuir()">Atribuir</button>
-      <button class="btn" onclick="fecharModal('modal-atribuir')">Cancelar</button>
-    </div>
-  </div>
-</div>
+<div class="mdl" id="m-banir"><div class="mbox">
+  <div class="mtitle">⛔ Banir Aluno</div>
+  <input type="hidden" id="ban-id">
+  <label>Motivo do banimento</label><textarea id="ban-mot" rows="3" placeholder="Motivo..."></textarea>
+  <div class="row"><button class="btn er" onclick="confirmarBanir()">Banir Permanentemente</button><button class="btn" onclick="fechar('m-banir')">Cancelar</button></div>
+</div></div>
 
-<!-- MODAL RESOLVER FLAG -->
-<div class="modal" id="modal-flag">
-  <div class="modal-box">
-    <div class="modal-title">🚨 Resolver Flag</div>
-    <input type="hidden" id="flag-id">
-    <label>Resolução</label>
-    <textarea id="flag-resolucao" rows="3" placeholder="Descreve a resolução..."></textarea>
-    <label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;letter-spacing:0">
-      <input type="checkbox" id="flag-banir" style="width:auto;margin:0"> Banir aluno
-    </label>
-    <div class="row" style="margin-top:12px">
-      <button class="btn danger" onclick="confirmarFlag()">Resolver</button>
-      <button class="btn" onclick="fecharModal('modal-flag')">Cancelar</button>
-    </div>
+<div class="mdl" id="m-scores"><div class="mbox">
+  <div class="mtitle">✏️ Editar Indicadores</div>
+  <input type="hidden" id="sc-id">
+  <div class="grid g2" style="gap:8px">
+    <div><label>⚡ Eficiência (0-100)</label><input type="number" id="sc-ef" min="0" max="100"></div>
+    <div><label>💪 Resiliência (0-100)</label><input type="number" id="sc-re" min="0" max="100"></div>
+    <div><label>📈 Consistência (0-100)</label><input type="number" id="sc-co" min="0" max="100"></div>
+    <div><label>🤝 Colaboração (0-100)</label><input type="number" id="sc-cl" min="0" max="100"></div>
+    <div><label>🧠 IAPN (0-100)</label><input type="number" id="sc-ia" min="0" max="100"></div>
+    <div><label>🌐 IEI (0-100)</label><input type="number" id="sc-ie" min="0" max="100"></div>
+    <div><label>🔥 Streak (semanas)</label><input type="number" id="sc-st" min="0"></div>
+    <div><label>🃏 Wildcards</label><input type="number" id="sc-wc" min="0"></div>
+    <div><label>🇬🇧 Nível Inglês</label><input type="text" id="sc-ni" placeholder="ex: B2"></div>
+    <div><label>🏅 Selo</label><input type="text" id="sc-sl" placeholder="ex: 🟢 Verificado"></div>
   </div>
-</div>
+  <div class="row"><button class="btn ok" onclick="confirmarScores()">Guardar</button><button class="btn" onclick="fechar('m-scores')">Cancelar</button></div>
+</div></div>
 
-<!-- MODAL PONTOS RECRUTADOR -->
-<div class="modal" id="modal-pontos">
-  <div class="modal-box">
-    <div class="modal-title">💰 Gerir Pontos</div>
-    <input type="hidden" id="pontos-id">
-    <label>Pontos a adicionar</label>
-    <input type="number" id="pontos-qtd" value="50" min="1">
-    <label>Motivo</label>
-    <input type="text" id="pontos-motivo" placeholder="Ex: Compensação, bónus...">
-    <div class="row">
-      <button class="btn success" onclick="confirmarPontos()">Adicionar</button>
-      <button class="btn" onclick="fecharModal('modal-pontos')">Cancelar</button>
-    </div>
-  </div>
-</div>
+<div class="mdl" id="m-notif"><div class="mbox">
+  <div class="mtitle">📢 Notificação para Aluno</div>
+  <input type="hidden" id="nf-id">
+  <label>Mensagem</label><textarea id="nf-msg" rows="4" placeholder="Escreve a mensagem..."></textarea>
+  <div class="row"><button class="btn in" onclick="confirmarNotif()">Enviar</button><button class="btn" onclick="fechar('m-notif')">Cancelar</button></div>
+</div></div>
 
-<!-- MODAL NOTIFICAÇÃO -->
-<div class="modal" id="modal-notif">
-  <div class="modal-box">
-    <div class="modal-title">📢 Enviar Notificação</div>
-    <input type="hidden" id="notif-aluno-id">
-    <label>Mensagem</label>
-    <textarea id="notif-msg" rows="4" placeholder="Escreve a mensagem para o aluno..."></textarea>
-    <div class="row">
-      <button class="btn primary" onclick="confirmarNotif()">Enviar</button>
-      <button class="btn" onclick="fecharModal('modal-notif')">Cancelar</button>
-    </div>
+<div class="mdl" id="m-atrib"><div class="mbox">
+  <div class="mtitle">📤 Atribuir Desafio</div>
+  <label>Aluno</label><select id="at-al"></select>
+  <label>Desafio</label><select id="at-de"></select>
+  <label>Idioma</label>
+  <select id="at-id"><option value="portugues">Português</option><option value="ingles">Inglês</option><option value="frances">Francês</option></select>
+  <label>Prazo (dias)</label><input type="number" id="at-pr" value="7" min="1" max="30">
+  <div class="row"><button class="btn in" onclick="confirmarAtribuir()">Atribuir</button><button class="btn" onclick="fechar('m-atrib')">Cancelar</button></div>
+</div></div>
+
+<div class="mdl" id="m-criar-desafio"><div class="mbox">
+  <div class="mtitle">➕ Novo Desafio</div>
+  <label>Título</label><input type="text" id="cd-ti" placeholder="Título do desafio">
+  <div class="grid g2" style="gap:8px">
+    <div><label>Área</label><input type="text" id="cd-ar" placeholder="ex: Engenharia Informática"></div>
+    <div><label>Subárea</label><input type="text" id="cd-sa" placeholder="ex: Redes"></div>
+    <div><label>Dificuldade</label><select id="cd-di"><option value="facil">Fácil</option><option value="medio">Médio</option><option value="dificil">Difícil</option></select></div>
+    <div><label>Tipo</label><select id="cd-tp"><option value="tecnico">Técnico</option><option value="troubleshooting">Troubleshooting</option><option value="interdisciplinar">Interdisciplinar</option><option value="compostura">Compostura</option></select></div>
+    <div><label>Idioma</label><select id="cd-id"><option value="portugues">Português</option><option value="ingles">Inglês</option><option value="frances">Francês</option></select></div>
+    <div><label>Tempo Esperado (min)</label><input type="number" id="cd-tm" value="45" min="5"></div>
   </div>
-</div>
+  <label>Rubrica Técnica</label><textarea id="cd-rt" rows="3" placeholder="Critérios de avaliação técnica..."></textarea>
+  <label>Rubrica Linguística</label><textarea id="cd-rl" rows="2" placeholder="Critérios linguísticos..."></textarea>
+  <div class="row"><button class="btn ok" onclick="confirmarCriarDesafio()">Criar</button><button class="btn" onclick="fechar('m-criar-desafio')">Cancelar</button></div>
+</div></div>
+
+<div class="mdl" id="m-flag"><div class="mbox">
+  <div class="mtitle">🚨 Resolver Flag</div>
+  <input type="hidden" id="fl-id">
+  <label>Resolução</label><textarea id="fl-res" rows="3" placeholder="Descreve a resolução..."></textarea>
+  <label style="display:flex;align-items:center;gap:8px;text-transform:none;letter-spacing:0;cursor:pointer">
+    <input type="checkbox" id="fl-ban" style="width:auto;margin:0"> Banir aluno permanentemente
+  </label>
+  <div class="row" style="margin-top:12px"><button class="btn er" onclick="confirmarFlag()">Resolver</button><button class="btn" onclick="fechar('m-flag')">Cancelar</button></div>
+</div></div>
+
+<div class="mdl" id="m-pontos"><div class="mbox">
+  <div class="mtitle" id="m-pontos-titulo">💰 Gerir Pontos</div>
+  <input type="hidden" id="pt-id">
+  <input type="hidden" id="pt-op">
+  <label>Quantidade de pontos</label><input type="number" id="pt-qt" value="50" min="1">
+  <label>Motivo</label><input type="text" id="pt-mot" placeholder="ex: Compensação, bónus...">
+  <div class="row"><button class="btn ok" onclick="confirmarPontos()">Confirmar</button><button class="btn" onclick="fechar('m-pontos')">Cancelar</button></div>
+</div></div>
+
+<div class="mdl" id="m-rec"><div class="mbox">
+  <div class="row" style="justify-content:space-between;margin-bottom:14px">
+    <div class="mtitle" id="m-rec-nome">Recrutador</div>
+    <button class="btn sm" onclick="fechar('m-rec')">✕</button>
+  </div>
+  <div id="m-rec-body"></div>
+</div></div>
 
 <script>
 const API = "https://hargent26-a074b51a.base44.app/functions/adminDashboard";
 let D = null, FL = [], AT = [], DESAFIOS = [], STATS = null;
 
-function bdg(t, tp) {
-  const M = { ok:"#10b981", al:"#f59e0b", er:"#ef4444", in:"#3498DB", wa:"#f59e0b" };
-  const c = M[tp] || "#6b7280";
-  return `<span style="background:${c}20;color:${c};border:1px solid ${c}40;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700">${t}</span>`;
-}
-function crd(ic, lb, vl, cl, sb) {
-  cl = cl || "#E67E22";
-  return `<div class="card" style="border-color:${cl}25"><div class="card-label">${ic} ${lb}</div><div class="card-value" style="color:${cl}">${vl != null ? vl : '—'}</div>${sb ? `<div class="card-sub">${sb}</div>` : ''}</div>`;
-}
-function tab(id, btn) {
-  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-  btn.classList.add("active");
-  document.querySelectorAll("[id^='v-']").forEach(v => v.style.display = "none");
-  document.getElementById("v-" + id).style.display = "";
-  if (id === 'st' && !STATS) carregarStats();
-  if (id === 'de') carregarDesafios();
-}
-function fmt(dt) { return dt ? new Date(dt).toLocaleDateString("pt-PT") : "—"; }
-function fmtDt(dt) { return dt ? new Date(dt).toLocaleString("pt-PT") : "—"; }
-function post(acao, extra) {
-  return fetch(API, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({acao, ...extra}) }).then(r => r.json());
-}
-function showSuccess(msg) {
-  const el = document.getElementById("success-msg");
-  el.textContent = "✅ " + msg; el.style.display = "";
-  setTimeout(() => el.style.display = "none", 3000);
-}
-function showError(msg) {
-  const el = document.getElementById("eb");
-  el.textContent = "❌ " + msg; el.style.display = "";
-  setTimeout(() => el.style.display = "none", 4000);
-}
-function abrirModal(id) { document.getElementById(id).classList.add("open"); }
-function fecharModal(id) { document.getElementById(id).classList.remove("open"); }
+const post = (acao, extra={}) => fetch(API, {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({acao,...extra})}).then(r=>r.json());
 
-async function loadAll() {
-  document.getElementById("loading").style.display = "";
-  document.getElementById("app").style.display = "none";
-  document.getElementById("eb").style.display = "none";
-  document.getElementById("sb").textContent = "A carregar...";
-  document.getElementById("sb").className = "badge";
-  try {
-    const [ov, fl, at] = await Promise.all([post("overview"), post("flags_integridade"), post("atenuantes_pendentes")]);
-    if (ov.error) throw new Error(ov.error);
-    D = ov; FL = fl.flags || []; AT = at.atenuantes || [];
+function ok(msg){const e=document.getElementById("msg-ok");e.textContent="✅ "+msg;e.style.display="";setTimeout(()=>e.style.display="none",3000)}
+function er(msg){const e=document.getElementById("msg-er");e.textContent="❌ "+msg;e.style.display="";setTimeout(()=>e.style.display="none",4000)}
+function abrir(id){document.getElementById(id).classList.add("open")}
+function fechar(id){document.getElementById(id).classList.remove("open")}
+function fmt(d){return d?new Date(d).toLocaleDateString("pt-PT"):"—"}
+function fmtDt(d){return d?new Date(d).toLocaleString("pt-PT"):"—"}
+function bdg(t,c){const M={ok:"#10b981",er:"#ef4444",wa:"#f59e0b",in:"#3498DB",pu:"#8b5cf6",gr:"#6b7280"};const x=M[c]||M.gr;return`<span class="bdg ${c||'gr'}">${t}</span>`}
+function crd(ic,lb,vl,c,sb){return`<div class="card" style="border-color:${c||"#E67E22"}25"><div class="cl">${ic} ${lb}</div><div class="cv" style="color:${c||"#E67E22"}">${vl!=null?vl:"—"}</div>${sb?`<div class="cs">${sb}</div>`:""}</div>`}
+function pr(v,c){return`<div class="row"><span style="color:${c};font-weight:700;min-width:26px;font-size:12px">${v!=null?v:"—"}</span><div class="prog"><div class="pb" style="width:${Math.min(100,v||0)}%;background:${c}"></div></div></div>`}
+
+function tab(id,btn){
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("on"));btn.classList.add("on");
+  document.querySelectorAll("[id^='v-']").forEach(v=>v.style.display="none");
+  document.getElementById("v-"+id).style.display="";
+  if(id==="de")carregarDesafios();
+  if(id==="st"&&!STATS)carregarStats();
+}
+
+async function loadAll(){
+  document.getElementById("ldr").style.display="";
+  document.getElementById("app").style.display="none";
+  document.getElementById("sb").textContent="A carregar...";
+  document.getElementById("sb").className="bdg gr";
+  try{
+    const [ov,fl,at]=await Promise.all([post("overview"),post("flags_integridade"),post("atenuantes_pendentes")]);
+    if(ov.error)throw new Error(ov.error);
+    D=ov;FL=fl.flags||[];AT=at.atenuantes||[];
     render();
-    document.getElementById("loading").style.display = "none";
-    document.getElementById("app").style.display = "";
-    document.getElementById("sb").textContent = "✅ Online";
-    document.getElementById("sb").className = "badge ok";
-    const fa = FL.filter(f => f.severidade === "alto" || f.severidade === "critico").length;
-    const ap = AT.filter(a => a.estado === "pendente").length;
-    document.getElementById("ti").textContent = fa ? `🚨 Integridade (${fa})` : "🚨 Integridade";
-    document.getElementById("ta").textContent = ap ? `📋 Atenuantes (${ap})` : "📋 Atenuantes";
-  } catch(e) {
-    document.getElementById("loading").style.display = "none";
-    document.getElementById("eb").textContent = "❌ " + (e.message || "Erro ao ligar.");
-    document.getElementById("eb").style.display = "";
-    document.getElementById("sb").textContent = "Erro";
-    document.getElementById("sb").className = "badge er";
+    document.getElementById("ldr").style.display="none";
+    document.getElementById("app").style.display="";
+    document.getElementById("sb").textContent="✅ Online";
+    document.getElementById("sb").className="bdg ok";
+    const fa=FL.filter(f=>f.severidade==="alto"||f.severidade==="critico").length;
+    const ap=AT.filter(a=>a.estado==="pendente").length;
+    const ep=(D.entrevistas_pendentes||0);
+    document.getElementById("ti").textContent=fa?`🚨 Integridade (${fa})`:"🚨 Integridade";
+    document.getElementById("ta").textContent=ap?`📋 Atenuantes (${ap})`:"📋 Atenuantes";
+    document.getElementById("te").textContent=ep?`📅 Entrevistas (${ep})`:"📅 Entrevistas";
+  }catch(e){
+    document.getElementById("ldr").style.display="none";
+    er(e.message||"Erro ao ligar.");
+    document.getElementById("sb").textContent="Offline";
+    document.getElementById("sb").className="bdg er";
   }
 }
 
-function render() {
-  const d = D || {};
-  // Cards principais
-  document.getElementById("cm").innerHTML = [
-    crd("🎓","Alunos", d.total_alunos, "#E67E22", "registados"),
-    crd("🔍","Recrutadores", d.total_recrutadores, "#3498DB"),
-    crd("💎","Premium", d.recrutadores_premium, "#8b5cf6"),
-    crd("📤","Submissões", d.total_submissoes, "#E67E22"),
-    crd("⏳","Em Curso", d.desafios_em_curso, "#f59e0b"),
-    crd("🎯","Desafios Banco", d.desafios_ativos + "/" + d.total_desafios_banco, "#10b981"),
+function render(){
+  const d=D||{};
+  document.getElementById("cm").innerHTML=[
+    crd("🎓","Alunos",d.total_alunos,"#E67E22","registados"),
+    crd("🔍","Recrutadores",d.total_recrutadores,"#3498DB"),
+    crd("💎","Premium",d.recrutadores_premium,"#8b5cf6"),
+    crd("📤","Submissões",d.total_submissoes,"#E67E22"),
+    crd("⏳","Em Curso",d.desafios_em_curso,"#f59e0b"),
+    crd("🎯","Desafios Banco",`${d.desafios_ativos||0}/${d.total_desafios_banco||0}`,"#10b981","activos/total"),
+    crd("🚨","Flags Críticos",d.flags_criticos||0,(d.flags_criticos||0)>0?"#ef4444":"#6b7280"),
+    crd("📅","Entrevistas",d.total_entrevistas,"#f59e0b",`${d.entrevistas_pendentes||0} pendentes`),
+    crd("📋","Atenuantes",d.atenuantes_pendentes||0,"#f59e0b","pendentes"),
+    crd("💬","Posts Estaleiro",d.total_posts,"#8b5cf6"),
   ].join("");
-  document.getElementById("cs").innerHTML = [
-    crd("⚡","Eficiência Média", d.avg_eficiencia != null ? Math.round(d.avg_eficiencia) : "—", "#E67E22"),
-    crd("💪","Resiliência Média", d.avg_resiliencia != null ? Math.round(d.avg_resiliencia) : "—", "#10b981"),
-    crd("📈","Consistência Média", d.avg_consistencia != null ? Math.round(d.avg_consistencia) : "—", "#3498DB"),
-    crd("🤝","Colaboração Média", d.avg_colaboracao != null ? Math.round(d.avg_colaboracao) : "—", "#8b5cf6"),
-    crd("🚨","Flags Críticos", d.flags_criticos || 0, d.flags_criticos > 0 ? "#ef4444" : "#6b7280"),
-    crd("📅","Entrevistas", d.total_entrevistas, "#f59e0b"),
+  document.getElementById("cs").innerHTML=[
+    crd("⚡","Efic. Média",d.avg_eficiencia!=null?d.avg_eficiencia+"":"—","#E67E22"),
+    crd("💪","Resil. Média",d.avg_resiliencia!=null?d.avg_resiliencia+"":"—","#10b981"),
+    crd("📈","Consist. Média",d.avg_consistencia!=null?d.avg_consistencia+"":"—","#3498DB"),
+    crd("🤝","Colab. Média",d.avg_colaboracao!=null?d.avg_colaboracao+"":"—","#8b5cf6"),
+    crd("🧠","IAPN Médio",d.avg_iapn!=null?d.avg_iapn+"":"—","#f59e0b"),
+    crd("🌐","IEI Médio",d.avg_iei!=null?d.avg_iei+"":"—","#10b981"),
   ].join("");
 
-  // Overview submissões
-  const sb = d.ultimas_submissoes || [];
-  document.getElementById("tb-ov-s").innerHTML = sb.length === 0 ? '<tr><td colspan="4" class="empty">Sem submissões.</td></tr>' :
-    sb.slice(0,10).map(s => `<tr><td style="color:#fff">${(s.aluno_id||"").slice(0,8)}…</td><td>${bdg(s.estado, s.estado==="avaliado"?"ok":s.estado==="em_curso"?"al":"in")}</td><td style="color:#E67E22;font-weight:700">${s.score_tecnico != null ? s.score_tecnico : '—'}</td><td>${fmt(s.submetido_em)}</td></tr>`).join("");
+  const sb=d.ultimas_submissoes||[];
+  document.getElementById("tb-ov-s").innerHTML=sb.length?sb.slice(0,12).map(s=>`<tr><td style="color:#fff;font-family:monospace;font-size:11px">${(s.aluno_id||"").slice(0,10)}…</td><td>${bdg(s.estado,s.estado==="avaliado"?"ok":s.estado==="em_curso"?"wa":s.estado==="invalidado"?"er":"in")}</td><td style="color:#E67E22;font-weight:700">${s.score_tecnico!=null?s.score_tecnico:"—"}</td><td style="color:#3498DB;font-weight:700">${s.score_linguistico!=null?s.score_linguistico:"—"}</td><td>${fmt(s.submetido_em)}</td></tr>`).join(""):`<tr><td colspan="5" class="empty">Sem submissões.</td></tr>`;
 
-  // Overview transações
-  const tx = d.transacoes_recentes || [];
-  document.getElementById("tb-ov-t").innerHTML = tx.length === 0 ? '<tr><td colspan="4" class="empty">Sem transações.</td></tr>' :
-    tx.slice(0,10).map(t => `<tr><td style="color:#fff">${(t.recrutador_id||"").slice(0,8)}…</td><td>${bdg(t.tipo, t.tipo==="credito"?"ok":"er")}</td><td style="color:${t.tipo==="credito"?"#10b981":"#ef4444"};font-weight:700">${t.tipo==="credito"?"+":"−"}${t.pontos}</td><td>${t.motivo||"—"}</td></tr>`).join("");
+  const tx=d.transacoes_recentes||[];
+  document.getElementById("tb-ov-t").innerHTML=tx.length?tx.slice(0,12).map(t=>`<tr><td style="font-family:monospace;font-size:11px">${(t.recrutador_id||"").slice(0,10)}…</td><td>${bdg(t.tipo,t.tipo==="credito"?"ok":"er")}</td><td style="color:${t.tipo==="credito"?"#10b981":"#ef4444"};font-weight:700">${t.tipo==="credito"?"+":"−"}${t.pontos}</td><td style="color:#9ca3af">${t.motivo||"—"}</td></tr>`).join(""):`<tr><td colspan="4" class="empty">Sem transações.</td></tr>`;
 
-  renderAlunos(d.alunos || []);
-  renderRecrutadores(d.recrutadores || []);
+  renderAlunos(d.alunos||[]);
+  renderRecrutadores(d.recrutadores||[]);
   renderFlags();
   renderAtenuantes();
-  renderFinanceiro(d.transacoes_recentes || []);
+  renderEntrevistas(d.entrevistas_lista||[]);
+  renderFinanceiro(d.transacoes_recentes||[]);
 }
 
-function renderAlunos(alunos) {
-  document.getElementById("tb-a").innerHTML = alunos.length === 0 ? '<tr><td colspan="9" class="empty">Sem alunos.</td></tr>' :
-    alunos.map(a => `<tr>
-      <td style="color:#fff;font-weight:600">${a.nome||"—"}</td>
-      <td>${a.universidade||"—"}</td>
-      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${a.curso||"—"}</td>
-      <td><div class="row"><span style="color:#E67E22;font-weight:700;min-width:28px">${a.score_eficiencia!=null?a.score_eficiencia:'—'}</span><div class="prog"><div class="prog-bar" style="width:${a.score_eficiencia||0}%;background:#E67E22"></div></div></div></td>
-      <td><div class="row"><span style="color:#10b981;font-weight:700;min-width:28px">${a.score_resiliencia!=null?a.score_resiliencia:'—'}</span><div class="prog"><div class="prog-bar" style="width:${a.score_resiliencia||0}%;background:#10b981"></div></div></div></td>
-      <td style="color:#8b5cf6;font-weight:700">${a.iapn!=null?a.iapn:'—'}</td>
-      <td>${a.streak_semanas!=null?a.streak_semanas:'—'}s</td>
-      <td>${a.selo||"—"}</td>
-      <td>
-        <div class="row">
-          <button class="btn sm primary" onclick="verAluno('${a.id}','${(a.nome||'').replace(/'/g,"\\'")}')">👤</button>
-          <button class="btn sm" onclick="abrirNotif('${a.id}')">📢</button>
-          <button class="btn sm" onclick="abrirScores('${a.id}',${a.score_eficiencia||0},${a.score_resiliencia||0},${a.score_consistencia||0},${a.score_colaboracao||0},${a.iapn||0})">✏️</button>
-          ${a.selo&&a.selo.includes('Suspenso') ? `<button class="btn sm success" onclick="reativarAluno('${a.id}')">✅</button>` : `<button class="btn sm danger" onclick="abrirSuspender('${a.id}')">🔴</button>`}
-        </div>
-      </td>
-    </tr>`).join("");
-}
-
-function filtrarAlunos() {
-  const q = document.getElementById("search-al").value.toLowerCase();
-  const alunos = (D?.alunos || []).filter(a => (a.nome||"").toLowerCase().includes(q) || (a.universidade||"").toLowerCase().includes(q) || (a.curso||"").toLowerCase().includes(q));
-  renderAlunos(alunos);
-}
-
-async function verAluno(id, nome) {
-  document.getElementById("modal-aluno-nome").textContent = "👤 " + nome;
-  document.getElementById("modal-aluno-body").innerHTML = '<div class="loading"><div class="spinner"></div></div>';
-  abrirModal("modal-aluno");
-  try {
-    const r = await post("aluno_detalhe", { aluno_id: id });
-    const p = r.perfil || {};
-    const assigns = r.assignments || [];
-    const flags = r.flags || [];
-    document.getElementById("modal-aluno-body").innerHTML = `
-      <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
-        <div class="kpi"><div class="kpi-label">Universidade</div><div class="kpi-val" style="font-size:13px">${p.universidade||"—"}</div></div>
-        <div class="kpi"><div class="kpi-label">Curso</div><div class="kpi-val" style="font-size:13px">${p.curso||"—"}</div></div>
-        <div class="kpi"><div class="kpi-label">Eficiência</div><div class="kpi-val" style="color:#E67E22">${p.score_eficiencia||0}</div></div>
-        <div class="kpi"><div class="kpi-label">Resiliência</div><div class="kpi-val" style="color:#10b981">${p.score_resiliencia||0}</div></div>
-        <div class="kpi"><div class="kpi-label">IAPN</div><div class="kpi-val" style="color:#8b5cf6">${p.iapn||0}</div></div>
-        <div class="kpi"><div class="kpi-label">Streak</div><div class="kpi-val" style="color:#f59e0b">${p.streak_semanas||0}s</div></div>
-      </div>
-      <div style="font-size:12px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Histórico (${assigns.length} desafios)</div>
-      <div class="tw" style="margin-bottom:12px"><table><thead><tr><th>Estado</th><th>Téc.</th><th>Ling.</th><th>Data</th></tr></thead><tbody>
-        ${assigns.length===0?'<tr><td colspan="4" class="empty">Sem desafios.</td></tr>':assigns.slice(0,10).map(a=>`<tr><td>${bdg(a.estado,a.estado==="avaliado"?"ok":a.estado==="em_curso"?"al":"in")}</td><td style="color:#E67E22;font-weight:700">${a.score_tecnico!=null?a.score_tecnico:'—'}</td><td style="color:#3498DB;font-weight:700">${a.score_linguistico!=null?a.score_linguistico:'—'}</td><td>${fmt(a.submetido_em)}</td></tr>`).join("")}
-      </tbody></table></div>
-      <div style="font-size:12px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Flags (${flags.length})</div>
-      ${flags.length===0?'<div class="empty" style="padding:16px">Sem flags.</div>':flags.map(f=>`<div class="panel" style="padding:12px;margin-bottom:8px"><div class="row">${bdg(f.severidade,f.severidade==="critico"||f.severidade==="alto"?"er":f.severidade==="medio"?"wa":"in")}<span style="font-size:12px;color:#d1d5db">${f.tipo_anomalia||"—"}</span><span style="font-size:11px;color:#6b7280;margin-left:auto">${fmt(f.timestamp)}</span></div></div>`).join("")}
-    `;
-  } catch(e) { document.getElementById("modal-aluno-body").innerHTML = `<div class="eb">Erro: ${e.message}</div>`; }
-}
-
-function abrirSuspender(id) { document.getElementById("suspender-id").value = id; document.getElementById("suspender-motivo").value = ""; abrirModal("modal-suspender"); }
-async function confirmarSuspender() {
-  const id = document.getElementById("suspender-id").value;
-  const motivo = document.getElementById("suspender-motivo").value;
-  try { await post("suspender_aluno", { aluno_id: id, motivo }); fecharModal("modal-suspender"); showSuccess("Aluno suspenso."); await loadAll(); } catch(e) { showError(e.message); }
-}
-async function reativarAluno(id) {
-  if (!confirm("Reativar este aluno?")) return;
-  try { await post("reativar_aluno", { aluno_id: id }); showSuccess("Aluno reativado."); await loadAll(); } catch(e) { showError(e.message); }
-}
-
-function abrirScores(id, ef, re, co, cl, ia) {
-  document.getElementById("scores-id").value = id;
-  document.getElementById("sc-ef").value = ef;
-  document.getElementById("sc-re").value = re;
-  document.getElementById("sc-co").value = co;
-  document.getElementById("sc-cl").value = cl;
-  document.getElementById("sc-ia").value = ia;
-  abrirModal("modal-scores");
-}
-async function confirmarScores() {
-  const id = document.getElementById("scores-id").value;
-  const scores = { score_eficiencia: +document.getElementById("sc-ef").value, score_resiliencia: +document.getElementById("sc-re").value, score_consistencia: +document.getElementById("sc-co").value, score_colaboracao: +document.getElementById("sc-cl").value, iapn: +document.getElementById("sc-ia").value };
-  try { await post("editar_scores", { aluno_id: id, scores }); fecharModal("modal-scores"); showSuccess("Scores actualizados."); await loadAll(); } catch(e) { showError(e.message); }
-}
-
-function abrirNotif(id) { document.getElementById("notif-aluno-id").value = id; document.getElementById("notif-msg").value = ""; abrirModal("modal-notif"); }
-async function confirmarNotif() {
-  const id = document.getElementById("notif-aluno-id").value;
-  const msg = document.getElementById("notif-msg").value;
-  if (!msg) return;
-  try { await post("enviar_notificacao", { aluno_id: id, mensagem_texto: msg }); fecharModal("modal-notif"); showSuccess("Notificação enviada."); } catch(e) { showError(e.message); }
-}
-
-async function carregarDesafios() {
-  if (DESAFIOS.length > 0) { renderDesafios(); return; }
-  const r = await post("listar_desafios");
-  DESAFIOS = r.desafios || [];
-  renderDesafios();
-}
-function renderDesafios() {
-  const cor_dif = { facil:"#10b981", medio:"#f59e0b", dificil:"#ef4444" };
-  document.getElementById("tb-d").innerHTML = DESAFIOS.length === 0 ? '<tr><td colspan="7" class="empty">Sem desafios.</td></tr>' :
-    DESAFIOS.map(d => `<tr>
-      <td style="color:#fff;font-weight:600;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${d.titulo||"—"}</td>
-      <td>${d.area||"—"}</td>
-      <td>${bdg(d.dificuldade, d.dificuldade==="dificil"?"er":d.dificuldade==="medio"?"wa":"ok")}</td>
-      <td>${d.tipo||"—"}</td>
-      <td>${d.idioma||"—"}</td>
-      <td>${d.ativo ? bdg("Activo","ok") : bdg("Inactivo","er")}</td>
-      <td><button class="btn sm ${d.ativo?'danger':'success'}" onclick="toggleDesafio('${d.id}',${!d.ativo})">${d.ativo?"Desactivar":"Activar"}</button></td>
-    </tr>`).join("");
-  const sb = D?.ultimas_submissoes || [];
-  document.getElementById("tb-sub").innerHTML = sb.length === 0 ? '<tr><td colspan="7" class="empty">Sem submissões.</td></tr>' :
-    sb.map(s => `<tr>
-      <td style="color:#fff">${(s.aluno_id||"").slice(0,8)}…</td>
-      <td>${bdg(s.estado, s.estado==="avaliado"?"ok":s.estado==="em_curso"?"al":s.estado==="invalidado"?"er":"in")}</td>
-      <td style="color:#E67E22;font-weight:700">${s.score_tecnico!=null?s.score_tecnico:'—'}</td>
-      <td style="color:#3498DB;font-weight:700">${s.score_linguistico!=null?s.score_linguistico:'—'}</td>
-      <td>${s.idioma||"—"}</td>
-      <td>${fmt(s.submetido_em)}</td>
-      <td>${s.estado==="avaliado"?`<button class="btn sm danger" onclick="invalidarSubmissao('${s.id}')">Invalidar</button>`:'—'}</td>
-    </tr>`).join("");
-}
-
-async function toggleDesafio(id, ativo) {
-  try { await post("toggle_desafio", { desafio_id: id, ativo }); DESAFIOS = []; showSuccess(ativo ? "Desafio activado." : "Desafio desactivado."); carregarDesafios(); } catch(e) { showError(e.message); }
-}
-async function invalidarSubmissao(id) {
-  const motivo = prompt("Motivo da invalidação:");
-  if (motivo === null) return;
-  try { await post("invalidar_submissao", { assignment_id: id, motivo }); showSuccess("Submissão invalidada."); await loadAll(); } catch(e) { showError(e.message); }
-}
-
-function abrirModalAtribuir() {
-  const alunos = D?.alunos || [];
-  document.getElementById("at-aluno").innerHTML = alunos.map(a => `<option value="${a.id}">${a.nome||a.id}</option>`).join("");
-  document.getElementById("at-desafio").innerHTML = DESAFIOS.filter(d=>d.ativo).map(d => `<option value="${d.id}">${d.titulo||d.id}</option>`).join("");
-  abrirModal("modal-atribuir");
-}
-async function confirmarAtribuir() {
-  const aluno_id = document.getElementById("at-aluno").value;
-  const desafio_id = document.getElementById("at-desafio").value;
-  const prazo_dias = +document.getElementById("at-prazo").value;
-  try { await post("atribuir_desafio", { aluno_id, desafio_id, prazo_dias }); fecharModal("modal-atribuir"); showSuccess("Desafio atribuído."); await loadAll(); } catch(e) { showError(e.message); }
-}
-
-function renderFlags() {
-  document.getElementById("li").innerHTML = FL.length === 0 ?
-    '<div style="background:#111827;border-radius:14px;padding:48px;text-align:center"><div style="font-size:40px">✅</div><div style="color:#10b981;margin-top:12px;font-weight:600">Sem flags activos</div></div>' :
-    FL.map(f => `<div class="panel ${f.severidade==="critico"||f.severidade==="alto"?"danger":"warn"}">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:10px">
-        <div class="row">${bdg(f.severidade||"—", f.severidade==="critico"||f.severidade==="alto"?"er":f.severidade==="medio"?"wa":"in")}<span style="color:#fff;font-weight:700">${f.tipo_anomalia||"—"}</span><span style="color:#6b7280;font-size:11px">#${f.ocorrencia_numero||1}</span></div>
-        <span style="color:#6b7280;font-size:11px">${fmtDt(f.timestamp)}</span>
-      </div>
-      <div style="color:#9ca3af;font-size:12px;margin-bottom:10px">${f.descricao||"—"}</div>
-      <div style="color:#6b7280;font-size:11px;margin-bottom:10px">Aluno: <span style="color:#d1d5db">${(f.aluno_id||"").slice(0,12)}…</span> · Acção actual: <span style="color:#f59e0b">${f.acao_tomada||"pendente"}</span></div>
+function renderAlunos(al){
+  document.getElementById("tb-a").innerHTML=al.length?al.map(a=>`<tr>
+    <td style="color:#fff;font-weight:600;white-space:nowrap">${a.nome||"—"}</td>
+    <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${a.universidade||"—"}</td>
+    <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${a.curso||"—"}</td>
+    <td style="text-align:center">${a.ano_plataforma||"—"}</td>
+    <td>${pr(a.score_eficiencia,"#E67E22")}</td>
+    <td>${pr(a.score_resiliencia,"#10b981")}</td>
+    <td>${pr(a.score_consistencia,"#3498DB")}</td>
+    <td>${pr(a.score_colaboracao,"#8b5cf6")}</td>
+    <td>${pr(a.iapn,"#f59e0b")}</td>
+    <td>${pr(a.iei,"#10b981")}</td>
+    <td style="color:#f59e0b;font-weight:700;text-align:center">${a.streak_semanas!=null?a.streak_semanas+"s":"—"}</td>
+    <td>${a.selo||"—"}</td>
+    <td style="text-align:center;color:#8b5cf6;font-weight:700">${a.wildcards_disponiveis||0}</td>
+    <td>${a.nivel_ingles||"—"}</td>
+    <td>
       <div class="row">
-        <button class="btn sm success" onclick="abrirFlag('${f.id}')">✅ Resolver</button>
-        <button class="btn sm danger" onclick="abrirFlagBanir('${f.id}')">🔴 Banir Aluno</button>
+        <button class="btn sm in" onclick="verAluno('${a.id}','${(a.nome||"").replace(/'/g,"\\'")}')">👤</button>
+        <button class="btn sm pu" onclick="abrirNotif('${a.id}')">📢</button>
+        <button class="btn sm wa" onclick="abrirScores('${a.id}',${JSON.stringify(a).replace(/</g,'\\u003c')})">✏️</button>
+        ${a.selo&&(a.selo.includes("Suspenso")||a.selo.includes("Banido"))?`<button class="btn sm ok" onclick="reativar('${a.id}')">✅</button>`:`<button class="btn sm er" onclick="abrirSuspender('${a.id}')">⏸</button>`}
+        <button class="btn sm er" onclick="abrirBanir('${a.id}')">⛔</button>
       </div>
-    </div>`).join("");
+    </td>
+  </tr>`).join(""):`<tr><td colspan="15" class="empty">Sem alunos.</td></tr>`;
+}
+function filtrarAlunos(){
+  const q=document.getElementById("q-al").value.toLowerCase();
+  renderAlunos((D?.alunos||[]).filter(a=>(a.nome||"").toLowerCase().includes(q)||(a.universidade||"").toLowerCase().includes(q)||(a.curso||"").toLowerCase().includes(q)));
 }
 
-function abrirFlag(id, banir=false) {
-  document.getElementById("flag-id").value = id;
-  document.getElementById("flag-resolucao").value = "";
-  document.getElementById("flag-banir").checked = banir;
-  abrirModal("modal-flag");
-}
-function abrirFlagBanir(id) { abrirFlag(id, true); }
-async function confirmarFlag() {
-  const id = document.getElementById("flag-id").value;
-  const resolucao = document.getElementById("flag-resolucao").value;
-  const banir = document.getElementById("flag-banir").checked;
-  try { await post("resolver_flag", { flag_id: id, resolucao, banir }); fecharModal("modal-flag"); showSuccess("Flag resolvido."); await loadAll(); } catch(e) { showError(e.message); }
-}
-
-function renderAtenuantes() {
-  document.getElementById("la").innerHTML = AT.length === 0 ? '<div class="empty">Nenhum pedido.</div>' :
-    AT.map(a => `<div class="panel ${a.estado==="pendente"?"warn":""}">
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px">
-        <span style="color:#fff;font-weight:700">${(a.aluno_id||"").slice(0,10)}… · ${fmt(a.periodo_inicio)} → ${fmt(a.periodo_fim)}</span>
-        ${bdg(a.estado||"—", a.estado==="pendente"?"wa":a.estado==="aprovado"?"ok":"er")}
+async function verAluno(id,nome){
+  document.getElementById("m-aluno-nome").textContent="👤 "+nome;
+  document.getElementById("m-aluno-body").innerHTML='<div class="spin"></div>';
+  abrir("m-aluno");
+  try{
+    const r=await post("aluno_detalhe",{aluno_id:id});
+    const p=r.perfil||{};const assigns=r.assignments||[];const flags=r.flags||[];const lang=r.lang||[];
+    document.getElementById("m-aluno-body").innerHTML=`
+      <div class="kpi-g">
+        <div class="kpi"><div class="kpi-l">Universidade</div><div class="kpi-v" style="font-size:12px">${p.universidade||"—"}</div></div>
+        <div class="kpi"><div class="kpi-l">Curso</div><div class="kpi-v" style="font-size:12px">${p.curso||"—"}</div></div>
+        <div class="kpi"><div class="kpi-l">Ano</div><div class="kpi-v" style="color:#E67E22">${p.ano_plataforma||"—"}</div></div>
+        <div class="kpi"><div class="kpi-l">⚡ Eficiência</div><div class="kpi-v" style="color:#E67E22">${p.score_eficiencia||0}</div></div>
+        <div class="kpi"><div class="kpi-l">💪 Resiliência</div><div class="kpi-v" style="color:#10b981">${p.score_resiliencia||0}</div></div>
+        <div class="kpi"><div class="kpi-l">📈 Consistência</div><div class="kpi-v" style="color:#3498DB">${p.score_consistencia||0}</div></div>
+        <div class="kpi"><div class="kpi-l">🤝 Colaboração</div><div class="kpi-v" style="color:#8b5cf6">${p.score_colaboracao||0}</div></div>
+        <div class="kpi"><div class="kpi-l">🧠 IAPN</div><div class="kpi-v" style="color:#f59e0b">${p.iapn||0}</div></div>
+        <div class="kpi"><div class="kpi-l">🌐 IEI</div><div class="kpi-v" style="color:#10b981">${p.iei||0}</div></div>
+        <div class="kpi"><div class="kpi-l">🔥 Streak</div><div class="kpi-v" style="color:#f59e0b">${p.streak_semanas||0}s</div></div>
+        <div class="kpi"><div class="kpi-l">🃏 Wildcards</div><div class="kpi-v" style="color:#8b5cf6">${p.wildcards_disponiveis||0}</div></div>
+        <div class="kpi"><div class="kpi-l">🇬🇧 Inglês</div><div class="kpi-v">${p.nivel_ingles||"—"}</div></div>
       </div>
-      <div style="color:#9ca3af;font-size:13px;margin-bottom:8px">${a.descricao||"—"}</div>
-      ${a.tipo_prova ? `<div style="font-size:11px;color:#6b7280;margin-bottom:8px">Tipo: <span style="color:#d1d5db">${a.tipo_prova}</span></div>` : ''}
-      ${a.ficheiro_url ? `<a href="${a.ficheiro_url}" target="_blank" style="color:#3498DB;font-size:12px;display:block;margin-bottom:10px">📎 Ver Comprovativo</a>` : ''}
-      ${a.estado==="pendente" ? `<div class="row"><button class="btn sm success" onclick="acaoAt('${a.id}','aprovar_atenuante')">✅ Aprovar</button><button class="btn sm danger" onclick="acaoAt('${a.id}','rejeitar_atenuante')">❌ Rejeitar</button></div>` : `<div style="font-size:11px;color:#6b7280">Revisto por: ${a.revisto_por||"—"} em ${fmt(a.revisto_em)}</div>`}
-    </div>`).join("");
-}
-async function acaoAt(id, acao) {
-  try { await post(acao, { atenuante_id: id }); showSuccess(acao==="aprovar_atenuante"?"Aprovado.":"Rejeitado."); await loadAll(); } catch(e) { showError(e.message); }
-}
-
-function renderRecrutadores(rc) {
-  document.getElementById("tb-r").innerHTML = rc.length === 0 ? '<tr><td colspan="7" class="empty">Sem recrutadores.</td></tr>' :
-    rc.map(r => `<tr>
-      <td style="color:#fff;font-weight:600">${r.nome||"—"}</td>
-      <td>${r.empresa||"—"}</td>
-      <td>${r.setor||"—"}</td>
-      <td>${bdg(r.plano||"free", r.plano==="premium"?"wa":"in")}</td>
-      <td style="color:#f59e0b;font-weight:700">${r.pontos!=null?r.pontos:0}</td>
-      <td>${r.vagas_ativas!=null?r.vagas_ativas:0}</td>
-      <td>
-        <div class="row">
-          ${r.plano==="premium" ? `<button class="btn sm danger" onclick="downgradeRecrutador('${r.id}')">⬇ Free</button>` : `<button class="btn sm success" onclick="upgradeRecrutador('${r.id}')">⬆ Premium</button>`}
-          <button class="btn sm primary" onclick="abrirPontos('${r.id}')">💰</button>
-        </div>
-      </td>
-    </tr>`).join("");
-}
-async function upgradeRecrutador(id) {
-  if (!confirm("Fazer upgrade para Premium?")) return;
-  try { await post("upgrade_recrutador", { recrutador_id: id, pontos: 100 }); showSuccess("Actualizado para Premium."); await loadAll(); } catch(e) { showError(e.message); }
-}
-async function downgradeRecrutador(id) {
-  if (!confirm("Reverter para Free?")) return;
-  try { await post("downgrade_recrutador", { recrutador_id: id }); showSuccess("Revertido para Free."); await loadAll(); } catch(e) { showError(e.message); }
-}
-function abrirPontos(id) { document.getElementById("pontos-id").value = id; document.getElementById("pontos-qtd").value = 50; document.getElementById("pontos-motivo").value = ""; abrirModal("modal-pontos"); }
-async function confirmarPontos() {
-  const id = document.getElementById("pontos-id").value;
-  const pontos = +document.getElementById("pontos-qtd").value;
-  const motivo = document.getElementById("pontos-motivo").value;
-  try { await post("adicionar_pontos", { recrutador_id: id, pontos, motivo }); fecharModal("modal-pontos"); showSuccess(pontos + " pontos adicionados."); await loadAll(); } catch(e) { showError(e.message); }
+      <hr class="sep">
+      <div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Email: ${p.email_institucional||"—"} · Selo: ${p.selo||"—"}</div>
+      <hr class="sep">
+      <div style="font-weight:700;margin-bottom:8px">Desafios (${assigns.length})</div>
+      <div class="tw" style="margin-bottom:12px"><table><thead><tr><th>Estado</th><th>Téc.</th><th>Ling.</th><th>Efic.</th><th>Idioma</th><th>Data</th><th></th></tr></thead><tbody>
+        ${assigns.length?assigns.slice(0,15).map(a=>`<tr><td>${bdg(a.estado,a.estado==="avaliado"?"ok":a.estado==="em_curso"?"wa":a.estado==="invalidado"?"er":"in")}</td><td style="color:#E67E22;font-weight:700">${a.score_tecnico!=null?a.score_tecnico:"—"}</td><td style="color:#3498DB;font-weight:700">${a.score_linguistico!=null?a.score_linguistico:"—"}</td><td style="color:#f59e0b;font-weight:700">${a.score_eficiencia!=null?a.score_eficiencia:"—"}</td><td>${a.idioma||"—"}</td><td>${fmt(a.submetido_em)}</td><td>${a.estado==="avaliado"?`<button class="btn sm er" onclick="verSubmissao('${a.id}')">👁</button>`:"—"}</td></tr>`).join(""):`<tr><td colspan="7" class="empty">Sem desafios.</td></tr>`}
+      </tbody></table></div>
+      <div style="font-weight:700;margin-bottom:8px">Flags (${flags.length})</div>
+      ${flags.length?flags.map(f=>`<div class="pnl ${f.severidade==="critico"||f.severidade==="alto"?"er":"wa"}" style="padding:10px;margin-bottom:8px"><div class="row">${bdg(f.severidade||"—",f.severidade==="critico"||f.severidade==="alto"?"er":f.severidade==="medio"?"wa":"in")}<span style="font-size:12px">${f.tipo_anomalia||"—"}</span><span style="font-size:11px;color:#6b7280;margin-left:auto">${fmt(f.timestamp)}</span></div></div>`).join(""):`<div style="color:#10b981;font-size:12px;padding:8px">✅ Sem flags</div>`}
+      ${lang.length?`<hr class="sep"><div style="font-weight:700;margin-bottom:8px">Línguas</div>${lang.map(l=>`<div style="display:flex;gap:12px;font-size:12px;margin-bottom:4px"><span style="color:#3498DB;font-weight:700">${l.idioma||"—"}</span><span>Nível: ${l.nivel_atual||"—"}</span><span>Técnico: ${l.nivel_tecnico||"—"}</span></div>`).join("")}`:""}
+    `;
+  }catch(e){document.getElementById("m-aluno-body").innerHTML=`<div class="msg-er">Erro: ${e.message}</div>`}
 }
 
-function renderFinanceiro(tx) {
-  document.getElementById("tb-fi").innerHTML = tx.length === 0 ? '<tr><td colspan="6" class="empty">Sem transações.</td></tr>' :
-    tx.map(t => `<tr>
-      <td style="color:#fff">${(t.recrutador_id||"").slice(0,10)}…</td>
-      <td>${bdg(t.tipo, t.tipo==="credito"?"ok":"er")}</td>
-      <td style="color:${t.tipo==="credito"?"#10b981":"#ef4444"};font-weight:700">${t.tipo==="credito"?"+":"−"}${t.pontos}</td>
-      <td>${t.motivo||"—"}</td>
-      <td style="color:#9ca3af;font-size:11px;max-width:180px;overflow:hidden;text-overflow:ellipsis">${t.descricao||"—"}</td>
-      <td>${fmt(t.created_date)}</td>
-    </tr>`).join("");
+async function verSubmissao(id){
+  document.getElementById("m-sub-body").innerHTML='<div class="spin"></div>';
+  abrir("m-sub");
+  try{
+    const r=await post("submissao_detalhe",{assignment_id:id});
+    const a=r.assignment||{};const d=r.desafio||{};const al=r.aluno||{};
+    document.getElementById("m-sub-body").innerHTML=`
+      <div class="kpi-g">
+        <div class="kpi"><div class="kpi-l">Aluno</div><div class="kpi-v" style="font-size:12px">${al.nome||"—"}</div></div>
+        <div class="kpi"><div class="kpi-l">Desafio</div><div class="kpi-v" style="font-size:11px">${d.titulo||"—"}</div></div>
+        <div class="kpi"><div class="kpi-l">Score Técnico</div><div class="kpi-v" style="color:#E67E22">${a.score_tecnico!=null?a.score_tecnico:"—"}</div></div>
+        <div class="kpi"><div class="kpi-l">Score Ling.</div><div class="kpi-v" style="color:#3498DB">${a.score_linguistico!=null?a.score_linguistico:"—"}</div></div>
+        <div class="kpi"><div class="kpi-l">Eficiência</div><div class="kpi-v" style="color:#f59e0b">${a.score_eficiencia!=null?a.score_eficiencia:"—"}</div></div>
+        <div class="kpi"><div class="kpi-l">Tempo Gasto</div><div class="kpi-v">${a.tempo_gasto_seg?Math.round(a.tempo_gasto_seg/60)+"min":"—"}</div></div>
+      </div>
+      <hr class="sep">
+      <div style="font-weight:700;margin-bottom:6px;font-size:12px">Resposta do Aluno</div>
+      <div style="background:#0d1117;border-radius:8px;padding:12px;font-size:12px;color:#d1d5db;white-space:pre-wrap;max-height:180px;overflow-y:auto;margin-bottom:12px">${a.resposta_texto||"(sem resposta)"}</div>
+      <div style="font-weight:700;margin-bottom:6px;font-size:12px">Feedback IA</div>
+      <div style="background:#0d1117;border-radius:8px;padding:12px;font-size:12px;color:#9ca3af;white-space:pre-wrap;max-height:180px;overflow-y:auto;margin-bottom:12px">${a.feedback_ia||"(sem feedback)"}</div>
+      <div style="font-size:11px;color:#6b7280">Idioma: ${a.idioma||"—"} · Estado: ${a.estado||"—"} · Submetido: ${fmtDt(a.submetido_em)}</div>
+      ${a.flags_integridade&&a.flags_integridade.length?`<div style="margin-top:10px;color:#ef4444;font-size:12px">⚠️ Flags: ${a.flags_integridade.join(", ")}</div>`:""}
+      <hr class="sep">
+      ${a.estado==="avaliado"?`<button class="btn er" onclick="invalidarSub('${a.id}')">Invalidar esta Submissão</button>`:""}
+    `;
+  }catch(e){document.getElementById("m-sub-body").innerHTML=`<div class="msg-er">Erro: ${e.message}</div>`}
 }
 
-async function carregarStats() {
-  const r = await post("stats_avancadas");
-  STATS = r;
-  const el = document.getElementById("stats-content");
-  const barras = (obj, cor) => Object.entries(obj||{}).sort((a,b)=>b[1]-a[1]).slice(0,8).map(([k,v]) =>
-    `<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="color:#d1d5db">${k}</span><span style="color:${cor};font-weight:700">${v}</span></div><div class="prog"><div class="prog-bar" style="width:${Math.min(100,v/Math.max(...Object.values(obj||{1:1}))*100)}%;background:${cor}"></div></div></div>`
-  ).join("");
-  el.innerHTML = `
-    <div class="grid" style="margin-bottom:24px">
-      ${crd("✅","Taxa Conclusão", (r.taxa_conclusao||0)+"%","#10b981")}
-      ${crd("🚨","Taxa Flags", (r.taxa_flags||0)+"%", r.taxa_flags>20?"#ef4444":"#6b7280")}
-      ${crd("📅","Entrevistas Pendentes", r.entrevistas_pendentes||0,"#f59e0b")}
-      ${crd("✅","Entrevistas Confirmadas", r.entrevistas_confirmadas||0,"#10b981")}
+async function invalidarSub(id){
+  const mot=prompt("Motivo da invalidação:");if(mot===null)return;
+  try{await post("invalidar_submissao",{assignment_id:id,motivo:mot});fechar("m-sub");ok("Submissão invalidada.");await loadAll();}catch(e){er(e.message)}
+}
+
+function abrirSuspender(id){document.getElementById("sus-id").value=id;document.getElementById("sus-mot").value="";abrir("m-suspender")}
+async function confirmarSuspender(){
+  const id=document.getElementById("sus-id").value;const mot=document.getElementById("sus-mot").value;
+  try{await post("suspender_aluno",{aluno_id:id,motivo:mot});fechar("m-suspender");ok("Aluno suspenso.");await loadAll();}catch(e){er(e.message)}
+}
+function abrirBanir(id){document.getElementById("ban-id").value=id;document.getElementById("ban-mot").value="";abrir("m-banir")}
+async function confirmarBanir(){
+  const id=document.getElementById("ban-id").value;const mot=document.getElementById("ban-mot").value;
+  try{await post("banir_aluno",{aluno_id:id,motivo:mot});fechar("m-banir");ok("Aluno banido.");await loadAll();}catch(e){er(e.message)}
+}
+async function reativar(id){if(!confirm("Reativar aluno?"))return;try{await post("reativar_aluno",{aluno_id:id});ok("Aluno reativado.");await loadAll();}catch(e){er(e.message)}}
+
+function abrirScores(id,a){
+  document.getElementById("sc-id").value=id;
+  document.getElementById("sc-ef").value=a.score_eficiencia||0;
+  document.getElementById("sc-re").value=a.score_resiliencia||0;
+  document.getElementById("sc-co").value=a.score_consistencia||0;
+  document.getElementById("sc-cl").value=a.score_colaboracao||0;
+  document.getElementById("sc-ia").value=a.iapn||0;
+  document.getElementById("sc-ie").value=a.iei||0;
+  document.getElementById("sc-st").value=a.streak_semanas||0;
+  document.getElementById("sc-wc").value=a.wildcards_disponiveis||0;
+  document.getElementById("sc-ni").value=a.nivel_ingles||"";
+  document.getElementById("sc-sl").value=a.selo||"";
+  abrir("m-scores");
+}
+async function confirmarScores(){
+  const id=document.getElementById("sc-id").value;
+  const scores={score_eficiencia:+document.getElementById("sc-ef").value,score_resiliencia:+document.getElementById("sc-re").value,score_consistencia:+document.getElementById("sc-co").value,score_colaboracao:+document.getElementById("sc-cl").value,iapn:+document.getElementById("sc-ia").value,iei:+document.getElementById("sc-ie").value,streak_semanas:+document.getElementById("sc-st").value,wildcards_disponiveis:+document.getElementById("sc-wc").value,nivel_ingles:document.getElementById("sc-ni").value,selo:document.getElementById("sc-sl").value};
+  try{await post("editar_scores",{aluno_id:id,scores});fechar("m-scores");ok("Indicadores actualizados.");await loadAll();}catch(e){er(e.message)}
+}
+
+function abrirNotif(id){document.getElementById("nf-id").value=id;document.getElementById("nf-msg").value="";abrir("m-notif")}
+async function confirmarNotif(){
+  const id=document.getElementById("nf-id").value;const msg=document.getElementById("nf-msg").value;if(!msg)return;
+  try{await post("enviar_notificacao",{aluno_id:id,mensagem_texto:msg});fechar("m-notif");ok("Notificação enviada.");}catch(e){er(e.message)}
+}
+
+async function carregarDesafios(){
+  if(DESAFIOS.length){renderDesafios();return;}
+  const r=await post("listar_desafios");DESAFIOS=r.desafios||[];renderDesafios();
+}
+function renderDesafios(){
+  document.getElementById("tb-d").innerHTML=DESAFIOS.length?DESAFIOS.map(d=>`<tr>
+    <td style="color:#fff;font-weight:600;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${d.titulo||""}">${d.titulo||"—"}</td>
+    <td>${d.area||"—"}</td><td>${d.subarea||"—"}</td>
+    <td>${bdg(d.dificuldade,d.dificuldade==="dificil"?"er":d.dificuldade==="medio"?"wa":"ok")}</td>
+    <td>${d.tipo||"—"}</td><td>${d.idioma||"—"}</td>
+    <td>${d.tempo_esperado_min?d.tempo_esperado_min+"min":"—"}</td>
+    <td>${d.ativo?bdg("Activo","ok"):bdg("Inactivo","er")}</td>
+    <td><div class="row"><button class="btn sm ${d.ativo?"er":"ok"}" onclick="toggleDesafio('${d.id}',${!d.ativo})">${d.ativo?"Desact.":"Activar"}</button></div></td>
+  </tr>`).join(""):`<tr><td colspan="9" class="empty">Sem desafios.</td></tr>`;
+  const sb=D?.ultimas_submissoes||[];
+  document.getElementById("tb-sub").innerHTML=sb.length?sb.map(s=>`<tr>
+    <td style="font-family:monospace;font-size:11px;color:#fff">${(s.aluno_id||"").slice(0,10)}…</td>
+    <td>${bdg(s.estado,s.estado==="avaliado"?"ok":s.estado==="em_curso"?"wa":s.estado==="invalidado"?"er":"in")}</td>
+    <td style="color:#E67E22;font-weight:700">${s.score_tecnico!=null?s.score_tecnico:"—"}</td>
+    <td style="color:#3498DB;font-weight:700">${s.score_linguistico!=null?s.score_linguistico:"—"}</td>
+    <td style="color:#f59e0b;font-weight:700">${s.score_eficiencia!=null?s.score_eficiencia:"—"}</td>
+    <td>${s.idioma||"—"}</td><td>${fmt(s.submetido_em)}</td>
+    <td><div class="row">
+      ${s.score_tecnico!=null?`<button class="btn sm in" onclick="verSubmissao('${s.id}')">👁 Ver</button>`:""}
+      ${s.estado==="avaliado"?`<button class="btn sm er" onclick="invalidarSub('${s.id}')">Invalidar</button>`:""}
+    </div></td>
+  </tr>`).join(""):`<tr><td colspan="8" class="empty">Sem submissões.</td></tr>`;
+}
+
+async function toggleDesafio(id,ativo){
+  try{await post("toggle_desafio",{desafio_id:id,ativo});DESAFIOS=[];ok(ativo?"Desafio activado.":"Desafio desactivado.");carregarDesafios();}catch(e){er(e.message)}
+}
+
+function abrirModalAtribuir(){
+  const al=D?.alunos||[];const de=DESAFIOS.filter(d=>d.ativo);
+  document.getElementById("at-al").innerHTML=al.map(a=>`<option value="${a.id}">${a.nome||a.id}</option>`).join("");
+  document.getElementById("at-de").innerHTML=de.map(d=>`<option value="${d.id}">${d.titulo||d.id}</option>`).join("");
+  abrir("m-atrib");
+}
+async function confirmarAtribuir(){
+  const aluno_id=document.getElementById("at-al").value;
+  const desafio_id=document.getElementById("at-de").value;
+  const idioma=document.getElementById("at-id").value;
+  const prazo_dias=+document.getElementById("at-pr").value;
+  try{await post("atribuir_desafio",{aluno_id,desafio_id,idioma,prazo_dias});fechar("m-atrib");ok("Desafio atribuído.");await loadAll();}catch(e){er(e.message)}
+}
+
+function abrirModalCriarDesafio(){abrir("m-criar-desafio")}
+async function confirmarCriarDesafio(){
+  const dados={titulo:document.getElementById("cd-ti").value,area:document.getElementById("cd-ar").value,subarea:document.getElementById("cd-sa").value,dificuldade:document.getElementById("cd-di").value,tipo:document.getElementById("cd-tp").value,idioma:document.getElementById("cd-id").value,tempo_esperado_min:+document.getElementById("cd-tm").value,rubrica_tecnica:document.getElementById("cd-rt").value,rubrica_linguistica:document.getElementById("cd-rl").value};
+  if(!dados.titulo){er("Título obrigatório.");return;}
+  try{await post("criar_desafio",dados);fechar("m-criar-desafio");DESAFIOS=[];ok("Desafio criado.");carregarDesafios();}catch(e){er(e.message)}
+}
+
+function renderFlags(){
+  document.getElementById("li").innerHTML=FL.length?FL.map(f=>`<div class="pnl ${f.severidade==="critico"||f.severidade==="alto"?"er":"wa"}">
+    <div class="row" style="justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:6px">
+      <div class="row">${bdg(f.severidade||"—",f.severidade==="critico"||f.severidade==="alto"?"er":f.severidade==="medio"?"wa":"in")}<span style="color:#fff;font-weight:700">${f.tipo_anomalia||"—"}</span><span style="color:#6b7280;font-size:11px">#${f.ocorrencia_numero||1}</span></div>
+      <span style="color:#6b7280;font-size:11px">${fmtDt(f.timestamp)}</span>
     </div>
-    <div class="grid2">
-      <div class="panel"><div class="st" style="font-size:14px;margin-bottom:16px">🏛 Por Universidade</div>${barras(r.por_universidade,"#E67E22")}</div>
-      <div class="panel"><div class="st" style="font-size:14px;margin-bottom:16px">📚 Por Curso</div>${barras(r.por_curso,"#3498DB")}</div>
-      <div class="panel"><div class="st" style="font-size:14px;margin-bottom:16px">🏅 Por Selo</div>${barras(r.por_selo,"#8b5cf6")}</div>
-      <div class="panel"><div class="st" style="font-size:14px;margin-bottom:16px">📋 Por Estado de Desafio</div>${barras(r.por_estado_assign,"#10b981")}</div>
-    </div>
-  `;
+    <div style="color:#9ca3af;font-size:12px;margin-bottom:8px">${f.descricao||"—"}</div>
+    <div style="font-size:11px;color:#6b7280;margin-bottom:10px">Aluno: <span style="color:#d1d5db;font-family:monospace">${(f.aluno_id||"").slice(0,14)}…</span> · Acção: <span style="color:#f59e0b">${f.acao_tomada||"pendente"}</span></div>
+    <div class="row"><button class="btn sm ok" onclick="abrirFlag('${f.id}')">✅ Resolver</button><button class="btn sm er" onclick="abrirFlagBanir('${f.id}')">⛔ Banir Aluno</button></div>
+  </div>`).join(""):`<div style="background:#111827;border-radius:14px;padding:48px;text-align:center"><div style="font-size:36px">✅</div><div style="color:#10b981;margin-top:10px;font-weight:600">Sem flags activos</div></div>`;
+}
+function abrirFlag(id,banir=false){document.getElementById("fl-id").value=id;document.getElementById("fl-res").value="";document.getElementById("fl-ban").checked=banir;abrir("m-flag")}
+function abrirFlagBanir(id){abrirFlag(id,true)}
+async function confirmarFlag(){
+  const id=document.getElementById("fl-id").value;const res=document.getElementById("fl-res").value;const banir=document.getElementById("fl-ban").checked;
+  try{await post("resolver_flag",{flag_id:id,resolucao:res,banir});fechar("m-flag");ok("Flag resolvido.");await loadAll();}catch(e){er(e.message)}
 }
 
-// fechar modal clicando fora
-document.querySelectorAll(".modal").forEach(m => m.addEventListener("click", e => { if(e.target === m) m.classList.remove("open"); }));
+function renderAtenuantes(){
+  document.getElementById("la").innerHTML=AT.length?AT.map(a=>`<div class="pnl ${a.estado==="pendente"?"wa":""}">
+    <div class="row" style="justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:6px">
+      <span style="color:#fff;font-weight:700">${(a.aluno_id||"").slice(0,10)}… · ${fmt(a.periodo_inicio)} → ${fmt(a.periodo_fim)}</span>
+      ${bdg(a.estado||"—",a.estado==="pendente"?"wa":a.estado==="aprovado"?"ok":"er")}
+    </div>
+    <div style="color:#9ca3af;font-size:13px;margin-bottom:6px">${a.descricao||"—"}</div>
+    ${a.tipo_prova?`<div style="font-size:11px;color:#6b7280;margin-bottom:6px">Tipo: <span style="color:#d1d5db">${a.tipo_prova}</span></div>`:""}
+    ${a.ficheiro_url?`<a href="${a.ficheiro_url}" target="_blank" style="color:#3498DB;font-size:12px;display:block;margin-bottom:8px">📎 Ver Comprovativo</a>`:""}
+    ${a.estado==="pendente"?`<div class="row"><button class="btn sm ok" onclick="acaoAt('${a.id}','aprovar_atenuante')">✅ Aprovar</button><button class="btn sm er" onclick="acaoAt('${a.id}','rejeitar_atenuante')">❌ Rejeitar</button></div>`:`<div style="font-size:11px;color:#6b7280">Revisto por ${a.revisto_por||"—"} em ${fmt(a.revisto_em)}</div>`}
+  </div>`).join(""):`<div class="empty">Nenhum pedido de atenuante.</div>`;
+}
+async function acaoAt(id,acao){
+  try{await post(acao,{atenuante_id:id});ok(acao==="aprovar_atenuante"?"Aprovado.":"Rejeitado.");await loadAll();}catch(e){er(e.message)}
+}
 
+function renderEntrevistas(en){
+  document.getElementById("tb-en").innerHTML=en.length?en.map(e=>`<tr>
+    <td style="color:#fff;font-weight:600">${e.recrutador_nome||"—"}</td>
+    <td>${e.recrutador_empresa||"—"}</td>
+    <td>${e.aluno_nome||"—"}</td>
+    <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.vaga_titulo||"—"}</td>
+    <td>${e.data_proposta?fmt(e.data_proposta)+" "+( e.hora_proposta||""):"—"}</td>
+    <td>${e.formato||"—"}</td>
+    <td>${bdg(e.estado,e.estado==="confirmada"?"ok":e.estado==="pendente"?"wa":e.estado==="cancelada"?"er":"in")}</td>
+    <td><div class="row">
+      ${e.estado==="pendente"?`<button class="btn sm ok" onclick="confirmarEnt('${e.id}')">✅</button><button class="btn sm er" onclick="cancelarEnt('${e.id}')">❌</button>`:""}
+      ${e.link_meet?`<a href="${e.link_meet}" target="_blank" class="btn sm in">🎥</a>`:""}
+    </div></td>
+  </tr>`).join(""):`<tr><td colspan="8" class="empty">Sem entrevistas.</td></tr>`;
+}
+async function confirmarEnt(id){try{await post("confirmar_entrevista",{entrevista_id:id});ok("Entrevista confirmada.");await loadAll();}catch(e){er(e.message)}}
+async function cancelarEnt(id){const nota=prompt("Motivo do cancelamento:");if(nota===null)return;try{await post("cancelar_entrevista",{entrevista_id:id,nota});ok("Entrevista cancelada.");await loadAll();}catch(e){er(e.message)}}
+
+function renderRecrutadores(rc){
+  document.getElementById("tb-r").innerHTML=rc.length?rc.map(r=>`<tr>
+    <td style="color:#fff;font-weight:600">${r.nome||"—"}</td>
+    <td>${r.empresa||"—"}</td><td>${r.setor||"—"}</td>
+    <td>${bdg(r.plano||"free",r.plano==="premium"?"wa":"in")}</td>
+    <td style="color:#f59e0b;font-weight:700">${r.pontos||0}</td>
+    <td>${r.vagas_ativas||0}</td>
+    <td>${r.perfis_visitados||0}</td>
+    <td>${r.entrevistas_marcadas||0}</td>
+    <td><div class="row">
+      <button class="btn sm in" onclick="verRecrutador('${r.id}','${(r.nome||"").replace(/'/g,"\\'")}')">👁</button>
+      ${r.plano==="premium"?`<button class="btn sm er" onclick="downgrade('${r.id}')">⬇ Free</button>`:`<button class="btn sm ok" onclick="upgrade('${r.id}')">⬆ Premium</button>`}
+      <button class="btn sm ok" onclick="abrirPontos('${r.id}','+')">+Pts</button>
+      <button class="btn sm er" onclick="abrirPontos('${r.id}','-')">−Pts</button>
+    </div></td>
+  </tr>`).join(""):`<tr><td colspan="9" class="empty">Sem recrutadores.</td></tr>`;
+}
+
+async function verRecrutador(id,nome){
+  document.getElementById("m-rec-nome").textContent="🔍 "+nome;
+  document.getElementById("m-rec-body").innerHTML='<div class="spin"></div>';
+  abrir("m-rec");
+  try{
+    const r=await post("recrutador_detalhe",{recrutador_id:id});
+    const p=r.perfil||{};const ents=r.entrevistas||[];const txs=r.transacoes||[];
+    document.getElementById("m-rec-body").innerHTML=`
+      <div class="kpi-g">
+        <div class="kpi"><div class="kpi-l">Empresa</div><div class="kpi-v" style="font-size:12px">${p.empresa||"—"}</div></div>
+        <div class="kpi"><div class="kpi-l">Setor</div><div class="kpi-v" style="font-size:12px">${p.setor||"—"}</div></div>
+        <div class="kpi"><div class="kpi-l">Plano</div><div class="kpi-v">${bdg(p.plano||"free",p.plano==="premium"?"wa":"in")}</div></div>
+        <div class="kpi"><div class="kpi-l">Pontos</div><div class="kpi-v" style="color:#f59e0b">${p.pontos||0}</div></div>
+        <div class="kpi"><div class="kpi-l">Vagas</div><div class="kpi-v">${p.vagas_ativas||0}</div></div>
+        <div class="kpi"><div class="kpi-l">Perfis Vis.</div><div class="kpi-v">${p.perfis_visitados||0}</div></div>
+      </div>
+      <hr class="sep">
+      <div style="font-weight:700;margin-bottom:8px">Entrevistas (${ents.length})</div>
+      <div class="tw" style="margin-bottom:12px"><table><thead><tr><th>Aluno</th><th>Vaga</th><th>Estado</th><th>Data</th></tr></thead><tbody>
+        ${ents.length?ents.slice(0,10).map(e=>`<tr><td>${e.aluno_nome||"—"}</td><td>${e.vaga_titulo||"—"}</td><td>${bdg(e.estado,e.estado==="confirmada"?"ok":e.estado==="pendente"?"wa":"er")}</td><td>${fmt(e.data_proposta)}</td></tr>`).join(""):`<tr><td colspan="4" class="empty">Sem entrevistas.</td></tr>`}
+      </tbody></table></div>
+      <div style="font-weight:700;margin-bottom:8px">Transações (${txs.length})</div>
+      <div class="tw"><table><thead><tr><th>Tipo</th><th>Pontos</th><th>Motivo</th><th>Data</th></tr></thead><tbody>
+        ${txs.length?txs.slice(0,10).map(t=>`<tr><td>${bdg(t.tipo,t.tipo==="credito"?"ok":"er")}</td><td style="color:${t.tipo==="credito"?"#10b981":"#ef4444"};font-weight:700">${t.tipo==="credito"?"+":"−"}${t.pontos}</td><td>${t.motivo||"—"}</td><td>${fmt(t.created_date)}</td></tr>`).join(""):`<tr><td colspan="4" class="empty">Sem transações.</td></tr>`}
+      </tbody></table></div>
+    `;
+  }catch(e){document.getElementById("m-rec-body").innerHTML=`<div class="msg-er">Erro: ${e.message}</div>`}
+}
+
+async function upgrade(id){if(!confirm("Fazer upgrade para Premium?"))return;try{await post("upgrade_recrutador",{recrutador_id:id,pontos:100});ok("Premium activado.");await loadAll();}catch(e){er(e.message)}}
+async function downgrade(id){if(!confirm("Reverter para Free?"))return;try{await post("downgrade_recrutador",{recrutador_id:id});ok("Revertido para Free.");await loadAll();}catch(e){er(e.message)}}
+
+function abrirPontos(id,op){
+  document.getElementById("pt-id").value=id;document.getElementById("pt-op").value=op;
+  document.getElementById("m-pontos-titulo").textContent=op==="+"?"💰 Adicionar Pontos":"💰 Remover Pontos";
+  document.getElementById("pt-qt").value=50;document.getElementById("pt-mot").value="";
+  abrir("m-pontos");
+}
+async function confirmarPontos(){
+  const id=document.getElementById("pt-id").value;const op=document.getElementById("pt-op").value;
+  const pontos=+document.getElementById("pt-qt").value;const motivo=document.getElementById("pt-mot").value;
+  const acao=op==="+"?"adicionar_pontos":"remover_pontos";
+  try{await post(acao,{recrutador_id:id,pontos,motivo});fechar("m-pontos");ok(pontos+" pontos "+(op==="+"?"adicionados.":"removidos."));await loadAll();}catch(e){er(e.message)}
+}
+
+function renderFinanceiro(tx){
+  document.getElementById("tb-fi").innerHTML=tx.length?tx.map(t=>`<tr>
+    <td style="font-family:monospace;font-size:11px">${(t.recrutador_id||"").slice(0,12)}…</td>
+    <td>${bdg(t.tipo,t.tipo==="credito"?"ok":"er")}</td>
+    <td style="color:${t.tipo==="credito"?"#10b981":"#ef4444"};font-weight:700">${t.tipo==="credito"?"+":"−"}${t.pontos}</td>
+    <td>${t.motivo||"—"}</td>
+    <td style="color:#6b7280;font-size:11px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.descricao||"—"}</td>
+    <td>${fmt(t.created_date)}</td>
+  </tr>`).join(""):`<tr><td colspan="6" class="empty">Sem transações.</td></tr>`;
+}
+
+async function carregarStats(){
+  try{
+    const r=await post("stats_avancadas");STATS=r;
+    const barras=(obj,c)=>Object.entries(obj||{}).sort((a,b)=>b[1]-a[1]).slice(0,8).map(([k,v])=>`<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span style="color:#d1d5db">${k}</span><span style="color:${c};font-weight:700">${v}</span></div><div class="prog"><div class="pb" style="width:${Math.min(100,v/Math.max(...Object.values(obj||{a:1}))*100)}%;background:${c}"></div></div></div>`).join("");
+    const top=(lista,c)=>lista.map(a=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #1f2937"><span style="color:#fff;font-size:12px">${a.nome||"—"}</span><div class="row"><span style="font-size:11px;color:#6b7280">${a.universidade||""}</span><span style="color:${c};font-weight:700;min-width:28px;text-align:right">${a.score}</span></div></div>`).join("");
+    document.getElementById("st-body").innerHTML=`
+      <div class="grid g6" style="margin-bottom:16px">
+        ${crd("✅","Taxa Conclusão",(r.taxa_conclusao||0)+"%","#10b981")}
+        ${crd("🚨","Taxa Flags",(r.taxa_flags||0)+"%",(r.taxa_flags||0)>20?"#ef4444":"#6b7280")}
+        ${crd("💪","Taxa Resiliência",(r.taxa_resiliencia||0)+"%","#10b981")}
+        ${crd("📅","Entrev. Pendentes",r.entrevistas_pendentes||0,"#f59e0b")}
+        ${crd("✅","Entrev. Confirmadas",r.entrevistas_confirmadas||0,"#10b981")}
+        ${crd("❌","Entrev. Canceladas",r.entrevistas_canceladas||0,"#ef4444")}
+      </div>
+      <div class="grid g2" style="margin-bottom:16px">
+        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">🏆 Top Eficiência</div>${top(r.top_alunos_eficiencia||[],"#E67E22")}</div>
+        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">🧠 Top IAPN</div>${top(r.top_alunos_iapn||[],"#f59e0b")}</div>
+      </div>
+      <div class="grid g2">
+        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">🏛 Por Universidade</div>${barras(r.por_universidade,"#E67E22")}</div>
+        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">📚 Por Curso</div>${barras(r.por_curso,"#3498DB")}</div>
+        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">🏅 Por Selo</div>${barras(r.por_selo,"#8b5cf6")}</div>
+        <div class="pnl"><div style="font-weight:700;margin-bottom:12px">📋 Por Estado</div>${barras(r.por_estado,"#10b981")}</div>
+      </div>
+    `;
+  }catch(e){document.getElementById("st-body").innerHTML=`<div class="msg-er">Erro: ${e.message}</div>`}
+}
+
+async function exportarCSV(){
+  try{
+    const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({acao:"exportar_alunos_csv"})});
+    const blob=await r.blob();const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");a.href=url;a.download="vetorh_alunos.csv";a.click();URL.revokeObjectURL(url);
+    ok("CSV exportado.");
+  }catch(e){er(e.message)}
+}
+
+document.querySelectorAll(".mdl").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("open")}));
 loadAll();
 </script>
 </body>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>VETORH Login Test</title>
+<style>body{background:#0A0E14;color:#fff;font-family:monospace;padding:30px;max-width:600px}
+input{background:#1f2937;border:1px solid #374151;color:#fff;padding:8px;width:100%;margin:5px 0;font-size:14px}
+button{background:#E67E22;color:#fff;border:none;padding:10px 20px;cursor:pointer;font-size:14px;margin:5px 0;width:100%}
+#log{background:#0d1117;border:1px solid #374151;padding:15px;margin-top:15px;white-space:pre-wrap;font-size:12px;min-height:100px;max-height:400px;overflow-y:auto}
+.ok{color:#10b981}.er{color:#ef4444}.info{color:#f59e0b}
+</style>
+</head>
+<body>
+<h2 style="color:#E67E22">VETORH — Teste de Login</h2>
+<label>Email:</label>
+<input type="email" id="email" value="admin@vetorh.ao">
+<label>Senha:</label>
+<input type="password" id="pass" value="vetorh2026">
+<button onclick="testar()">Testar Login Agora</button>
+<button onclick="limpar()" style="background:#374151">Limpar Logs</button>
+<div id="log"><span class="info">Clica em "Testar Login Agora" para começar...</span></div>
+
+<script>
+const API = "https://hargent26-a074b51a.base44.app/functions/adminDashboard";
+const log = document.getElementById("log");
+
+function addLog(msg, type="") {
+  const line = document.createElement("div");
+  line.className = type;
+  line.textContent = new Date().toLocaleTimeString() + " — " + msg;
+  log.appendChild(line);
+  log.scrollTop = log.scrollHeight;
+}
+
+function limpar() { log.innerHTML = ""; }
+
+async function testar() {
+  limpar();
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("pass").value;
+  
+  addLog("A iniciar pedido de login...", "info");
+  addLog("URL: " + API, "info");
+  addLog("Email: " + email, "info");
+  
+  try {
+    addLog("A enviar fetch...", "info");
+    
+    const response = await fetch(API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ acao: "login", email: email, password: pass })
+    });
+    
+    addLog("HTTP Status: " + response.status, response.ok ? "ok" : "er");
+    
+    const text = await response.text();
+    addLog("Resposta raw: " + text, "info");
+    
+    try {
+      const json = JSON.parse(text);
+      if (json.ok) {
+        addLog("✅ LOGIN OK! Token: " + json.token.slice(0,20) + "...", "ok");
+        addLog("Email: " + json.email, "ok");
+        addLog("SUCESSO — o login funciona correctamente!", "ok");
+      } else {
+        addLog("❌ Erro do servidor: " + json.error, "er");
+      }
+    } catch(e) {
+      addLog("❌ Resposta não é JSON válido: " + e.message, "er");
+    }
+    
+  } catch(e) {
+    addLog("❌ ERRO DE REDE: " + e.message, "er");
+    addLog("Tipo: " + e.name, "er");
+    if (e.message.includes("CORS")) addLog("Problema de CORS detectado", "er");
+    if (e.message.includes("Failed to fetch")) addLog("Não conseguiu contactar o servidor. Verifica a ligação à internet.", "er");
+  }
+}
+</script>
+</body>
+</html>

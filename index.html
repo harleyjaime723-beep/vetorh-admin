@@ -352,67 +352,117 @@ label{color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:1px;d
 
 <script>
 const API = "https://hargent26-a074b51a.base44.app/functions/adminDashboard";
-let TOKEN = localStorage.getItem("vt_admin_token") || "";
-let ADMIN_EMAIL = localStorage.getItem("vt_admin_email") || "";
+let TOKEN = "";
+let ADMIN_EMAIL = "";
 let D = null, FL = [], AT = [], DESAFIOS = [], STATS = null;
 
-function post(acao, extra={}) {
-  return fetch(API, {
-    method:"POST",
-    headers:{"Content-Type":"application/json","X-Admin-Token":TOKEN},
-    body:JSON.stringify({acao,...extra})
-  }).then(r=>r.json());
+// Tentar recuperar sessão guardada
+try {
+  const saved = sessionStorage.getItem("vt_token");
+  if (saved) { TOKEN = saved; ADMIN_EMAIL = sessionStorage.getItem("vt_email") || ""; }
+} catch(e) {}
+
+function apiCall(acao, extra, raw) {
+  const opts = {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "X-Admin-Token": TOKEN },
+    body: JSON.stringify({ acao, ...extra })
+  };
+  if (raw) return fetch(API, opts);
+  return fetch(API, opts).then(r => r.json());
 }
+const post = (acao, extra={}) => apiCall(acao, extra, false);
 
 async function login() {
-  const email = document.getElementById("l-email").value.trim();
-  const password = document.getElementById("l-pass").value;
-  const er = document.getElementById("login-er");
-  er.style.display="none";
-  if(!email||!password){er.textContent="Preenche todos os campos.";er.style.display="";return;}
+  const email = (document.getElementById("l-email").value || "").trim();
+  const password = document.getElementById("l-pass").value || "";
+  const errEl = document.getElementById("login-er");
+  errEl.style.display = "none";
+  errEl.style.background = "#ef444415";
+  errEl.style.color = "#ef4444";
+  errEl.style.borderColor = "#ef444440";
+
+  if (!email || !password) {
+    errEl.textContent = "Preenche o email e a senha.";
+    errEl.style.display = "";
+    return;
+  }
+
+  const btn = document.querySelector(".btn.full");
+  btn.textContent = "A entrar...";
+  btn.disabled = true;
+
   try {
-    const r = await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({acao:"login",email,password})}).then(r=>r.json());
-    if(r.error){er.textContent="❌ "+r.error;er.style.display="";return;}
-    TOKEN=r.token; ADMIN_EMAIL=r.email;
-    localStorage.setItem("vt_admin_token",TOKEN);
-    localStorage.setItem("vt_admin_email",ADMIN_EMAIL);
-    document.getElementById("login-page").style.display="none";
-    document.getElementById("main-app").style.display="";
-    document.getElementById("admin-email-chip").textContent="👤 "+ADMIN_EMAIL;
+    const resp = await fetch(API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ acao: "login", email: email, password: password })
+    });
+    const r = await resp.json();
+
+    if (r.error) {
+      errEl.textContent = "❌ " + r.error;
+      errEl.style.display = "";
+      btn.textContent = "Entrar →";
+      btn.disabled = false;
+      return;
+    }
+
+    TOKEN = r.token;
+    ADMIN_EMAIL = r.email;
+    try {
+      sessionStorage.setItem("vt_token", TOKEN);
+      sessionStorage.setItem("vt_email", ADMIN_EMAIL);
+    } catch(e) {}
+
+    document.getElementById("login-page").style.display = "none";
+    document.getElementById("main-app").style.display = "";
+    document.getElementById("admin-email-chip").textContent = "👤 " + ADMIN_EMAIL;
+    btn.textContent = "Entrar →";
+    btn.disabled = false;
     loadAll();
-  } catch(e){er.textContent="❌ Erro de ligação.";er.style.display="";}
+
+  } catch(e) {
+    errEl.textContent = "❌ Erro de ligação: " + e.message;
+    errEl.style.display = "";
+    btn.textContent = "Entrar →";
+    btn.disabled = false;
+  }
 }
 
 function logout() {
-  TOKEN=""; ADMIN_EMAIL="";
-  localStorage.removeItem("vt_admin_token");
-  localStorage.removeItem("vt_admin_email");
-  document.getElementById("main-app").style.display="none";
-  document.getElementById("login-page").style.display="flex";
-}
-function limparSessao() {
-  localStorage.clear();
-  TOKEN=""; ADMIN_EMAIL="";
-  document.getElementById("login-er").textContent="✅ Sessão limpa. Faz login novamente.";
-  document.getElementById("login-er").style.background="#10b98115";
-  document.getElementById("login-er").style.color="#10b981";
-  document.getElementById("login-er").style.borderColor="#10b98140";
-  document.getElementById("login-er").style.display="";
+  TOKEN = ""; ADMIN_EMAIL = "";
+  try { sessionStorage.clear(); } catch(e) {}
+  document.getElementById("main-app").style.display = "none";
+  document.getElementById("login-page").style.display = "flex";
 }
 
-// Auto-login se token guardado — verifica se é válido
-async function verificarToken() {
-  if(!TOKEN) return;
-  try {
-    const r = await fetch(API, {method:"POST", headers:{"Content-Type":"application/json","X-Admin-Token":TOKEN}, body:JSON.stringify({acao:"listar_admins"})}).then(r=>r.json());
-    if(r.error) { logout(); return; }
-    document.getElementById("login-page").style.display="none";
-    document.getElementById("main-app").style.display="";
-    document.getElementById("admin-email-chip").textContent="👤 "+ADMIN_EMAIL;
-    loadAll();
-  } catch(e) { logout(); }
+function limparSessao() {
+  try { sessionStorage.clear(); localStorage.clear(); } catch(e) {}
+  TOKEN = ""; ADMIN_EMAIL = "";
+  const errEl = document.getElementById("login-er");
+  errEl.textContent = "✅ Sessão limpa. Podes fazer login agora.";
+  errEl.style.background = "#10b98115";
+  errEl.style.color = "#10b981";
+  errEl.style.borderColor = "#10b98140";
+  errEl.style.display = "";
 }
-if(TOKEN) verificarToken();
+
+// Se tiver token guardado, verificar validade
+if (TOKEN) {
+  fetch(API, { method:"POST", headers:{"Content-Type":"application/json","X-Admin-Token":TOKEN}, body:JSON.stringify({acao:"listar_admins"}) })
+    .then(r=>r.json())
+    .then(r=>{
+      if (r.ok) {
+        document.getElementById("login-page").style.display = "none";
+        document.getElementById("main-app").style.display = "";
+        document.getElementById("admin-email-chip").textContent = "👤 " + ADMIN_EMAIL;
+        loadAll();
+      } else {
+        logout();
+      }
+    }).catch(()=>logout());
+}
 
 function ok(msg){const e=document.getElementById("msg-ok");e.textContent="✅ "+msg;e.style.display="";setTimeout(()=>e.style.display="none",3000)}
 function er(msg){const e=document.getElementById("msg-er");e.textContent="❌ "+msg;e.style.display="";setTimeout(()=>e.style.display="none",4000)}

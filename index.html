@@ -378,12 +378,10 @@ async function login() {
   const password = document.getElementById("l-pass").value || "";
   const errEl = document.getElementById("login-er");
   errEl.style.display = "none";
-  errEl.style.background = "#ef444415";
-  errEl.style.color = "#ef4444";
-  errEl.style.borderColor = "#ef444440";
 
   if (!email || !password) {
     errEl.textContent = "Preenche o email e a senha.";
+    errEl.style.color = "#ef4444";
     errEl.style.display = "";
     return;
   }
@@ -402,6 +400,7 @@ async function login() {
 
     if (r.error) {
       errEl.textContent = "❌ " + r.error;
+      errEl.style.color = "#ef4444";
       errEl.style.display = "";
       btn.textContent = "Entrar →";
       btn.disabled = false;
@@ -410,20 +409,23 @@ async function login() {
 
     TOKEN = r.token;
     ADMIN_EMAIL = r.email;
-    try {
-      sessionStorage.setItem("vt_token", TOKEN);
-      sessionStorage.setItem("vt_email", ADMIN_EMAIL);
-    } catch(e) {}
+    try { sessionStorage.setItem("vt_token", TOKEN); sessionStorage.setItem("vt_email", ADMIN_EMAIL); } catch(e) {}
 
+    // Mostrar painel
     document.getElementById("login-page").style.display = "none";
     document.getElementById("main-app").style.display = "";
     document.getElementById("admin-email-chip").textContent = "👤 " + ADMIN_EMAIL;
+    document.getElementById("ldr").style.display = "";
+    document.getElementById("app").style.display = "none";
     btn.textContent = "Entrar →";
     btn.disabled = false;
+
+    // Carregar dados
     loadAll();
 
   } catch(e) {
-    errEl.textContent = "❌ Erro de ligação: " + e.message;
+    errEl.textContent = "❌ Erro: " + e.message;
+    errEl.style.color = "#ef4444";
     errEl.style.display = "";
     btn.textContent = "Entrar →";
     btn.disabled = false;
@@ -448,21 +450,7 @@ function limparSessao() {
   errEl.style.display = "";
 }
 
-// Se tiver token guardado, verificar validade
-if (TOKEN) {
-  fetch(API, { method:"POST", headers:{"Content-Type":"application/json","X-Admin-Token":TOKEN}, body:JSON.stringify({acao:"listar_admins"}) })
-    .then(r=>r.json())
-    .then(r=>{
-      if (r.ok) {
-        document.getElementById("login-page").style.display = "none";
-        document.getElementById("main-app").style.display = "";
-        document.getElementById("admin-email-chip").textContent = "👤 " + ADMIN_EMAIL;
-        loadAll();
-      } else {
-        logout();
-      }
-    }).catch(()=>logout());
-}
+// auto-login desactivado
 
 function ok(msg){const e=document.getElementById("msg-ok");e.textContent="✅ "+msg;e.style.display="";setTimeout(()=>e.style.display="none",3000)}
 function er(msg){const e=document.getElementById("msg-er");e.textContent="❌ "+msg;e.style.display="";setTimeout(()=>e.style.display="none",4000)}
@@ -490,7 +478,9 @@ async function loadAll(){
   document.getElementById("sb").className="bdg gr";
   try{
     const [ov,fl,at]=await Promise.all([post("overview"),post("flags_integridade"),post("atenuantes_pendentes")]);
-    if(ov.error){if(ov.error.includes("autenticado")||ov.error.includes("Token")){logout();return;}throw new Error(ov.error);}
+    if(ov.error){if(ov.error.includes("autenticado")||ov.error.includes("Token")){logout();return;}
+    document.getElementById("ldr").innerHTML='<div style="color:#ef4444;padding:20px;font-size:16px">❌ Erro ao carregar dados: '+ov.error+'<br><br><button onclick="loadAll()" style="background:#E67E22;color:#fff;border:none;padding:10px 20px;cursor:pointer;border-radius:8px">Tentar novamente</button></div>';
+    return;}
     D=ov;FL=fl.flags||[];AT=at.atenuantes||[];
     render();
     document.getElementById("ldr").style.display="none";
